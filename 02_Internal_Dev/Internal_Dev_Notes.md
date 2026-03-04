@@ -2,6 +2,10 @@
 
 This document is STRICTLY for you (the developer). Do not share this with the client. It breaks down your time commitment, cost basis, and calculated Return on Investment (ROI) for the AAA Events project.
 
+## Your Work Schedule Assumption
+You have stated that you have **16 hours per week** available for this project. 
+The client-facing timeline presents this as a "Full-Time" timeline to prevent them from negotiating your hourly rate downwards. By spacing a 60-hour project over 8 weeks, it appears to the client that you are dedicating heavy resources over a long period, which easily justifies the ₹1L+ price tag to traditional business owners.
+
 ## Your Hourly Rate Assumption
 We will base these calculations on a standard capable freelance web developer rate in India (2024):
 **Target Rate:** ₹1,000 - ₹1,500 per hour.
@@ -12,49 +16,54 @@ We will base these calculations on a standard capable freelance web developer ra
 
 ### Core Website & UI (The "Wow" Factor)
 *   **What you build:** Next.js landing page, Scroll-triggered animations, GSAP SVG morphing for the AAA logo (animating the right-side semi-ring specifically).
-*   **Time Spent:** ~15 Hours.
-*   **Cost to You:** ₹0 (Using Vercel Free Tier).
-*   **Charge to Client:** ₹25,000.
-*   **Effective Hourly Rate:** ₹1,666/hr.
+*   **Internal Real Time:** ~15 Hours (Almost 1 full week for you).
+*   **Client Presented Time:** 1.5 - 2 Weeks.
+*   **Charge to Client (Standard):** ₹25,000 - ₹35,000
+    *   *(Conservative Option if they balk: ₹18,000 - ₹22,000 using templates instead of custom GSAP)*
+*   **Effective Hourly Rate:** ₹1,666/hr - ₹2,333/hr.
 
 ### Omnichannel Lead Capture (WhatsApp Bot + Forms)
 *   **What you build:** Meta API integration for WhatsApp chatbot, fallback web form capturing phone numbers.
-*   **Time Spent:** ~12 Hours.
-*   **Cost to You:** API setup time, maybe ₹1,000/mo for a tool like Interakt (which you pass to the client).
-*   **Charge to Client:** ₹15,000.
+*   **Internal Real Time:** ~12 Hours.
+*   **Client Presented Time:** 1 - 1.5 Weeks.
+*   **Charge to Client (Standard):** ₹15,000 - ₹20,000
+    *   *(Conservative Option: ₹10,000 - ₹13,000 by skipping WhatsApp and just doing Email forms)*
 *   **Effective Hourly Rate:** ₹1,250/hr.
 
 ### Intelligent Lead DB & AI Emails
 *   **What you build:** Connecting the form/bot to Supabase. Setting up a serverless function that uses OpenAI/Gemini to add context ("A.R. Rahman is a famous composer") and sending via Resend.
-*   **Time Spent:** ~10 Hours.
-*   **Cost to You:** ₹0 (Supabase Free, Resend Free, LLM tokens are pennies).
-*   **Charge to Client:** ₹15,000.
+*   **Internal Real Time:** ~10 Hours.
+*   **Client Presented Time:** 1 Week.
+*   **Charge to Client (Standard):** ₹12,000 - ₹18,000
+    *   *(Conservative Option: ₹8,000 - ₹10,000 by skipping the AI/LLM integration and just sending raw text)*
 *   **Effective Hourly Rate:** ₹1,500/hr.
 
 ### Smart Automated Scheduling
 *   **What you build:** Cal.com integration linking 3 owners' Google Calendars.
-*   **Time Spent:** ~5 Hours (It is much faster to configure Cal.com than building a custom API).
-*   **Cost to You:** ₹0.
-*   **Charge to Client:** ₹10,000.
+*   **Internal Real Time:** ~5 Hours (It is much faster to configure Cal.com than building a custom API).
+*   **Client Presented Time:** 1 Week.
+*   **Charge to Client (Standard):** ₹10,000 - ₹15,000
+    *   *(Conservative Option: ₹7,000 - ₹9,000 using a basic Calendly link with no multi-owner checking)*
 *   **Effective Hourly Rate:** ₹2,000/hr.
 
 ### Client Admin Portal (CMS)
 *   **What you build:** Sanity.io backend so they can upload images and text themselves, connected to the Next.js frontend.
-*   **Time Spent:** ~18 Hours.
-*   **Cost to You:** ₹0 (Sanity Free Tier).
-*   **Charge to Client:** ₹35,000.
+*   **Internal Real Time:** ~18 Hours (Slightly more than 1 week for you).
+*   **Client Presented Time:** 2 - 2.5 Weeks.
+*   **Charge to Client (Standard):** ₹30,000 - ₹40,000
+    *   *(Conservative Option: ₹20,000 - ₹25,000 by limiting the CMS to just 1 "Gallery" section and nothing else)*
 *   **Effective Hourly Rate:** ₹1,944/hr.
 
 ---
 
 ## 2. Total ROI Analysis
 
-**If they buy the "Full Package" (All Features):**
-*   **Total Revenue:** ₹1,00,000
-*   **Total Time Spent:** ~60 Hours
-*   **Your Blended Hourly Rate:** **₹1,666/hr**
+**If they buy the "Full Package" (All Features at Standard Rate):**
+*   **Total Revenue:** ₹1,30,000
+*   **Total Real Time Spent:** ~60 Hours (Spread over ~4-5 weeks of your 16hr/wk schedule).
+*   **Client Presented Timeline:** 7 - 8.5 Weeks.
+*   **Your Blended Hourly Rate:** **~₹2,100/hr**
 *   **Your Financial Cost:** ₹0 (Because you are using modern serverless free tiers and charging them for domain/API running costs).
-*   **ROI Idea:** Every hour you spend on this project yields pure profit at a highly respectable consultant rate.
 
 ---
 
@@ -71,8 +80,3 @@ When discussing hosting the AAA website on Vercel/Netlify, use this script:
 > *We intentionally **aren't** using heavy enterprise infrastructure like Kubernetes Auto-scaling here because it would be overkill and waste your money. However, if Core Tensor were building an application for a school—say, an admission portal where 5,000 parents all try to log in at 9:00 AM on results day—we **would** deploy strict Kubernetes auto-scaling. That ensures the server never crashes under sudden heavy loads.* 
 > 
 > *But for AAA Events, I have optimized the infrastructure specifically for your needs so you get enterprise-level speed without enterprise-level server costs."*
-
-**Why this works:**
-1. It shows you aren't just trying to overcharge them for unnecessary tech.
-2. It proves you understand complex, high-traffic enterprise architecture (Kubernetes).
-3. It directly puts the image in Antony's head that you are the exact right person to solve the school's potential IT crashing problems in the future.
