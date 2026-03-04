@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AAA Events & Production — Feature Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --gold: #f0b429;
+  --gold-dim: #c48f1a;
+  --bg: #080808;
+  --bg2: #111111;
+  --bg3: #1a1a1a;
+  --border: #2a2a2a;
+  --text: #e8e8e8;
+  --muted: #888;
+  --green: #22c55e;
+  --blue: #3b82f6;
+  --purple: #a855f7;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+h1,h2,h3,h4 { font-family: 'Sora', sans-serif; }
+
+/* ── HEADER ── */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,8,8,.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-ring {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 3px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 12px; color: var(--gold);
+  position: relative;
+}
+.logo-ring::before {
+  content: ''; position: absolute; top: -5px; right: -5px;
+  width: 10px; height: 10px; border-radius: 50%; background: var(--gold);
+}
+.logo-text { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; }
+.logo-text span { color: var(--gold); }
+.tabs { display: flex; gap: 4px; }
+.tab-btn {
+  padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  background: transparent; color: var(--muted); transition: all .2s;
+}
+.tab-btn.active { background: var(--gold); color: #000; }
+.tab-btn:hover:not(.active) { color: var(--text); background: var(--bg3); }
+
+/* ── HERO ── */
+.hero {
+  padding: 64px 24px 48px;
+  text-align: center;
+  background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(240,180,41,.12), transparent);
+}
+.hero-badge {
+  display: inline-block; padding: 5px 14px; border-radius: 20px;
+  border: 1px solid rgba(240,180,41,.4); color: var(--gold);
+  font-size: 12px; font-weight: 500; margin-bottom: 20px; letter-spacing: .05em;
+}
+.hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+.hero h1 span { color: var(--gold); }
+.hero p { color: var(--muted); font-size: 16px; max-width: 560px; margin: 0 auto 32px; line-height: 1.6; }
+.hero-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.stat { text-align: center; }
+.stat-num { font-family: 'Sora', sans-serif; font-size: 26px; font-weight: 800; color: var(--gold); }
+.stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; text-transform: uppercase; letter-spacing: .06em; }
+
+/* ── TABS CONTENT ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── SECTION HEADER ── */
+.section-intro {
+  max-width: 1100px; margin: 0 auto; padding: 40px 24px 8px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.section-num {
+  width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 16px; color: var(--gold);
+  flex-shrink: 0;
+}
+.section-title-wrap { flex: 1; padding: 0 16px; }
+.section-title-wrap h2 { font-size: 22px; font-weight: 700; }
+.section-title-wrap p { color: var(--muted); font-size: 13px; margin-top: 3px; }
+.time-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg3); border: 1px solid var(--border);
+  padding: 8px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; color: var(--gold);
+  white-space: nowrap;
+}
+
+/* ── FEATURE CARD ── */
+.feature-card {
+  max-width: 1100px; margin: 0 auto 16px; padding: 0 24px;
+}
+.feature-inner {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  transition: border-color .3s;
+}
+.feature-inner:hover { border-color: rgba(240,180,41,.35); }
+.mockup-col {
+  background: var(--bg3); padding: 28px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border-right: 1px solid var(--border); min-height: 320px;
+}
+.details-col { padding: 32px; }
+
+/* ── BROWSER MOCKUP ── */
+.browser {
+  width: 100%; max-width: 320px; border-radius: 10px;
+  background: #1c1c1e; border: 1px solid #333; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.browser-bar {
+  background: #2c2c2e; padding: 8px 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.dot { width: 9px; height: 9px; border-radius: 50%; }
+.d-red { background: #ff5f57; }
+.d-yellow { background: #ffbd2e; }
+.d-green { background: #28c840; }
+.browser-url {
+  flex: 1; background: #3a3a3c; border-radius: 4px;
+  padding: 3px 8px; font-size: 10px; color: #888; text-align: center;
+}
+.browser-body { padding: 0; overflow: hidden; }
+
+/* PHONE MOCKUP */
+.phone {
+  width: 160px; border-radius: 20px;
+  background: #1c1c1e; border: 3px solid #333;
+  overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.phone-notch {
+  background: #111; height: 20px; display: flex; align-items: center; justify-content: center;
+}
+.phone-notch-inner { width: 50px; height: 10px; background: #2c2c2e; border-radius: 5px; }
+.phone-body { padding: 8px; }
+
+/* MOCKUP: Hero Website */
+.mock-hero-site {
+  padding: 16px 12px;
+  background: linear-gradient(135deg, #0a0a1a 0%, #0f0f2e 100%);
+}
+.mock-logo-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.mock-logo { font-size: 9px; font-weight: 800; color: #f0b429; font-family: 'Sora', sans-serif; }
+.mock-nav { display: flex; gap: 6px; }
+.mock-nav span { font-size: 7px; color: #666; }
+.mock-headline {
+  font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 800;
+  color: #fff; line-height: 1.3; margin-bottom: 6px;
+}
+.mock-headline em { color: #f0b429; font-style: normal; }
+.mock-sub { font-size: 7px; color: #888; margin-bottom: 10px; line-height: 1.5; }
+.mock-btns { display: flex; gap: 6px; }
+.mock-btn-gold {
+  background: #f0b429; color: #000; border-radius: 4px;
+  padding: 4px 8px; font-size: 7px; font-weight: 700;
+}
+.mock-btn-outline {
+  border: 1px solid #444; color: #aaa; border-radius: 4px;
+  padding: 4px 8px; font-size: 7px;
+}
+.mock-scaffold-silhouette {
+  margin-top: 10px; height: 40px; position: relative;
+  display: flex; align-items: flex-end; gap: 3px; justify-content: center;
+}
+.scaffold-bar {
+  background: rgba(240,180,41,.3); border-radius: 2px 2px 0 0;
+}
+
+/* MOCKUP: WhatsApp */
+.mock-wa-chat { padding: 8px; background: #075e54; }
+.mock-wa-header { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.mock-wa-avatar { width: 22px; height: 22px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #000; }
+.mock-wa-name { font-size: 9px; font-weight: 600; color: #fff; }
+.mock-wa-status { font-size: 7px; color: rgba(255,255,255,.7); }
+.mock-wa-messages { background: #ece5dd; padding: 8px; border-radius: 4px; display: flex; flex-direction: column; gap: 5px; }
+.msg-in, .msg-out { border-radius: 8px; padding: 5px 8px; font-size: 8px; line-height: 1.4; max-width: 80%; }
+.msg-in { background: #fff; color: #333; align-self: flex-start; }
+.msg-out { background: #dcf8c6; color: #333; align-self: flex-end; }
+.msg-time { font-size: 6px; color: #999; text-align: right; margin-top: 2px; }
+
+/* MOCKUP: Lead DB */
+.mock-sheet { padding: 10px; background: #fff; border-radius: 4px; }
+.mock-sheet-row { display: flex; gap: 4px; margin-bottom: 3px; }
+.mock-sheet-cell { flex: 1; padding: 3px 5px; font-size: 7px; border: 1px solid #e0e0e0; border-radius: 2px; color: #333; overflow: hidden; white-space: nowrap; }
+.mock-sheet-head { background: #4285f4; color: #fff !important; font-weight: 700; }
+.mock-email-notif { margin-top: 10px; background: #1e1e2e; border-radius: 6px; padding: 8px; }
+.mock-email-subject { font-size: 8px; font-weight: 700; color: #f0b429; margin-bottom: 4px; }
+.mock-email-body { font-size: 7px; color: #aaa; line-height: 1.5; }
+.ai-chip { display: inline-block; background: #7c3aed; color: #fff; border-radius: 3px; padding: 1px 5px; font-size: 6px; margin-left: 4px; }
+
+/* MOCKUP: Calendar */
+.mock-cal { padding: 10px; background: #fff; }
+.mock-cal-header { text-align: center; font-size: 8px; font-weight: 700; color: #333; margin-bottom: 6px; }
+.mock-cal-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 4px; }
+.mock-slot { padding: 5px 3px; border-radius: 4px; text-align: center; font-size: 7px; font-weight: 500; }
+.slot-free { background: #e6f4ea; color: #137333; border: 1px solid #a8d5b5; cursor: pointer; }
+.slot-busy { background: #fce8e6; color: #c5221f; }
+.slot-selected { background: #1a73e8; color: #fff; }
+.mock-cal-note { margin-top: 6px; font-size: 7px; color: #666; text-align: center; }
+
+/* MOCKUP: CMS */
+.mock-cms { padding: 10px; background: #1a1a2e; }
+.mock-cms-header { font-size: 9px; font-weight: 700; color: #f0b429; margin-bottom: 8px; display: flex; justify-content: space-between; }
+.mock-photo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 4px; margin-bottom: 8px; }
+.mock-photo {
+  aspect-ratio: 1; border-radius: 4px;
+  background: linear-gradient(135deg, var(--c1), var(--c2));
+  display: flex; align-items: center; justify-content: center; font-size: 12px;
+}
+.mock-upload-btn {
+  background: var(--gold); color: #000; border-radius: 6px;
+  padding: 5px 0; font-size: 8px; font-weight: 700; text-align: center; width: 100%;
+}
+
+/* MOCKUP: SEO */
+.mock-google { padding: 10px; background: #fff; }
+.mock-search-bar {
+  border: 2px solid #ddd; border-radius: 20px;
+  padding: 4px 10px; font-size: 8px; color: #333;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 4px;
+}
+.mock-search-icon { color: #4285f4; font-weight: 700; }
+.mock-result { margin-bottom: 8px; }
+.mock-result-url { font-size: 7px; color: #006621; }
+.mock-result-title { font-size: 10px; color: #1a0dab; font-weight: 600; }
+.mock-result-snippet { font-size: 7px; color: #545454; line-height: 1.4; }
+.mock-maps-preview {
+  height: 40px; background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  border-radius: 6px; position: relative; overflow: hidden; margin-top: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+.map-pin { font-size: 16px; }
+.map-label { font-size: 7px; font-weight: 700; color: #1b5e20; margin-left: 4px; }
+
+/* ── DETAILS ── */
+.feature-name { font-size: 22px; font-weight: 800; color: var(--gold); margin-bottom: 6px; }
+.feature-tagline { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+.feature-desc { font-size: 13px; line-height: 1.7; color: #ccc; margin-bottom: 20px; }
+.inspired-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.chip {
+  padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  border: 1px solid; cursor: default;
+}
+.chip-blue { border-color: #3b82f6; color: #93c5fd; background: rgba(59,130,246,.1); }
+.chip-purple { border-color: #a855f7; color: #c084fc; background: rgba(168,85,247,.1); }
+.chip-green { border-color: #22c55e; color: #86efac; background: rgba(34,197,94,.1); }
+.chip-gold { border-color: #f0b429; color: #f0b429; background: rgba(240,180,41,.1); }
+.chip-red { border-color: #ef4444; color: #fca5a5; background: rgba(239,68,68,.1); }
+.benefits-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 8px; }
+.benefits { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+.benefit { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; line-height: 1.5; }
+.benefit-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.meta-pill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; border: 1px solid;
+}
+.pill-time { border-color: #3b82f6; color: #93c5fd; background: rgba(59,130,246,.1); }
+.pill-cost { border-color: #22c55e; color: #86efac; background: rgba(34,197,94,.1); }
+
+/* DIVIDER */
+.section-divider {
+  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+}
+.divider-line {
+  border: none; border-top: 1px solid var(--border); margin: 32px 0 8px;
+}
+
+/* ── PRICING CALCULATOR ── */
+.calculator-wrap {
+  max-width: 1100px; margin: 0 auto; padding: 32px 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+.calc-panel {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 28px;
+}
+.calc-panel h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.calc-panel .calc-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+
+/* Preset Tier Buttons */
+.tier-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.tier-btn {
+  padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg3); color: var(--text); font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif;
+}
+.tier-btn:hover { border-color: var(--gold); color: var(--gold); }
+.tier-btn.tier-recommended {
+  border-color: var(--gold); background: rgba(240,180,41,.1); color: var(--gold);
+}
+.tier-btn.active-tier { background: var(--gold); color: #000; border-color: var(--gold); }
+
+/* Feature Toggle Cards */
+.feature-toggle {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px; border-radius: 10px; border: 1px solid var(--border);
+  margin-bottom: 10px; cursor: pointer; transition: all .2s;
+  background: var(--bg3);
+}
+.feature-toggle:hover { border-color: rgba(240,180,41,.4); }
+.feature-toggle.selected { border-color: var(--gold); background: rgba(240,180,41,.06); }
+.toggle-check {
+  width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px; transition: all .2s; font-size: 11px;
+}
+.feature-toggle.selected .toggle-check { background: var(--gold); border-color: var(--gold); color: #000; }
+.toggle-info { flex: 1; }
+.toggle-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.toggle-meta { display: flex; gap: 10px; }
+.toggle-cost { font-size: 11px; color: var(--green); }
+.toggle-time { font-size: 11px; color: var(--blue); }
+
+/* Summary Panel */
+.summary-header { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.summary-title { font-size: 18px; font-weight: 700; }
+.rec-badge {
+  background: var(--gold); color: #000; border-radius: 6px;
+  padding: 2px 8px; font-size: 10px; font-weight: 700; display: none;
+}
+.selected-features-list { min-height: 160px; margin-bottom: 20px; }
+.sf-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+}
+.sf-item:last-child { border-bottom: none; }
+.sf-name { color: var(--text); }
+.sf-cost { color: var(--green); font-weight: 600; font-size: 12px; }
+.empty-state { color: var(--muted); font-size: 13px; text-align: center; padding: 32px 0; }
+.total-block {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+}
+.total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.total-label { font-size: 13px; color: var(--muted); }
+.total-value { font-size: 13px; font-weight: 600; }
+.total-divider { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+.grand-total-row { display: flex; justify-content: space-between; align-items: center; }
+.grand-label { font-size: 15px; font-weight: 700; }
+.grand-value { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 800; color: var(--gold); }
+.grand-value .dash { color: var(--muted); margin: 0 4px; }
+.hosting-note {
+  margin-top: 12px; padding: 10px 14px; border-radius: 8px;
+  background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
+  font-size: 11px; color: #86efac; display: flex; align-items: center; gap: 6px;
+}
+.timeline-row {
+  margin-top: 12px; padding: 12px 14px; border-radius: 8px;
+  background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.2);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.tl-label { font-size: 12px; color: #93c5fd; }
+.tl-value { font-size: 14px; font-weight: 700; color: #93c5fd; }
+
+/* FOOTER */
+.footer {
+  border-top: 1px solid var(--border); padding: 32px 24px;
+  text-align: center; color: var(--muted); font-size: 12px; margin-top: 48px;
+}
+.footer strong { color: var(--gold); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .feature-inner { grid-template-columns: 1fr; }
+  .mockup-col { border-right: none; border-bottom: 1px solid var(--border); }
+  .calculator-wrap { grid-template-columns: 1fr; }
+  .hero-stats { gap: 24px; }
+  .tabs { gap: 2px; }
+  .tab-btn { padding: 8px 12px; font-size: 12px; }
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.feature-card { animation: fadeUp .4s ease both; }
+.feature-card:nth-child(1) { animation-delay:.05s; }
+.feature-card:nth-child(2) { animation-delay:.1s; }
+.feature-card:nth-child(3) { animation-delay:.15s; }
+.feature-card:nth-child(4) { animation-delay:.2s; }
+.feature-card:nth-child(5) { animation-delay:.25s; }
+.feature-card:nth-child(6) { animation-delay:.3s; }
+
+/* Pulse dot */
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+.pulse-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 1.5s infinite; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-ring">AAA</div>
+    <div class="logo-text"><span>AAA</span> Events &amp; Production</div>
+  </div>
+  <nav class="tabs">
+    <button class="tab-btn active" onclick="switchTab('showcase',this)">✦ Feature Showcase</button>
+    <button class="tab-btn" onclick="switchTab('pricing',this)">₹ Pricing Calculator</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Digital Transformation Proposal · Bangalore 2025</div>
+  <h1>Build a Platform That <span>Wins Clients</span><br/>While You Sleep</h1>
+  <p>A complete breakdown of every feature we'll build for AAA Events &amp; Production — what it does, why it matters, and exactly what it costs.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Feature Modules</div></div>
+    <div class="stat"><div class="stat-num">7–8.5</div><div class="stat-label">Weeks to Launch</div></div>
+    <div class="stat"><div class="stat-num">₹0</div><div class="stat-label">Monthly Server Cost</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Tier Packages</div></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ TAB 1: SHOWCASE ════════════════════════════════ -->
+<div id="tab-showcase" class="tab-panel active">
+
+  <!-- ── FEATURE 1 ── -->
+  <div class="section-intro">
+    <div class="section-num">01</div>
+    <div class="section-title-wrap">
+      <h2>Premium Immersive Web Design</h2>
+      <p>The first thing every client sees — and judges you by</p>
+    </div>
+    <div class="time-badge">🕐 1.5 – 2 Weeks</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-inner">
+      <div class="mockup-col">
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dot d-red"></div><div class="dot d-yellow"></div><div class="dot d-green"></div>
+            <div class="browser-url">aaaevents.in</div>
+          </div>
+          <div class="browser-body">
+            <div class="mock-hero-site">
+              <div class="mock-logo-bar">
+                <div class="mock-logo">◎ AAA</div>
+                <div class="mock-nav"><span>Services</span><span>Gallery</span><span>Contact</span></div>
+              </div>
+              <div class="mock-headline">Bangalore's Premier<br/><em>Ringlock Scaffolding</em><br/>Specialists</div>
+              <div class="mock-sub">Trusted by 200+ events · Serving all of Karnataka</div>
+              <div class="mock-btns">
+                <div class="mock-btn-gold">WhatsApp Us</div>
+                <div class="mock-btn-outline">View Gallery</div>
+              </div>
+              <div class="mock-scaffold-silhouette">
+                <div class="scaffold-bar" style="width:4px;height:30px;"></div>
+                <div class="scaffold-bar" style="width:4px;height:38px;"></div>
+                <div class="scaffold-bar" style="width:18px;height:12px;opacity:.5;"></div>
+                <div class="scaffold-bar" style="width:4px;height:40px;"></div>
+                <div class="scaffold-bar" style="width:4px;height:32px;"></div>
+                <div class="scaffold-bar" style="width:18px;height:10px;opacity:.5;"></div>
+                <div class="scaffold-bar" style="width:4px;height:36px;"></div>
+                <div class="scaffold-bar" style="width:4px;height:28px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-col">
+        <div class="feature-name">Premium Immersive Web Design</div>
+        <div class="feature-tagline">Your brand's digital headquarters — designed to impress in 3 seconds.</div>
+        <div class="feature-desc">A lightning-fast, highly visual landing page with scroll-triggered animations, a custom SVG morphing AAA logo, a founders section, and Google Maps integration. Built on Next.js with GSAP animations — the same stack used by top agencies.</div>
+        <div class="inspired-label">Inspired by</div>
+        <div class="chips">
+          <div class="chip chip-blue">Apple.com</div>
+          <div class="chip chip-purple">Stripe.com</div>
+          <div class="chip chip-gold">Awwwards Winners</div>
+          <div class="chip chip-green">Linear.app</div>
+        </div>
+        <div class="benefits-label">How it helps AAA</div>
+        <div class="benefits">
+          <div class="benefit"><div class="benefit-icon">🎯</div><div>94% of first impressions are design-related — a premium site immediately signals you are a top-tier vendor</div></div>
+          <div class="benefit"><div class="benefit-icon">📈</div><div>Faster page loads (Next.js) directly improve Google ranking — more organic traffic without ad spend</div></div>
+          <div class="benefit"><div class="benefit-icon">🏆</div><div>Animated logo + scroll reveals make your brand memorable long after a client visits</div></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-pill pill-time">🕐 1.5 – 2 Weeks</div>
+          <div class="meta-pill pill-cost">₹ 25,000 – 35,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr class="divider-line"/></div>
+
+  <!-- ── FEATURE 2 ── -->
+  <div class="section-intro">
+    <div class="section-num">02</div>
+    <div class="section-title-wrap">
+      <h2>Omnichannel Lead Capture</h2>
+      <p>Catch every enquiry — whether they're on WhatsApp or a desktop form</p>
+    </div>
+    <div class="time-badge">🕐 1 – 1.5 Weeks</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-inner">
+      <div class="mockup-col">
+        <div class="phone">
+          <div class="phone-notch"><div class="phone-notch-inner"></div></div>
+          <div class="phone-body">
+            <div class="mock-wa-chat">
+              <div class="mock-wa-header">
+                <div class="mock-wa-avatar">A</div>
+                <div>
+                  <div class="mock-wa-name">AAA Events Bot</div>
+                  <div class="mock-wa-status">● Online</div>
+                </div>
+              </div>
+              <div class="mock-wa-messages">
+                <div class="msg-in">Hi! I need scaffolding for a corporate event in Whitefield<div class="msg-time">10:23 AM</div></div>
+                <div class="msg-out">Great! What's the event date? 📅<div class="msg-time">10:23 AM</div></div>
+                <div class="msg-in">March 15th, about 500 guests<div class="msg-time">10:24 AM</div></div>
+                <div class="msg-out">Perfect! Antony will call you within 30 min ✅<div class="msg-time">10:24 AM</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-col">
+        <div class="feature-name">Omnichannel Lead Capture</div>
+        <div class="feature-tagline">A WhatsApp bot that captures leads 24/7 — even at 2 AM on a Sunday.</div>
+        <div class="feature-desc">A "Click-to-Chat" WhatsApp Bot flow that collects client name, event type, date, and location through a natural conversation. For desktop users, a smart web form fallback ensures no one slips through the cracks.</div>
+        <div class="inspired-label">Inspired by</div>
+        <div class="chips">
+          <div class="chip chip-green">Swiggy / Zomato</div>
+          <div class="chip chip-blue">JustDial</div>
+          <div class="chip chip-purple">Intercom</div>
+          <div class="chip chip-gold">IndiaMART</div>
+        </div>
+        <div class="benefits-label">How it helps AAA</div>
+        <div class="benefits">
+          <div class="benefit"><div class="benefit-icon">📲</div><div>WhatsApp messages have an <strong>87% open rate</strong> vs 20% for email — clients actually see your reply</div></div>
+          <div class="benefit"><div class="benefit-icon">🌙</div><div>Captures leads at midnight, on weekends, during holidays — no enquiry ever goes unanswered</div></div>
+          <div class="benefit"><div class="benefit-icon">⚡</div><div>Instant automated acknowledgement makes clients feel valued from the first second</div></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-pill pill-time">🕐 1 – 1.5 Weeks</div>
+          <div class="meta-pill pill-cost">₹ 15,000 – 20,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr class="divider-line"/></div>
+
+  <!-- ── FEATURE 3 ── -->
+  <div class="section-intro">
+    <div class="section-num">03</div>
+    <div class="section-title-wrap">
+      <h2>Intelligent Lead Management &amp; AI Routing</h2>
+      <p>Every lead enriched with AI context before you pick up the phone</p>
+    </div>
+    <div class="time-badge">🕐 1 Week</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-inner">
+      <div class="mockup-col">
+        <div style="width:100%;max-width:320px;">
+          <div class="browser">
+            <div class="browser-bar">
+              <div class="dot d-red"></div><div class="dot d-yellow"></div><div class="dot d-green"></div>
+              <div class="browser-url">sheets.google.com · AAA Leads</div>
+            </div>
+            <div class="browser-body" style="padding:8px;background:#fff;">
+              <div class="mock-sheet">
+                <div class="mock-sheet-row">
+                  <div class="mock-sheet-cell mock-sheet-head">Name</div>
+                  <div class="mock-sheet-cell mock-sheet-head">Event</div>
+                  <div class="mock-sheet-cell mock-sheet-head">Date</div>
+                </div>
+                <div class="mock-sheet-row">
+                  <div class="mock-sheet-cell">Ravi K.</div>
+                  <div class="mock-sheet-cell">Corporate</div>
+                  <div class="mock-sheet-cell">Mar 15</div>
+                </div>
+                <div class="mock-sheet-row">
+                  <div class="mock-sheet-cell">Priya S.</div>
+                  <div class="mock-sheet-cell">Wedding</div>
+                  <div class="mock-sheet-cell">Apr 2</div>
+                </div>
+                <div class="mock-sheet-row">
+                  <div class="mock-sheet-cell" style="color:#1a73e8;font-weight:600;">+New</div>
+                  <div class="mock-sheet-cell">Concert</div>
+                  <div class="mock-sheet-cell">Apr 20</div>
+                </div>
+              </div>
+              <div class="mock-email-notif">
+                <div class="mock-email-subject">🔔 New Lead: Rahul M. <span class="ai-chip">AI</span></div>
+                <div class="mock-email-body">
+                  Event: Film Shoot · 300 people · Malleshwaram<br/>
+                  <strong style="color:#f0b429;">AI Note:</strong> Film shoots require overhead clearance. Avg Bangalore film set is 800–1200 sq ft. Suggest 6m ringlock towers.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-col">
+        <div class="feature-name">Intelligent Lead Management</div>
+        <div class="feature-tagline">Turn raw enquiries into intelligence — before you say hello.</div>
+        <div class="feature-desc">Every new lead is automatically stored in a Google Sheets database accessible by all 3 owners. Instantly an email goes to all three with the lead details — plus AI-generated context about the client's event type, typical requirements, and suggested talking points.</div>
+        <div class="inspired-label">Inspired by</div>
+        <div class="chips">
+          <div class="chip chip-blue">HubSpot CRM</div>
+          <div class="chip chip-purple">Salesforce</div>
+          <div class="chip chip-green">Zoho CRM</div>
+          <div class="chip chip-gold">Pipedrive</div>
+        </div>
+        <div class="benefits-label">How it helps AAA</div>
+        <div class="benefits">
+          <div class="benefit"><div class="benefit-icon">🧠</div><div>AI-enriched emails mean you walk into every sales call already knowing the client's likely needs</div></div>
+          <div class="benefit"><div class="benefit-icon">👥</div><div>All 3 owners see every lead simultaneously — no lead falls through because one person missed a message</div></div>
+          <div class="benefit"><div class="benefit-icon">📊</div><div>Centralised database gives you monthly visibility into enquiry volume, event types, and conversion trends</div></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-pill pill-time">🕐 1 Week</div>
+          <div class="meta-pill pill-cost">₹ 12,000 – 18,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr class="divider-line"/></div>
+
+  <!-- ── FEATURE 4 ── -->
+  <div class="section-intro">
+    <div class="section-num">04</div>
+    <div class="section-title-wrap">
+      <h2>Automated Multi-Owner Scheduling</h2>
+      <p>Book meetings across 3 calendars with zero back-and-forth</p>
+    </div>
+    <div class="time-badge">🕐 1 Week</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-inner">
+      <div class="mockup-col">
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dot d-red"></div><div class="dot d-yellow"></div><div class="dot d-green"></div>
+            <div class="browser-url">cal.aaaevents.in/book</div>
+          </div>
+          <div class="browser-body" style="padding:12px;background:#fff;">
+            <div class="mock-cal">
+              <div class="mock-cal-header">📅 Book a Site Visit — March 2025</div>
+              <div style="font-size:7px;color:#666;text-align:center;margin-bottom:6px;">✓ Checks all 3 owners' calendars automatically</div>
+              <div class="mock-cal-grid">
+                <div class="mock-slot slot-free">Mon 10<br/>10:00 AM</div>
+                <div class="mock-slot slot-busy">Mon 10<br/>2:00 PM</div>
+                <div class="mock-slot slot-selected">Tue 11<br/>11:00 AM ✓</div>
+                <div class="mock-slot slot-free">Wed 12<br/>3:00 PM</div>
+                <div class="mock-slot slot-busy">Thu 13<br/>10:00 AM</div>
+                <div class="mock-slot slot-free">Fri 14<br/>9:00 AM</div>
+              </div>
+              <div class="mock-cal-note">🟢 Available &nbsp; 🔴 All busy &nbsp; ✓ Your pick</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-col">
+        <div class="feature-name">Automated Multi-Owner Scheduling</div>
+        <div class="feature-tagline">A single booking link. Three calendars. Zero conflicts.</div>
+        <div class="feature-desc">A smart scheduling page that simultaneously checks all 3 owners' Google Calendars and shows clients only the slots where at least one person is available. One click books the meeting — no phone tag, no "let me check and get back to you."</div>
+        <div class="inspired-label">Inspired by</div>
+        <div class="chips">
+          <div class="chip chip-blue">Calendly</div>
+          <div class="chip chip-green">Cal.com</div>
+          <div class="chip chip-purple">Acuity Scheduling</div>
+          <div class="chip chip-gold">Doodle</div>
+        </div>
+        <div class="benefits-label">How it helps AAA</div>
+        <div class="benefits">
+          <div class="benefit"><div class="benefit-icon">🕐</div><div>Clients can book at 11 PM — you wake up to a confirmed site visit already in your calendar</div></div>
+          <div class="benefit"><div class="benefit-icon">💼</div><div>Signals enterprise-grade professionalism — the same tools used by Accenture and McKinsey for client calls</div></div>
+          <div class="benefit"><div class="benefit-icon">📉</div><div>Reduces no-shows by 30%+ — automated reminders sent before every booked meeting</div></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-pill pill-time">🕐 1 Week</div>
+          <div class="meta-pill pill-cost">₹ 10,000 – 15,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr class="divider-line"/></div>
+
+  <!-- ── FEATURE 5 ── -->
+  <div class="section-intro">
+    <div class="section-num">05</div>
+    <div class="section-title-wrap">
+      <h2>Client Admin Portal (Headless CMS)</h2>
+      <p>Update your portfolio from your phone — no developer needed ever again</p>
+    </div>
+    <div class="time-badge">🕐 2 – 2.5 Weeks</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-inner">
+      <div class="mockup-col">
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dot d-red"></div><div class="dot d-yellow"></div><div class="dot d-green"></div>
+            <div class="browser-url">admin.aaaevents.in</div>
+          </div>
+          <div class="browser-body" style="padding:10px;background:#1a1a2e;">
+            <div class="mock-cms">
+              <div class="mock-cms-header">
+                <span>📁 Gallery Manager</span>
+                <span style="font-size:8px;color:#22c55e;">● Live</span>
+              </div>
+              <div class="mock-photo-grid">
+                <div class="mock-photo" style="--c1:#1e3a5f;--c2:#2980b9;">🏗️</div>
+                <div class="mock-photo" style="--c1:#4a1c2e;--c2:#c0392b;">🎪</div>
+                <div class="mock-photo" style="--c1:#1a3a1a;--c2:#27ae60;">⛺</div>
+                <div class="mock-photo" style="--c1:#3d2b1f;--c2:#d35400;">🎭</div>
+                <div class="mock-photo" style="--c1:#2c1e4a;--c2:#8e44ad;">🎬</div>
+                <div class="mock-photo" style="--c1:#1a2a3a;--c2:#2980b9;" style="border:1.5px dashed #f0b429;background:transparent;cursor:pointer;">➕</div>
+              </div>
+              <div class="mock-upload-btn">📱 Upload from Phone</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-col">
+        <div class="feature-name">Client Admin Portal</div>
+        <div class="feature-tagline">You control your website — upload photos, update text, live. From your phone.</div>
+        <div class="feature-desc">A secure private portal built on Sanity.io headless CMS. Antony and the team can log in, upload high-resolution scaffolding photos from their phones, rearrange the gallery, and update text on the live website — all without touching a line of code.</div>
+        <div class="inspired-label">Inspired by</div>
+        <div class="chips">
+          <div class="chip chip-blue">Sanity.io</div>
+          <div class="chip chip-purple">WordPress</div>
+          <div class="chip chip-green">Squarespace</div>
+          <div class="chip chip-gold">Contentful</div>
+        </div>
+        <div class="benefits-label">How it helps AAA</div>
+        <div class="benefits">
+          <div class="benefit"><div class="benefit-icon">📸</div><div>Add every new event to your portfolio within hours — Google rewards freshly updated websites with better rankings</div></div>
+          <div class="benefit"><div class="benefit-icon">🔑</div><div>You own your content permanently — no dependency on any developer to make simple updates</div></div>
+          <div class="benefit"><div class="benefit-icon">🎨</div><div>Headless architecture means the admin portal never slows down the public-facing site — enterprise performance</div></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-pill pill-time">🕐 2 – 2.5 Weeks</div>
+          <div class="meta-pill pill-cost">₹ 30,000 – 40,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><hr class="divider-line"/></div>
+
+  <!-- ── FEATURE 6 ── -->
+  <div class="section-intro">
+    <div class="section-num">06</div>
+    <div class="section-title-wrap">
+      <h2>AI &amp; Local SEO (AIO)</h2>
+      <p>Be the first result when someone asks Google — or ChatGPT — for scaffolding in Bangalore</p>
+    </div>
+    <div class="time-badge">🕐 0.5 Weeks</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-inner">
+      <div class="mockup-col">
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dot d-red"></div><div class="dot d-yellow"></div><div class="dot d-green"></div>
+            <div class="browser-url">google.com</div>
+          </div>
+          <div class="browser-body" style="padding:10px;background:#fff;">
+            <div class="mock-google">
+              <div class="mock-search-bar">
+                <span class="mock-search-icon">G</span>
+                <span>ringlock scaffolding bangalore</span>
+              </div>
+              <div class="mock-result">
+                <div class="mock-result-url">aaaevents.in › scaffolding</div>
+                <div class="mock-result-title">AAA Events — #1 Ringlock Scaffolding in Bangalore</div>
+                <div class="mock-result-snippet">Trusted by 200+ events. Ringlock scaffolding specialists in Mathikere, Bangalore. Call +91 91089 34435 for a free quote.</div>
+              </div>
+              <div class="mock-result" style="opacity:.5;">
+                <div class="mock-result-url">competitor.com</div>
+                <div class="mock-result-title" style="font-size:9px;">Scaffolding Services Bangalore</div>
+              </div>
+              <div class="mock-maps-preview">
+                <div class="map-pin">📍</div>
+                <div class="map-label">AAA Events · Mathikere, Bangalore · ⭐ 4.9</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="details-col">
+        <div class="feature-name">AI &amp; Local SEO (AIO)</div>
+        <div class="feature-tagline">Own the search results — on Google, Maps, and now ChatGPT.</div>
+        <div class="feature-desc">Full optimisation for traditional Google search, Google Maps local pack, AND the new frontier: AI search engines (ChatGPT, Claude, Perplexity). Targets high-intent keywords like "Ringlock Scaffolding Bangalore" and "Event Production Mathikere."</div>
+        <div class="inspired-label">Inspired by</div>
+        <div class="chips">
+          <div class="chip chip-blue">Google My Business</div>
+          <div class="chip chip-green">Moz Local</div>
+          <div class="chip chip-purple">BrightLocal</div>
+          <div class="chip chip-gold">AIO / GEO Strategies</div>
+        </div>
+        <div class="benefits-label">How it helps AAA</div>
+        <div class="benefits">
+          <div class="benefit"><div class="benefit-icon">🤖</div><div>When a contractor asks ChatGPT "best scaffolding company in Bangalore" — your name appears in the answer</div></div>
+          <div class="benefit"><div class="benefit-icon">🗺️</div><div>Dominate the Google Maps "3-pack" — the most clicked results for local searches on mobile</div></div>
+          <div class="benefit"><div class="benefit-icon">🔄</div><div>Organic traffic compounds over time — unlike ads, SEO keeps working without spending every month</div></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-pill pill-time">🕐 0.5 Weeks</div>
+          <div class="meta-pill pill-cost">₹ 10,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end tab-showcase -->
+
+<!-- ════════════════════════════════ TAB 2: PRICING ════════════════════════════════ -->
+<div id="tab-pricing" class="tab-panel">
+  <div class="hero" style="padding-bottom:24px;">
+    <div class="hero-badge">Interactive Pricing Calculator</div>
+    <h1>Build Your <span>Perfect Package</span></h1>
+    <p>Select the features you want. See the cost and timeline update live.</p>
+  </div>
+
+  <div class="calculator-wrap">
+
+    <!-- LEFT: Selection -->
+    <div class="calc-panel">
+      <h3>Select Features</h3>
+      <p class="calc-sub">Pick individual modules or choose a preset package below.</p>
+
+      <div class="tier-presets">
+        <button class="tier-btn" onclick="setTier([0])">Tier 1 — Core</button>
+        <button class="tier-btn tier-recommended" onclick="setTier([0,1,2])">★ Tier 2 — Recommended</button>
+        <button class="tier-btn" onclick="setTier([0,1,2,3,4])">Tier 3 — Ecosystem</button>
+        <button class="tier-btn" onclick="setTier([0,1,2,3,4,5])">All 6 Features</button>
+      </div>
+
+      <div id="feature-toggles"></div>
+    </div>
+
+    <!-- RIGHT: Summary -->
+    <div class="calc-panel">
+      <div class="summary-header">
+        <div class="summary-title">Your Estimate</div>
+        <div class="rec-badge" id="rec-badge">★ Recommended</div>
+      </div>
+
+      <div class="selected-features-list" id="selected-list">
+        <div class="empty-state">← Select features to see your estimate</div>
+      </div>
+
+      <div class="total-block">
+        <div class="total-row">
+          <div class="total-label">Min Investment</div>
+          <div class="total-value" id="total-min">₹0</div>
+        </div>
+        <div class="total-row" style="margin-bottom:0;">
+          <div class="total-label">Max Investment</div>
+          <div class="total-value" id="total-max">₹0</div>
+        </div>
+        <hr class="total-divider"/>
+        <div class="grand-total-row">
+          <div class="grand-label">Total Range</div>
+          <div class="grand-value">
+            <span id="grand-min">₹0</span>
+            <span class="dash">–</span>
+            <span id="grand-max">₹0</span>
+          </div>
+        </div>
+        <div class="hosting-note">
+          <div class="pulse-dot"></div>
+          Server &amp; Hosting: ~₹0/month (serverless free tiers)
+        </div>
+        <div class="timeline-row">
+          <div class="tl-label">⏱ Estimated Build Time</div>
+          <div class="tl-value" id="timeline-val">0 weeks</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- end tab-pricing -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  Prepared exclusively for <strong>Antony Thomas Dsouza · AAA Events &amp; Production</strong><br/>
+  Bangalore · +91 9108934435 · aaaevents58@gmail.com
+</footer>
+
+<script>
+const FEATURES = [
+  { name: "Premium Immersive Web Design",       min: 25000, max: 35000, timeMin: 1.5, timeMax: 2.0  },
+  { name: "Omnichannel Lead Capture",           min: 15000, max: 20000, timeMin: 1.0, timeMax: 1.5  },
+  { name: "Intelligent Lead Management & AI",   min: 12000, max: 18000, timeMin: 1.0, timeMax: 1.0  },
+  { name: "Automated Multi-Owner Scheduling",   min: 10000, max: 15000, timeMin: 1.0, timeMax: 1.0  },
+  { name: "Client Admin Portal (CMS)",          min: 30000, max: 40000, timeMin: 2.0, timeMax: 2.5  },
+  { name: "AI & Local SEO (AIO)",               min: 10000, max: 10000, timeMin: 0.5, timeMax: 0.5  },
+];
+
+let selected = new Set();
+
+function fmt(n) {
+  if (n >= 100000) return "₹" + (n/100000).toFixed(2).replace(/\.?0+$/,'') + "L";
+  return "₹" + n.toLocaleString('en-IN');
+}
+
+function renderToggles() {
+  const container = document.getElementById('feature-toggles');
+  container.innerHTML = '';
+  FEATURES.forEach((f, i) => {
+    const div = document.createElement('div');
+    div.className = 'feature-toggle' + (selected.has(i) ? ' selected' : '');
+    div.innerHTML = `
+      <div class="toggle-check">${selected.has(i) ? '✓' : ''}</div>
+      <div class="toggle-info">
+        <div class="toggle-name">${f.name}</div>
+        <div class="toggle-meta">
+          <span class="toggle-cost">${fmt(f.min)} – ${fmt(f.max)}</span>
+          <span class="toggle-time">⏱ ${f.timeMin}–${f.timeMax} wks</span>
+        </div>
+      </div>`;
+    div.onclick = () => { toggle(i); };
+    container.appendChild(div);
+  });
+}
+
+function toggle(i) {
+  if (selected.has(i)) selected.delete(i); else selected.add(i);
+  renderToggles();
+  updateSummary();
+}
+
+function setTier(indices) {
+  selected = new Set(indices);
+  renderToggles();
+  updateSummary();
+}
+
+function updateSummary() {
+  const list = document.getElementById('selected-list');
+  const totalMin = document.getElementById('total-min');
+  const totalMax = document.getElementById('total-max');
+  const grandMin = document.getElementById('grand-min');
+  const grandMax = document.getElementById('grand-max');
+  const tlVal = document.getElementById('timeline-val');
+  const recBadge = document.getElementById('rec-badge');
+
+  if (selected.size === 0) {
+    list.innerHTML = '<div class="empty-state">← Select features to see your estimate</div>';
+    totalMin.textContent = '₹0'; totalMax.textContent = '₹0';
+    grandMin.textContent = '₹0'; grandMax.textContent = '₹0';
+    tlVal.textContent = '0 weeks';
+    recBadge.style.display = 'none';
+    return;
+  }
+
+  let html = '';
+  let sumMin = 0, sumMax = 0, timeMin = 0, timeMax = 0;
+  [...selected].sort((a,b)=>a-b).forEach(i => {
+    const f = FEATURES[i];
+    sumMin += f.min; sumMax += f.max;
+    timeMin += f.timeMin; timeMax += f.timeMax;
+    html += `<div class="sf-item"><span class="sf-name">${f.name}</span><span class="sf-cost">${fmt(f.min)}–${fmt(f.max)}</span></div>`;
+  });
+
+  list.innerHTML = html;
+  totalMin.textContent = fmt(sumMin);
+  totalMax.textContent = fmt(sumMax);
+  grandMin.textContent = fmt(sumMin);
+  grandMax.textContent = fmt(sumMax);
+  tlVal.textContent = timeMin + '–' + timeMax + ' weeks';
+
+  // Show recommended badge for Tier 2 (features 0,1,2)
+  const sorted = [...selected].sort((a,b)=>a-b).join(',');
+  recBadge.style.display = (sorted === '0,1,2') ? 'block' : 'none';
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Init
+renderToggles();
+updateSummary();
+</script>
+</body>
+</html>
