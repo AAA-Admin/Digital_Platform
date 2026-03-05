@@ -177,6 +177,8 @@ h1,h2,h3,h4 { font-family: 'Sora', sans-serif; }
 
 /* PRICING */
 .calculator-wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.feature-toggle.locked { cursor: default; }
+.feature-toggle.locked:hover { border-color: var(--gold); }
 .calc-panel { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
 .calc-panel h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
 .calc-panel .calc-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
@@ -345,7 +347,7 @@ h1,h2,h3,h4 { font-family: 'Sora', sans-serif; }
   <nav class="tabs">
     <button class="tab-btn active" onclick="switchTab('showcase',this)">✦ Feature Showcase</button>
     <button class="tab-btn" onclick="switchTab('pricing',this)">₹ Pricing Calculator</button>
-    <button class="tab-btn" onclick="switchTab('competition',this)">📊 Market Gap</button>
+    <button class="tab-btn" onclick="switchTab('competition',this)">◎ Market Gap</button>
   </nav>
 </header>
 
@@ -705,10 +707,7 @@ h1,h2,h3,h4 { font-family: 'Sora', sans-serif; }
       <div class="summary-header"><div class="summary-title">Your Estimate</div><div class="rec-badge" id="rec-badge">★ Recommended</div></div>
       <div class="selected-features-list" id="selected-list"><div class="empty-state">← Select features to see your estimate</div></div>
       <div class="total-block">
-        <div class="total-row"><div class="total-label">Min Investment</div><div class="total-value" id="total-min">₹0</div></div>
-        <div class="total-row" style="margin-bottom:0;"><div class="total-label">Max Investment</div><div class="total-value" id="total-max">₹0</div></div>
-        <hr class="total-divider"/>
-        <div class="grand-total-row"><div class="grand-label">Total Range</div><div class="grand-value"><span id="grand-min">₹0</span><span class="dash">–</span><span id="grand-max">₹0</span></div></div>
+        <div class="grand-total-row"><div class="grand-label">Total</div><div class="grand-value" id="grand-total">₹0</div></div>
         <div class="hosting-note"><div class="pulse-dot"></div>Server &amp; Hosting: ~₹0/month (serverless free tiers)</div>
         <div class="timeline-row"><div class="tl-label">⏱ Estimated Build Time</div><div class="tl-value" id="timeline-val">0 weeks</div></div>
       </div>
@@ -732,7 +731,7 @@ h1,h2,h3,h4 { font-family: 'Sora', sans-serif; }
     <div class="speed-race" id="speed-race-container"></div>
     <div class="comp-insight">
       <span class="insight-icon">💡</span>
-      <span><strong>What this costs them:</strong> scaffoldingonrentals.com loads in 1.83s — it is being outranked by every faster competitor for the same keywords, purely because of server speed. AAA's Next.js site will load in under 0.3s — the fastest scaffolding website in Bangalore by a wide margin.</span>
+      <span><strong>What this costs them:</strong> scaffoldingonrentals.com loads in 1.83s — it is being outranked by every faster competitor for the same keywords, purely because of server speed. AAA's Next.js site will load in under 0.4s — among the fastest scaffolding websites in Bangalore by a wide margin.</span>
     </div>
   </div>
 
@@ -805,7 +804,7 @@ h1,h2,h3,h4 { font-family: 'Sora', sans-serif; }
   </div>
 </div>
 
-<footer class="footer">Prepared exclusively for <strong>Antony Thomas Dsouza · AAA Events &amp; Production</strong><br/>Bangalore · +91 9108934435 · aaaevents58@gmail.com</footer>
+<footer class="footer">Prepared exclusively for <strong>AAA Events &amp; Production</strong><br/>Bangalore · +91 9108934435 · aaaevents58@gmail.com</footer>
 
 <!-- INSPIRATION MODAL -->
 <div id="insp-overlay" class="insp-overlay" onclick="closeInspOverlay(event)">
@@ -821,13 +820,13 @@ h1,h2,h3,h4 { font-family: 'Sora', sans-serif; }
 </div>
 
 <script>
-const FEATURES=[{name:"Premium Immersive Web Design",min:25000,max:35000,timeMin:1.5,timeMax:2},{name:"Omnichannel Lead Capture",min:15000,max:20000,timeMin:1,timeMax:1.5},{name:"Intelligent Lead Management & AI",min:12000,max:18000,timeMin:1,timeMax:1},{name:"Automated Multi-Owner Scheduling",min:10000,max:15000,timeMin:1,timeMax:1},{name:"Client Admin Portal (CMS)",min:30000,max:40000,timeMin:2,timeMax:2.5},{name:"AI & Local SEO (AIO)",min:10000,max:10000,timeMin:.5,timeMax:.5}];
-let selected=new Set();
+const FEATURES=[{name:"Premium Immersive Web Design",price:28000,timeMin:1.5,timeMax:2,locked:true},{name:"Omnichannel Lead Capture",price:17000,timeMin:1,timeMax:1.5},{name:"Intelligent Lead Management & AI",price:15000,timeMin:1,timeMax:1},{name:"Automated Multi-Owner Scheduling",price:12000,timeMin:1,timeMax:1},{name:"Client Admin Portal (CMS)",price:35000,timeMin:2,timeMax:2.5},{name:"AI & Local SEO (AIO)",price:10000,timeMin:.5,timeMax:.5}];
+let selected=new Set([0]);
 function fmt(n){return n>=100000?"₹"+(n/100000).toFixed(2).replace(/\.?0+$/,"")+"L":"₹"+n.toLocaleString("en-IN")}
-function renderToggles(){const c=document.getElementById("feature-toggles");c.innerHTML="";FEATURES.forEach((f,i)=>{const d=document.createElement("div");d.className="feature-toggle"+(selected.has(i)?" selected":"");d.innerHTML=`<div class="toggle-check">${selected.has(i)?"✓":""}</div><div class="toggle-info"><div class="toggle-name">${f.name}</div><div class="toggle-meta"><span class="toggle-cost">${fmt(f.min)} – ${fmt(f.max)}</span><span class="toggle-time">⏱ ${f.timeMin}–${f.timeMax} wks</span></div></div>`;d.onclick=()=>toggle(i);c.appendChild(d)})}
-function toggle(i){selected.has(i)?selected.delete(i):selected.add(i);renderToggles();updateSummary()}
-function setTier(a){selected=new Set(a);renderToggles();updateSummary()}
-function updateSummary(){const list=document.getElementById("selected-list"),rb=document.getElementById("rec-badge");if(!selected.size){list.innerHTML='<div class="empty-state">← Select features to see your estimate</div>';["total-min","total-max","grand-min","grand-max"].forEach(id=>document.getElementById(id).textContent="₹0");document.getElementById("timeline-val").textContent="0 weeks";rb.style.display="none";return}let h="",sMin=0,sMax=0,tMin=0,tMax=0;[...selected].sort((a,b)=>a-b).forEach(i=>{const f=FEATURES[i];sMin+=f.min;sMax+=f.max;tMin+=f.timeMin;tMax+=f.timeMax;h+=`<div class="sf-item"><span class="sf-name">${f.name}</span><span class="sf-cost">${fmt(f.min)}–${fmt(f.max)}</span></div>`});list.innerHTML=h;document.getElementById("total-min").textContent=fmt(sMin);document.getElementById("total-max").textContent=fmt(sMax);document.getElementById("grand-min").textContent=fmt(sMin);document.getElementById("grand-max").textContent=fmt(sMax);document.getElementById("timeline-val").textContent=tMin+"–"+tMax+" weeks";rb.style.display=[...selected].sort((a,b)=>a-b).join(",")=="0,1,2"?"block":"none"}
+function renderToggles(){const c=document.getElementById("feature-toggles");c.innerHTML="";FEATURES.forEach((f,i)=>{const d=document.createElement("div");d.className="feature-toggle"+(selected.has(i)?" selected":"")+(f.locked?" locked":"");d.innerHTML=`<div class="toggle-check">${selected.has(i)?"✓":""}</div><div class="toggle-info"><div class="toggle-name">${f.name}${f.locked?'<span style="font-size:10px;color:var(--gold);margin-left:6px;font-weight:400;">Always included</span>':''}</div><div class="toggle-meta"><span class="toggle-cost">${fmt(f.price)}</span><span class="toggle-time">⏱ ${f.timeMin}–${f.timeMax} wks</span></div></div>`;if(!f.locked)d.onclick=()=>toggle(i);c.appendChild(d)})}
+function toggle(i){if(FEATURES[i].locked)return;selected.has(i)?selected.delete(i):selected.add(i);renderToggles();updateSummary()}
+function setTier(a){selected=new Set([0,...a]);renderToggles();updateSummary()}
+function updateSummary(){const list=document.getElementById("selected-list"),rb=document.getElementById("rec-badge");if(!selected.size){list.innerHTML='<div class="empty-state">← Select features to see your estimate</div>';document.getElementById("grand-total").textContent="₹0";document.getElementById("timeline-val").textContent="0 weeks";rb.style.display="none";return}let h="",total=0,tMin=0,tMax=0;[...selected].sort((a,b)=>a-b).forEach(i=>{const f=FEATURES[i];total+=f.price;tMin+=f.timeMin;tMax+=f.timeMax;h+=`<div class="sf-item"><span class="sf-name">${f.name}</span><span class="sf-cost">${fmt(f.price)}</span></div>`});list.innerHTML=h;document.getElementById("grand-total").textContent=fmt(total);document.getElementById("timeline-val").textContent=tMin+"–"+tMax+" weeks";rb.style.display=[...selected].sort((a,b)=>a-b).join(",")=="0,1,2"?"block":"none"}
 function switchTab(n,b){document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));document.querySelectorAll(".tab-btn").forEach(x=>x.classList.remove("active"));document.getElementById("tab-"+n).classList.add("active");b.classList.add("active")}
 
 function revealCost(pill){const h=pill.querySelector(".cost-hidden-label"),r=pill.querySelector(".cost-revealed-val"),showing=r.style.display==="inline";h.style.display=showing?"flex":"none";r.style.display=showing?"none":"inline"}
@@ -887,7 +886,7 @@ const SPEED_DATA=[
   {label:"msafegroup.com",ttfb:0.68,total:1.44,color:"#f59e0b",status:"⚠ Slow",aaa:false},
   {label:"scaffoldingonrentals.com",ttfb:1.21,total:1.83,color:"#ef4444",status:"✗ Penalised",aaa:false},
   {label:"aqaccess.com",ttfb:1.10,total:2.37,color:"#ef4444",status:"✗ Penalised",aaa:false},
-  {label:"AAA Events (Next.js target)",ttfb:0.12,total:0.28,color:"#f0b429",status:"🏆 Best",aaa:true}
+  {label:"AAA Events (Next.js target)",ttfb:0.15,total:0.4,color:"#f0b429",status:"🏆 Best",aaa:true}
 ];
 const MAX_SPEED=2.5;
 function renderSpeedRace(){
