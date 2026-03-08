@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AAA Events & Production — Bangalore's Premier Scaffolding Specialists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --gold: #f0b429; --gold-dim: #c48f1a; --gold-glow: rgba(240,180,41,0.15);
+  --bg: #080808; --bg2: #0f0f0f; --bg3: #1a1a1a; --border: #222;
+  --text: #e8e8e8; --muted: #777; --muted2: #555;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+h1,h2,h3,h4,h5 { font-family: 'Sora', sans-serif; }
+
+/* DEMO BANNER */
+.demo-banner {
+  position: fixed; bottom: 20px; right: 20px; z-index: 999;
+  background: var(--gold); color: #000; font-size: 11px; font-weight: 700;
+  padding: 7px 14px; border-radius: 20px; letter-spacing: .08em;
+  text-transform: uppercase; box-shadow: 0 4px 20px rgba(240,180,41,.4);
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px; padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(8,8,8,0.85); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: background .3s;
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo-text { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 16px; color: var(--text); }
+.nav-logo-text span { color: var(--gold); }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--gold); color: #000; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 9px 20px; border-radius: 8px; transition: opacity .2s;
+  text-decoration: none;
+}
+.nav-cta:hover { opacity: .85; }
+
+/* SVG LOGO */
+.logo-svg { width: 40px; height: 40px; }
+.logo-arc-right {
+  stroke-dasharray: 82;
+  stroke-dashoffset: 82;
+  animation: drawArc 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+}
+@keyframes drawArc { to { stroke-dashoffset: 0; } }
+
+/* HERO */
+.hero {
+  min-height: 100vh; padding: 120px 32px 80px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(240,180,41,.1), transparent 70%);
+}
+.hero-grid {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(240,180,41,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,180,41,.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridDrift 20s linear infinite;
+}
+@keyframes gridDrift { from { transform: translateY(0); } to { transform: translateY(60px); } }
+.hero-content { position: relative; z-index: 1; max-width: 820px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(240,180,41,.35); border-radius: 20px;
+  padding: 6px 16px; font-size: 12px; font-weight: 600; color: var(--gold);
+  letter-spacing: .06em; text-transform: uppercase; margin-bottom: 28px;
+  background: rgba(240,180,41,.05);
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+.hero h1 {
+  font-size: clamp(36px, 6vw, 72px); font-weight: 800;
+  line-height: 1.1; margin-bottom: 20px;
+  animation: heroSlideUp .9s cubic-bezier(0.4, 0, 0.2, 1) .2s both;
+}
+.hero h1 .gold { color: var(--gold); }
+.hero h1 .stroke {
+  -webkit-text-stroke: 1px rgba(240,180,41,.6);
+  color: transparent;
+}
+@keyframes heroSlideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px); color: var(--muted); max-width: 560px; margin: 0 auto 40px;
+  line-height: 1.7; animation: heroSlideUp .9s cubic-bezier(0.4, 0, 0.2, 1) .4s both;
+}
+.hero-actions {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  animation: heroSlideUp .9s cubic-bezier(0.4, 0, 0.2, 1) .6s both;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: #000; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+  padding: 14px 28px; border-radius: 10px;
+  text-decoration: none; transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 30px rgba(240,180,41,.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(240,180,41,.45); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--text); border: 1px solid var(--border);
+  cursor: pointer; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+  padding: 14px 28px; border-radius: 10px;
+  text-decoration: none; transition: border-color .2s, background .2s;
+}
+.btn-secondary:hover { border-color: var(--gold); background: var(--gold-glow); }
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--muted2); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  animation: bounce 2s infinite 1.5s;
+}
+.hero-scroll::after {
+  content: ''; width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--muted2), transparent);
+}
+@keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+/* MARQUEE */
+.marquee-wrap {
+  overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--bg2); padding: 16px 0;
+}
+.marquee-track { display: flex; gap: 60px; animation: marquee 25s linear infinite; white-space: nowrap; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-item { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+.marquee-item span { color: var(--gold); margin-right: 60px; }
+
+/* STATS */
+.stats-section { padding: 80px 32px; max-width: 1100px; margin: 0 auto; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; background: var(--border); border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+.stat-box {
+  background: var(--bg2); padding: 36px 24px; text-align: center;
+  transition: background .3s;
+}
+.stat-box:hover { background: var(--bg3); }
+.stat-num { font-family: 'Sora', sans-serif; font-size: 44px; font-weight: 800; color: var(--gold); line-height: 1; }
+.stat-unit { font-size: 20px; }
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 8px; text-transform: uppercase; letter-spacing: .08em; }
+
+/* SECTIONS GENERAL */
+section { padding: 80px 32px; }
+.section-max { max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+.section-h { font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+.section-sub { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 560px; margin-bottom: 48px; }
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(36px);
+  transition: opacity .7s cubic-bezier(0.4,0,0.2,1), transform .7s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.reveal-left { transform: translateX(-40px); }
+.reveal.reveal-right { transform: translateX(40px); }
+.reveal.reveal-scale { transform: scale(0.92); }
+.reveal.visible {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) scale(1) !important;
+}
+.delay-1 { transition-delay: .1s !important; }
+.delay-2 { transition-delay: .2s !important; }
+.delay-3 { transition-delay: .3s !important; }
+.delay-4 { transition-delay: .4s !important; }
+.delay-5 { transition-delay: .5s !important; }
+
+/* SERVICES */
+.services-section { background: var(--bg2); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.service-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 16px;
+  padding: 32px; transition: border-color .3s, transform .3s;
+  cursor: default;
+}
+.service-card:hover { border-color: rgba(240,180,41,.4); transform: translateY(-4px); }
+.service-icon {
+  width: 52px; height: 52px; border-radius: 12px;
+  background: rgba(240,180,41,.08); border: 1px solid rgba(240,180,41,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 20px;
+}
+.service-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+.service-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+.service-tag {
+  display: inline-block; margin-top: 16px; font-size: 11px; font-weight: 600;
+  color: var(--gold); border: 1px solid rgba(240,180,41,.3); border-radius: 12px;
+  padding: 4px 12px; letter-spacing: .05em;
+}
+
+/* PORTFOLIO */
+.portfolio-section { background: var(--bg); }
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 12px; }
+.portfolio-item {
+  border-radius: 12px; overflow: hidden; position: relative;
+  min-height: 200px; cursor: pointer;
+  transition: transform .3s, box-shadow .3s;
+}
+.portfolio-item:hover { transform: scale(1.02); box-shadow: 0 16px 60px rgba(0,0,0,.6); }
+.portfolio-item:nth-child(1) { grid-column: span 2; min-height: 280px; }
+.portfolio-item:nth-child(4) { grid-column: span 2; }
+.portfolio-bg {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.portfolio-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.2) 60%, transparent 100%);
+}
+.portfolio-info { position: absolute; bottom: 20px; left: 20px; right: 20px; }
+.portfolio-info h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.portfolio-info p { font-size: 12px; color: rgba(255,255,255,.6); }
+/* Scaffold art backgrounds */
+.p1-bg { background: linear-gradient(135deg, #0d0800 0%, #1a1000 40%, #100800 100%); }
+.p2-bg { background: linear-gradient(135deg, #080010 0%, #0f0020 50%, #060010 100%); }
+.p3-bg { background: linear-gradient(135deg, #000810 0%, #001020 50%, #000810 100%); }
+.p4-bg { background: linear-gradient(135deg, #100800 0%, #1a1000 40%, #0d0800 100%); }
+.p5-bg { background: linear-gradient(135deg, #080010 0%, #100020 50%, #060010 100%); }
+.scaffold-art { width: 100%; height: 100%; position: absolute; }
+
+/* SCAFFOLD SVG ARTS */
+.scaffold-lines { opacity: .35; }
+
+/* WHY CHOOSE US */
+.why-section { background: var(--bg2); }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.why-list { display: flex; flex-direction: column; gap: 20px; }
+.why-item { display: flex; gap: 16px; align-items: flex-start; }
+.why-icon {
+  width: 40px; height: 40px; flex-shrink: 0; border-radius: 10px;
+  background: rgba(240,180,41,.08); border: 1px solid rgba(240,180,41,.2);
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.why-text h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.why-text p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.why-visual {
+  border-radius: 20px; overflow: hidden; background: var(--bg3);
+  border: 1px solid var(--border); padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.cert-badge {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px;
+}
+.cert-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.cert-text { flex: 1; }
+.cert-text h5 { font-size: 14px; font-weight: 700; }
+.cert-text p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.cert-check { color: #22c55e; font-size: 16px; font-weight: 700; }
+
+/* FOUNDERS */
+.founders-section { background: var(--bg); }
+.founders-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.founder-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 20px;
+  padding: 32px; text-align: center; transition: border-color .3s, transform .3s;
+}
+.founder-card:hover { border-color: rgba(240,180,41,.35); transform: translateY(-4px); }
+.founder-avatar {
+  width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 20px;
+  border: 2px solid var(--border); overflow: hidden;
+  background: linear-gradient(135deg, var(--bg3), #2a2000);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-size: 26px; font-weight: 800; color: var(--gold);
+  position: relative;
+}
+.founder-avatar::after {
+  content: ''; position: absolute; inset: 2px; border-radius: 50%;
+  border: 1px solid rgba(240,180,41,.2);
+}
+.founder-name { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.founder-role { font-size: 12px; color: var(--gold); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 14px; }
+.founder-bio { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+.founder-contact { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.contact-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 600; color: var(--muted);
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 12px;
+  padding: 5px 12px; text-decoration: none; transition: color .2s, border-color .2s;
+}
+.contact-pill:hover { color: var(--gold); border-color: rgba(240,180,41,.3); }
+
+/* LOCATION */
+.location-section { background: var(--bg2); }
+.location-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: start; }
+.location-info { }
+.location-address {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 14px;
+  padding: 24px; margin-bottom: 20px;
+}
+.location-address h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--gold); }
+.location-address p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+.coverage-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.coverage-tag {
+  font-size: 12px; font-weight: 600; color: var(--text);
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 12px;
+}
+.map-container {
+  border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--border); height: 380px;
+}
+.map-container iframe { width: 100%; height: 100%; border: none; display: block; }
+
+/* CONTACT CTA */
+.cta-section { background: var(--bg); padding: 100px 32px; text-align: center; position: relative; overflow: hidden; }
+.cta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(240,180,41,.08), transparent);
+}
+.cta-section .section-max { position: relative; z-index: 1; }
+.cta-h { font-size: clamp(32px, 5vw, 56px); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+.cta-h .gold { color: var(--gold); }
+.cta-sub { font-size: 17px; color: var(--muted); max-width: 480px; margin: 0 auto 40px; line-height: 1.7; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-wa {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #25d366; color: #000; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
+  padding: 14px 28px; border-radius: 10px; text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 24px rgba(37,211,102,.3);
+}
+.btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(37,211,102,.4); }
+.btn-call {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: var(--text); border: 1px solid var(--border);
+  cursor: pointer; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+  padding: 14px 28px; border-radius: 10px; text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.btn-call:hover { border-color: var(--gold); background: var(--gold-glow); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border); background: var(--bg2);
+  padding: 40px 32px; text-align: center;
+  color: var(--muted); font-size: 13px;
+}
+footer .footer-logo { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 16px; }
+footer p { line-height: 1.7; }
+footer a { color: var(--gold); text-decoration: none; }
+
+/* FLOATING WHATSAPP */
+.wa-float {
+  position: fixed; bottom: 64px; right: 20px; z-index: 200;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #25d366; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,.5); text-decoration: none;
+  transition: transform .2s; animation: waPop .5s cubic-bezier(0.4,0,0.2,1) 2s both;
+}
+.wa-float:hover { transform: scale(1.1); }
+@keyframes waPop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 0 16px; }
+  .nav-links { display: none; }
+  section { padding: 56px 16px; }
+  .hero { padding: 100px 16px 64px; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .portfolio-item:nth-child(1), .portfolio-item:nth-child(4) { grid-column: span 1; }
+  .why-grid, .location-grid { grid-template-columns: 1fr; }
+  .stats-section { padding: 48px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- DEMO BADGE -->
+<div class="demo-banner">Preview Demo</div>
+
+<!-- FLOATING WHATSAPP -->
+<a class="wa-float" href="https://wa.me/919108934435?text=Hi%2C%20I%20want%20to%20discuss%20an%20event" target="_blank" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.847L0 24l6.29-1.506A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.568 9.568 0 01-4.9-1.343l-.351-.208-3.733.894.938-3.613-.228-.371A9.544 9.544 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <svg class="logo-svg" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" r="26" stroke="rgba(240,180,41,0.12)" stroke-width="1.5" fill="none"/>
+      <path d="M30 4 A26 26 0 0 0 30 56" stroke="rgba(240,180,41,0.35)" stroke-width="1.5" fill="none"/>
+      <path class="logo-arc-right" d="M30 56 A26 26 0 0 0 30 4" stroke="#f0b429" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <text x="30" y="36" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="15" fill="#f0b429">AAA</text>
+    </svg>
+    <span class="nav-logo-text">AAA <span>Events</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#founders">Team</a>
+    <a href="#location">Location</a>
+  </div>
+  <a class="nav-cta" href="https://wa.me/919108934435" target="_blank">Get a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Bangalore's #1 Ringlock Scaffolding Specialists</div>
+    <h1>
+      We Build the<br>
+      <span class="gold">Stages</span> That Define<br>
+      <span class="stroke">Unforgettable Events</span>
+    </h1>
+    <p class="hero-sub">
+      From intimate corporate setups to 10,000-person concert stages — AAA Events & Production delivers precision-engineered Ringlock scaffolding systems that never fail.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://wa.me/919108934435?text=Hi%2C%20I%20want%20a%20quote%20for%20an%20event" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.847L0 24l6.29-1.506A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.568 9.568 0 01-4.9-1.343l-.351-.208-3.733.894.938-3.613-.228-.371A9.544 9.544 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>
+        Request a Quote
+      </a>
+      <a class="btn-secondary" href="#portfolio">View Our Work &darr;</a>
+    </div>
+  </div>
+  <div class="hero-scroll">scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Concert Stages <span>✦</span></span>
+    <span class="marquee-item">Corporate Events <span>✦</span></span>
+    <span class="marquee-item">Award Ceremonies <span>✦</span></span>
+    <span class="marquee-item">Fashion Shows <span>✦</span></span>
+    <span class="marquee-item">Sports Events <span>✦</span></span>
+    <span class="marquee-item">Exhibitions <span>✦</span></span>
+    <span class="marquee-item">Film Shoots <span>✦</span></span>
+    <span class="marquee-item">Political Rallies <span>✦</span></span>
+    <span class="marquee-item">Concert Stages <span>✦</span></span>
+    <span class="marquee-item">Corporate Events <span>✦</span></span>
+    <span class="marquee-item">Award Ceremonies <span>✦</span></span>
+    <span class="marquee-item">Fashion Shows <span>✦</span></span>
+    <span class="marquee-item">Sports Events <span>✦</span></span>
+    <span class="marquee-item">Exhibitions <span>✦</span></span>
+    <span class="marquee-item">Film Shoots <span>✦</span></span>
+    <span class="marquee-item">Political Rallies <span>✦</span></span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-box reveal">
+      <div class="stat-num"><span class="counter" data-target="500">0</span><span class="stat-unit">+</span></div>
+      <div class="stat-label">Events Completed</div>
+    </div>
+    <div class="stat-box reveal delay-1">
+      <div class="stat-num"><span class="counter" data-target="15">0</span><span class="stat-unit">+</span></div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+    <div class="stat-box reveal delay-2">
+      <div class="stat-num"><span class="counter" data-target="3">0</span></div>
+      <div class="stat-label">Expert Founders</div>
+    </div>
+    <div class="stat-box reveal delay-3">
+      <div class="stat-num"><span class="counter" data-target="100">0</span><span class="stat-unit">%</span></div>
+      <div class="stat-label">Safety Record</div>
+    </div>
+    <div class="stat-box reveal delay-4">
+      <div class="stat-num"><span class="counter" data-target="48">0</span><span class="stat-unit">hr</span></div>
+      <div class="stat-label">Setup Turnaround</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-max">
+    <p class="section-label reveal">What We Do</p>
+    <h2 class="section-h reveal">Engineered for Scale.<br>Built for Impact.</h2>
+    <p class="section-sub reveal">Every stage we build is a statement. Our Ringlock system guarantees structural integrity at any height, any scale, any event.</p>
+    <div class="services-grid">
+      <div class="service-card reveal delay-1">
+        <div class="service-icon">⚙️</div>
+        <h3>Ringlock Scaffolding Systems</h3>
+        <p>Our core specialty — precision-engineered Ringlock scaffolding providing unmatched strength and speed. Certified safe for stages up to 30 feet and beyond.</p>
+        <span class="service-tag">Core Specialty</span>
+      </div>
+      <div class="service-card reveal delay-2">
+        <div class="service-icon">🎭</div>
+        <h3>Stage Design & Fabrication</h3>
+        <p>From intimate 20×20 corporate setups to massive concert stages for 10,000+ audiences — we design, fabricate, and erect stages that command attention.</p>
+        <span class="service-tag">End-to-End</span>
+      </div>
+      <div class="service-card reveal delay-3">
+        <div class="service-icon">🎪</div>
+        <h3>Event Production Support</h3>
+        <p>Comprehensive on-site event support including rigging, truss systems, lighting structures, and crowd control barriers for any venue in Bangalore.</p>
+        <span class="service-tag">Full Support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section" id="portfolio">
+  <div class="section-max">
+    <p class="section-label reveal">Our Work</p>
+    <h2 class="section-h reveal">Stages We've Built</h2>
+    <p class="section-sub reveal">From underground venues to city-wide festivals — every project completed on time, within budget, and to the highest safety standards.</p>
+    <div class="portfolio-grid">
+      <!-- Item 1 - wide -->
+      <div class="portfolio-item reveal delay-1">
+        <div class="portfolio-bg p1-bg">
+          <svg class="scaffold-art scaffold-lines" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+            <line x1="60" y1="0" x2="60" y2="280" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="180" y1="0" x2="180" y2="280" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="300" y1="0" x2="300" y2="280" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="420" y1="0" x2="420" y2="280" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="540" y1="0" x2="540" y2="280" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="0" y1="56" x2="600" y2="56" stroke="#f0b429" stroke-width="1"/>
+            <line x1="0" y1="140" x2="600" y2="140" stroke="#f0b429" stroke-width="1"/>
+            <line x1="0" y1="224" x2="600" y2="224" stroke="#f0b429" stroke-width="1"/>
+            <circle cx="60" cy="56" r="4" fill="#f0b429"/>
+            <circle cx="180" cy="56" r="4" fill="#f0b429"/>
+            <circle cx="300" cy="56" r="4" fill="#f0b429"/>
+            <circle cx="420" cy="56" r="4" fill="#f0b429"/>
+            <circle cx="540" cy="56" r="4" fill="#f0b429"/>
+            <circle cx="60" cy="140" r="4" fill="#f0b429"/>
+            <circle cx="180" cy="140" r="4" fill="#f0b429"/>
+            <circle cx="300" cy="140" r="4" fill="#f0b429"/>
+            <circle cx="420" cy="140" r="4" fill="#f0b429"/>
+            <circle cx="540" cy="140" r="4" fill="#f0b429"/>
+            <circle cx="60" cy="224" r="4" fill="#f0b429"/>
+            <circle cx="180" cy="224" r="4" fill="#f0b429"/>
+            <circle cx="300" cy="224" r="4" fill="#f0b429"/>
+            <circle cx="420" cy="224" r="4" fill="#f0b429"/>
+            <circle cx="540" cy="224" r="4" fill="#f0b429"/>
+            <line x1="60" y1="56" x2="180" y2="140" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <line x1="180" y1="56" x2="300" y2="140" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <line x1="300" y1="56" x2="420" y2="140" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <line x1="420" y1="56" x2="540" y2="140" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <line x1="60" y1="140" x2="180" y2="224" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <line x1="180" y1="140" x2="300" y2="224" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <line x1="300" y1="140" x2="420" y2="224" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <line x1="420" y1="140" x2="540" y2="224" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <h4>AR Rahman Concert — Palace Grounds</h4>
+          <p>30ft main stage · Ringlock system · 12,000 capacity</p>
+        </div>
+      </div>
+      <!-- Item 2 -->
+      <div class="portfolio-item reveal delay-2">
+        <div class="portfolio-bg p2-bg">
+          <svg class="scaffold-art scaffold-lines" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+            <line x1="56" y1="0" x2="56" y2="200" stroke="#a855f7" stroke-width="1.5"/>
+            <line x1="140" y1="0" x2="140" y2="200" stroke="#a855f7" stroke-width="1.5"/>
+            <line x1="224" y1="0" x2="224" y2="200" stroke="#a855f7" stroke-width="1.5"/>
+            <line x1="0" y1="66" x2="280" y2="66" stroke="#a855f7" stroke-width="1"/>
+            <line x1="0" y1="133" x2="280" y2="133" stroke="#a855f7" stroke-width="1"/>
+            <circle cx="56" cy="66" r="3.5" fill="#a855f7"/>
+            <circle cx="140" cy="66" r="3.5" fill="#a855f7"/>
+            <circle cx="224" cy="66" r="3.5" fill="#a855f7"/>
+            <circle cx="56" cy="133" r="3.5" fill="#a855f7"/>
+            <circle cx="140" cy="133" r="3.5" fill="#a855f7"/>
+            <circle cx="224" cy="133" r="3.5" fill="#a855f7"/>
+          </svg>
+        </div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <h4>NASSCOM Tech Summit</h4>
+          <p>Corporate stage · 2,000 delegates</p>
+        </div>
+      </div>
+      <!-- Item 3 -->
+      <div class="portfolio-item reveal delay-1">
+        <div class="portfolio-bg p3-bg">
+          <svg class="scaffold-art scaffold-lines" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+            <line x1="70" y1="0" x2="70" y2="200" stroke="#3b82f6" stroke-width="1.5"/>
+            <line x1="140" y1="0" x2="140" y2="200" stroke="#3b82f6" stroke-width="1.5"/>
+            <line x1="210" y1="0" x2="210" y2="200" stroke="#3b82f6" stroke-width="1.5"/>
+            <line x1="0" y1="50" x2="280" y2="50" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="0" y1="100" x2="280" y2="100" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="0" y1="150" x2="280" y2="150" stroke="#3b82f6" stroke-width="1"/>
+            <rect x="55" y="100" width="170" height="100" fill="none" stroke="#3b82f6" stroke-width="1" opacity=".4"/>
+            <circle cx="70" cy="50" r="3" fill="#3b82f6"/>
+            <circle cx="140" cy="50" r="3" fill="#3b82f6"/>
+            <circle cx="210" cy="50" r="3" fill="#3b82f6"/>
+            <circle cx="70" cy="100" r="3" fill="#3b82f6"/>
+            <circle cx="140" cy="100" r="3" fill="#3b82f6"/>
+            <circle cx="210" cy="100" r="3" fill="#3b82f6"/>
+          </svg>
+        </div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <h4>Bengaluru Fashion Week</h4>
+          <p>Runway structure · Phoenix Marketcity</p>
+        </div>
+      </div>
+      <!-- Item 4 - wide -->
+      <div class="portfolio-item reveal delay-2">
+        <div class="portfolio-bg p4-bg">
+          <svg class="scaffold-art scaffold-lines" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+            <line x1="75" y1="0" x2="75" y2="200" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="225" y1="0" x2="225" y2="200" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="375" y1="0" x2="375" y2="200" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="525" y1="0" x2="525" y2="200" stroke="#f0b429" stroke-width="1.5"/>
+            <line x1="0" y1="66" x2="600" y2="66" stroke="#f0b429" stroke-width="1"/>
+            <line x1="0" y1="133" x2="600" y2="133" stroke="#f0b429" stroke-width="1"/>
+            <line x1="75" y1="66" x2="225" y2="133" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <line x1="225" y1="66" x2="375" y2="133" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <line x1="375" y1="66" x2="525" y2="133" stroke="#f0b429" stroke-width=".8" opacity=".5"/>
+            <circle cx="75" cy="66" r="4" fill="#f0b429"/>
+            <circle cx="225" cy="66" r="4" fill="#f0b429"/>
+            <circle cx="375" cy="66" r="4" fill="#f0b429"/>
+            <circle cx="525" cy="66" r="4" fill="#f0b429"/>
+            <circle cx="75" cy="133" r="4" fill="#f0b429"/>
+            <circle cx="225" cy="133" r="4" fill="#f0b429"/>
+            <circle cx="375" cy="133" r="4" fill="#f0b429"/>
+            <circle cx="525" cy="133" r="4" fill="#f0b429"/>
+          </svg>
+        </div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <h4>IPL Pre-Season Ceremony — Chinnaswamy Stadium</h4>
+          <p>Multi-level stage system · 35,000 audience</p>
+        </div>
+      </div>
+      <!-- Item 5 -->
+      <div class="portfolio-item reveal delay-3">
+        <div class="portfolio-bg p5-bg">
+          <svg class="scaffold-art scaffold-lines" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="140" cy="100" r="80" stroke="#a855f7" stroke-width="1.5" fill="none" opacity=".6"/>
+            <circle cx="140" cy="100" r="50" stroke="#a855f7" stroke-width="1" fill="none" opacity=".4"/>
+            <line x1="60" y1="100" x2="220" y2="100" stroke="#a855f7" stroke-width="1"/>
+            <line x1="140" y1="20" x2="140" y2="180" stroke="#a855f7" stroke-width="1"/>
+            <circle cx="140" cy="100" r="5" fill="#a855f7"/>
+          </svg>
+        </div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <h4>360° Stage — Cultural Festival</h4>
+          <p>Radial Ringlock structure · Unique design</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-section">
+  <div class="section-max">
+    <div class="why-grid">
+      <div>
+        <p class="section-label reveal">Why AAA</p>
+        <h2 class="section-h reveal">The Difference Is<br>in the Details</h2>
+        <p class="section-sub reveal" style="margin-bottom: 32px;">We don't just rent scaffolding — we engineer safe, beautiful structures that become part of the event experience.</p>
+        <div class="why-list">
+          <div class="why-item reveal delay-1">
+            <div class="why-icon">🔩</div>
+            <div class="why-text">
+              <h4>Ringlock Certified Specialists</h4>
+              <p>The only company in Bangalore specializing exclusively in the superior Ringlock system — faster to erect, safer under load.</p>
+            </div>
+          </div>
+          <div class="why-item reveal delay-2">
+            <div class="why-icon">⚡</div>
+            <div class="why-text">
+              <h4>48-Hour Setup Guarantee</h4>
+              <p>Our trained crew can erect a full concert-scale stage within 48 hours of confirmation. No delays, no excuses.</p>
+            </div>
+          </div>
+          <div class="why-item reveal delay-3">
+            <div class="why-icon">🛡️</div>
+            <div class="why-text">
+              <h4>Zero Incident Safety Record</h4>
+              <p>15+ years, 500+ events, zero structural failures. Our reputation is built on the safety of every performer and every audience member.</p>
+            </div>
+          </div>
+          <div class="why-item reveal delay-4">
+            <div class="why-icon">📍</div>
+            <div class="why-text">
+              <h4>Pan-Bangalore Coverage</h4>
+              <p>Based in Mathikere, we cover every corner of Bangalore and Bengaluru Rural — from Whitefield to Yelahanka.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual reveal reveal-right">
+        <h3 style="font-size:16px; margin-bottom:20px; color: var(--muted);">CREDENTIALS & STANDARDS</h3>
+        <div class="cert-badge">
+          <div class="cert-icon" style="background: rgba(240,180,41,.1);">🏅</div>
+          <div class="cert-text">
+            <h5>Ringlock System Certified</h5>
+            <p>Layher-standard scaffolding installation</p>
+          </div>
+          <span class="cert-check">✓</span>
+        </div>
+        <div class="cert-badge">
+          <div class="cert-icon" style="background: rgba(34,197,94,.1);">✅</div>
+          <div class="cert-text">
+            <h5>GST Registered Business</h5>
+            <p>Fully compliant — invoices for all projects</p>
+          </div>
+          <span class="cert-check">✓</span>
+        </div>
+        <div class="cert-badge">
+          <div class="cert-icon" style="background: rgba(59,130,246,.1);">🔐</div>
+          <div class="cert-text">
+            <h5>Insured Operations</h5>
+            <p>Full liability coverage on all event projects</p>
+          </div>
+          <span class="cert-check">✓</span>
+        </div>
+        <div class="cert-badge">
+          <div class="cert-icon" style="background: rgba(168,85,247,.1);">📋</div>
+          <div class="cert-text">
+            <h5>Load-Rated Structures</h5>
+            <p>Engineering sign-off available on request</p>
+          </div>
+          <span class="cert-check">✓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDERS -->
+<section class="founders-section" id="founders">
+  <div class="section-max">
+    <p class="section-label reveal">The Team</p>
+    <h2 class="section-h reveal">The Founders Behind<br>Every Stage</h2>
+    <p class="section-sub reveal">Three owners. One mission. We are personally on-site for every major project — because our name is on the stage.</p>
+    <div class="founders-grid">
+      <div class="founder-card reveal delay-1">
+        <div class="founder-avatar">AT</div>
+        <div class="founder-name">Antony Thomas Dsouza</div>
+        <div class="founder-role">Director & Lead Engineer</div>
+        <p class="founder-bio">The technical backbone of AAA. Antony brings 15+ years of hands-on Ringlock scaffolding expertise, having personally overseen 500+ stage builds across Bangalore. Every large-format project runs through his sign-off.</p>
+        <div class="founder-contact">
+          <a class="contact-pill" href="https://wa.me/919108934435" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.847L0 24l6.29-1.506A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+            +91 91089 34435
+          </a>
+          <a class="contact-pill" href="mailto:aaaevents58@gmail.com">
+            ✉ aaaevents58@gmail.com
+          </a>
+        </div>
+      </div>
+      <!-- Founder 2 — placeholder for client to fill -->
+      <div class="founder-card reveal delay-2">
+        <div class="founder-avatar" style="background: linear-gradient(135deg, var(--bg3), #001a1a);">F2</div>
+        <div class="founder-name">[Co-Founder Name]</div>
+        <div class="founder-role">Co-Founder & Operations</div>
+        <p class="founder-bio">Manages on-ground logistics, crew deployment, and vendor relationships across all active projects in Bangalore. Ensures every stage is built to spec and delivered on schedule.</p>
+        <div class="founder-contact">
+          <span class="contact-pill">+91 99455 13198</span>
+        </div>
+      </div>
+      <!-- Founder 3 — placeholder for client to fill -->
+      <div class="founder-card reveal delay-3">
+        <div class="founder-avatar" style="background: linear-gradient(135deg, var(--bg3), #001a0a);">F3</div>
+        <div class="founder-name">[Co-Founder Name]</div>
+        <div class="founder-role">Co-Founder & Business Development</div>
+        <p class="founder-bio">Drives client relationships and new business across the corporate, entertainment, and government sectors. The face of AAA Events at every negotiation and new project kickoff.</p>
+        <div class="founder-contact">
+          <span class="contact-pill">Available on WhatsApp</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="section-max">
+    <p class="section-label reveal">Find Us</p>
+    <h2 class="section-h reveal">Based in Bangalore.<br>Built for Bangalore.</h2>
+    <p class="section-sub reveal">Centrally located in Mathikere — we reach any venue in the city within hours.</p>
+    <div class="location-grid">
+      <div class="location-info">
+        <div class="location-address reveal">
+          <h4>Our Office & Yard</h4>
+          <p>Building No. #14, 4th Cross<br>SBM Colony, Brindavan Nagar<br>Mathikere, Bangalore — 560054<br>Karnataka, India</p>
+        </div>
+        <div class="location-address reveal delay-1">
+          <h4>Contact</h4>
+          <p>
+            WhatsApp: <a href="https://wa.me/919108934435" style="color:var(--gold)">+91 91089 34435</a><br>
+            Alt: <a href="tel:+919945513198" style="color:var(--gold)">+91 99455 13198</a><br>
+            Email: <a href="mailto:aaaevents58@gmail.com" style="color:var(--gold)">aaaevents58@gmail.com</a>
+          </p>
+        </div>
+        <div class="reveal delay-2">
+          <p style="font-size:12px; color:var(--muted); margin-bottom:10px; text-transform:uppercase; letter-spacing:.08em; font-weight:600;">Areas We Cover</p>
+          <div class="coverage-tags">
+            <span class="coverage-tag">Mathikere</span>
+            <span class="coverage-tag">Hebbal</span>
+            <span class="coverage-tag">Yeshwantpur</span>
+            <span class="coverage-tag">Whitefield</span>
+            <span class="coverage-tag">Koramangala</span>
+            <span class="coverage-tag">Palace Grounds</span>
+            <span class="coverage-tag">Yelahanka</span>
+            <span class="coverage-tag">Electronic City</span>
+            <span class="coverage-tag">All of Bangalore</span>
+          </div>
+        </div>
+      </div>
+      <div class="map-container reveal reveal-right">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.4058756753384!2d77.56195517507637!3d13.027492387276437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17bb5d2b3ea5%3A0x7e2f5e8b9c3d1a0f!2sMathikere%2C%20Bengaluru%2C%20Karnataka%20560054!5e0!3m2!1sen!2sin!4v1741400000000!5m2!1sen!2sin"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="AAA Events & Production — Mathikere, Bangalore">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-max">
+    <p class="section-label reveal" style="text-align:center;">Get in Touch</p>
+    <h2 class="cta-h reveal">Ready to Build<br>Something <span class="gold">Extraordinary?</span></h2>
+    <p class="cta-sub reveal">Tell us about your event. We'll get back to you within 2 hours with a custom quote — no obligations, no pressure.</p>
+    <div class="cta-actions reveal delay-1">
+      <a class="btn-wa" href="https://wa.me/919108934435?text=Hi%20Antony%2C%20I%20need%20scaffolding%20for%20an%20event%20in%20Bangalore.%20Can%20we%20discuss%3F" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.534 5.847L0 24l6.29-1.506A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.6a9.568 9.568 0 01-4.9-1.343l-.351-.208-3.733.894.938-3.613-.228-.371A9.544 9.544 0 012.4 12C2.4 6.698 6.698 2.4 12 2.4S21.6 6.698 21.6 12 17.302 21.6 12 21.6z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <a class="btn-call" href="tel:+919108934435">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.64A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="32" height="32" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" r="26" stroke="rgba(240,180,41,0.3)" stroke-width="1.5" fill="none"/>
+      <path d="M30 56 A26 26 0 0 0 30 4" stroke="#f0b429" stroke-width="2" fill="none"/>
+      <text x="30" y="36" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="13" fill="#f0b429">AAA</text>
+    </svg>
+    <span style="font-family: 'Sora', sans-serif; font-weight: 800; font-size: 15px;">AAA Events & Production</span>
+  </div>
+  <p>Specialist in Ringlock Scaffolding Systems &nbsp;·&nbsp; Mathikere, Bangalore 560054<br>
+  <a href="mailto:aaaevents58@gmail.com">aaaevents58@gmail.com</a> &nbsp;·&nbsp;
+  <a href="tel:+919108934435">+91 91089 34435</a></p>
+  <p style="margin-top: 16px; font-size: 12px; color: var(--muted2);">
+    &copy; 2025 AAA Events & Production. All rights reserved. &nbsp;·&nbsp;
+    <em style="color: var(--muted2);">This is a preview demo — website under development by Core Tensor.</em>
+  </p>
+</footer>
+
+<script>
+// SCROLL REVEAL — IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// COUNTER ANIMATION
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = 1800;
+  const start = performance.now();
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    el.textContent = Math.round(easeOut(progress) * target);
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+// NAV scroll effect
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.style.background = 'rgba(8,8,8,0.97)';
+  } else {
+    nav.style.background = 'rgba(8,8,8,0.85)';
+  }
+}, { passive: true });
+</script>
+
+</body>
+</html>
