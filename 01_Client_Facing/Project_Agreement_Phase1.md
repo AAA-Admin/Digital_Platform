@@ -16,7 +16,9 @@ This covers three things bundled into a single engagement:
 | 2 | **Basic SEO & Google Indexing** | On-page SEO so you appear on Page 1 for your target keywords |
 | 3 | **Lead Capture Form + WhatsApp Alert** | Visitors fill a form on your site; all 3 owners get an instant WhatsApp message with the lead details |
 
-**Agreed Investment: ₹28,000 (all-inclusive, no hidden charges)**
+**Agreed Investment: ₹28,000 — all three deliverables above are included in this single price.**
+
+> **Important to note:** Basic SEO & Google Indexing and the Lead Capture Form with WhatsApp alerts are not add-ons. They are fully built and delivered within the ₹28,000. There are no extra charges for either.
 
 ---
 
