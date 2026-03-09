@@ -1,5 +1,5 @@
 # AAA Events & Production
-## Project Agreement — Phase 1
+## Project Agreement
 **Document Date:** March 2026
 **Prepared by:** Core Tensor
 **Client:** AAA Events & Production
@@ -8,7 +8,7 @@
 
 ## What We Are Building (Confirmed Scope)
 
-You have confirmed Phase 1 of your digital presence. This covers three things bundled into a single engagement:
+This covers three things bundled into a single engagement:
 
 | # | Deliverable | Detail |
 |:--|:--|:--|
@@ -132,7 +132,7 @@ For ₹28,000 this is what is included in your SEO:
 - **Core Web Vitals compliance** — passing Google's speed and usability tests, which directly affects rankings
 - **robots.txt** — correct crawl instructions so Google indexes only what matters
 
-**What is NOT included in this phase** (available in future phases):
+**What is NOT included in this engagement:**
 - Google My Business optimisation (local map ranking)
 - Ongoing monthly content / blog strategy
 - Backlink building campaigns
@@ -159,12 +159,12 @@ A website alone does not generate traffic. It *converts* traffic. Think of it li
 
 **Honest traffic estimate at Month 6 (on-page SEO only):** 150–400 visitors/month organically. That is enough for 10–25 genuine inbound leads per month if the site converts well — which ours will.
 
-### What actually drives faster, bigger traffic (and why it's not in Phase 1)
+### What actually drives faster, bigger traffic (and why it's not in this engagement)
 
 | Growth Lever | Impact | Status |
 |:--|:--|:--|
-| **Google My Business (GMB)** | Highest impact for local B2B — puts you in the Map Pack | Phase 5 |
-| **Backlinks** | Other sites linking to yours; tells Google you're credible | Phase 5 |
+| **Google My Business (GMB)** | Highest impact for local B2B — puts you in the Map Pack | Separate engagement |
+| **Backlinks** | Other sites linking to yours; tells Google you're credible | Separate engagement |
 | **Content / Blog** | Each article is a new door into your site for Google | Not scoped |
 | **Paid Ads (Google/Meta)** | Instant traffic, stops when budget stops | Not scoped — your decision |
 | **Your existing WhatsApp / Instagram** | Link your website everywhere — free traffic, starts day 1 | You can do this immediately |
@@ -181,10 +181,8 @@ GMB is the box that appears on the right side of Google search results and in Go
 
 When someone searches *"event company near me"* or *"stage setup Bengaluru"* on their phone, the first thing they see is the Map Pack — three businesses with star ratings, photos, and a call button. That is GMB.
 
-**Why it's not in Phase 1:**
-GMB setup is a separate discipline — verifying your business address with Google (they send a physical postcard or do a video call), uploading 20+ photos, getting your first 10+ reviews, and writing optimised business descriptions. It takes 2–4 weeks of focused work and is best done *after* the website is live so your GMB links to a credible, fast-loading site.
-
-**Phase 5 cost: ₹10,000** (one-time setup + optimisation)
+**Why it's not in this engagement:**
+GMB setup is a separate discipline — verifying your business address with Google (they send a physical postcard or do a video call), uploading 20+ photos, getting your first 10+ reviews, and writing optimised business descriptions. It takes 2–4 weeks of focused work and is best done *after* the website is live so your GMB links to a credible, fast-loading site. When you're ready, we scope it as a standalone engagement.
 
 ---
 
@@ -197,12 +195,10 @@ A backlink is when another website links to yours. Google treats each backlink a
 - Real backlinks come from: press features, event industry directories, supplier websites linking to you, blog posts about your work, and partnerships.
 - A new business typically gets 0–5 organic backlinks in Year 1. That's normal.
 
-**What we can do in Phase 5:**
+**What we can do when you're ready (separate engagement):**
 - Submit your business to 15–20 legitimate Indian event & business directories (each one is a free backlink)
 - Write a press-style case study of your best event, optimised to attract natural links
 - Identify partnership websites (venue partners, caterers, AV suppliers) who can link to you
-
-**Phase 5 cost: ₹10,000** (covers GMB + backlink foundation together)
 
 > **One free thing you can do right now:** Ask your top 5 best clients to leave a Google Review on your GMB page once it's live. Five genuine 5-star reviews in Month 1 will outperform most paid SEO activities.
 
@@ -257,15 +253,15 @@ This section exists to protect both parties. Everything below is a precise defin
 
 | What | Why It's Separate |
 |:--|:--|
-| Google My Business setup | Different workflow, 2–4 weeks, Phase 5 |
-| Backlink building | Ongoing work, not a one-time task |
+| Google My Business setup | Separate engagement after site is live |
+| Backlink building | Ongoing work, separate engagement |
 | Paid ad campaigns (Google Ads / Meta Ads) | Requires your ad budget + management fee |
-| Blog or content writing | Recurring monthly work |
+| Blog or content writing | Recurring monthly work, separate engagement |
 | Second page or additional pages | Single-page scope only |
-| Booking / payment gateway integration | Separate module, Phase 3 |
-| Custom admin panel to edit the site yourself | Phase 4 |
-| WhatsApp Bot (automated reply flow) | Phase 2 |
-| AI lead research / database | Phase 2 |
+| Booking / payment gateway integration | Separate engagement |
+| Custom admin panel to edit the site yourself | Separate engagement |
+| WhatsApp Bot (automated reply flow) | Separate engagement |
+| AI lead research / database | Separate engagement |
 | Social media management or posting | Not a web development service |
 | Logo design or brand identity work | Not in scope unless agreed separately |
 | Video production or photography | Content is provided by you |
@@ -279,18 +275,29 @@ This section exists to protect both parties. Everything below is a precise defin
 
 ---
 
-## What Happens Next (Future Phases)
+## Built to Grow — Scalability Without a Rebuild
 
-All future work is charged as separate, clearly scoped engagements. Nothing will ever be charged automatically or without your explicit approval.
+This website is not a dead end. It is built on a modern serverless architecture that is designed to expand.
 
-When you're ready to grow, the logical next steps are:
+When the business is ready, new capabilities — automated lead flows, booking systems, admin portals, AI integrations — can be layered on top of the existing foundation without throwing away what was built. The website today is a high-performance landing page. The same codebase and infrastructure can grow into a full web application over time.
 
-| Phase | What It Adds | Indicative Cost |
+Nothing gets rebuilt from scratch. Every rupee invested now carries forward.
+
+---
+
+## Payment Terms
+
+| Milestone | Amount | When |
 |:--|:--|:--|
-| **Phase 2** | Full WhatsApp Bot (automated lead qualification flow) + AI Lead Database | ₹27,000 – ₹38,000 |
-| **Phase 3** | 3-Owner Calendar Scheduling (auto-booking) | ₹10,000 – ₹15,000 |
-| **Phase 4** | Client Admin Portal (you upload photos yourself) | ₹30,000 – ₹40,000 |
-| **Phase 5** | Advanced AIO/SEO (AI search + Google Maps dominance) | ₹10,000 |
+| **Advance** | ₹8,000 | On agreement confirmation, before work begins |
+| **Mid-project** | ₹10,000 | On first draft delivery — design is live for your review |
+| **Final** | ₹10,000 | After every item in the IN SCOPE checklist is ticked and you sign off |
+
+**Total: ₹28,000**
+
+- No payment is due before the previous milestone is delivered
+- Final payment is released only after you have reviewed and approved all deliverables
+- No automatic charges — every future engagement is a separate agreement
 
 ---
 
@@ -298,10 +305,11 @@ When you're ready to grow, the logical next steps are:
 
 | Item | Detail |
 |:--|:--|
-| **Phase 1 Scope** | Custom website + Basic SEO + Form with WhatsApp alerts |
+| **Scope** | Custom website + Basic SEO + Form with WhatsApp alerts |
 | **Agreed Price** | ₹28,000 |
+| **Payment Schedule** | ₹8,000 advance → ₹10,000 on first draft → ₹10,000 on sign-off |
 | **Your Monthly Running Cost** | ~₹0 (only domain renewal ~₹1,200/year) |
-| **Future Charges** | Only when you approve the next phase; always from your accounts |
+| **All Third-Party Accounts** | In your name, billed to you directly — we never sit in between |
 | **Page Load Guarantee** | Under 0.8 seconds — demonstrated before handover |
 | **No Templates** | 100% custom code, owned by you |
 | **Timeline** | 10 – 14 working days from content receipt |
