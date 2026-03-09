@@ -140,6 +140,145 @@ For ₹28,000 this is what is included in your SEO:
 
 ---
 
+## Will the Website Get Traffic? How Much?
+
+This is the most honest answer we can give you.
+
+### The short answer
+A website alone does not generate traffic. It *converts* traffic. Think of it like opening a shop — the shop doesn't bring people in, your location, word of mouth, and signboards do. SEO is your signboard on Google.
+
+### What to realistically expect
+
+| Timeframe | What Happens | Why |
+|:--|:--|:--|
+| **Week 1–2** | Google discovers and indexes the site | We submit it directly; Google crawls within days |
+| **Month 1–3** | You appear in searches, but likely page 2–5 | New domain has zero history. Google is still "trusting" you. |
+| **Month 4–6** | Page 1 rankings begin for low-competition keywords | e.g. *"truss setup company Bengaluru"* — specific, less fought-over |
+| **Month 6–12** | Consistent page 1 for 3–5 target keywords | With no backlinks or content, this is the realistic ceiling |
+| **Month 12+** | Compounding growth | Every new backlink, review, or content piece accelerates ranking |
+
+**Honest traffic estimate at Month 6 (on-page SEO only):** 150–400 visitors/month organically. That is enough for 10–25 genuine inbound leads per month if the site converts well — which ours will.
+
+### What actually drives faster, bigger traffic (and why it's not in Phase 1)
+
+| Growth Lever | Impact | Status |
+|:--|:--|:--|
+| **Google My Business (GMB)** | Highest impact for local B2B — puts you in the Map Pack | Phase 5 |
+| **Backlinks** | Other sites linking to yours; tells Google you're credible | Phase 5 |
+| **Content / Blog** | Each article is a new door into your site for Google | Not scoped |
+| **Paid Ads (Google/Meta)** | Instant traffic, stops when budget stops | Not scoped — your decision |
+| **Your existing WhatsApp / Instagram** | Link your website everywhere — free traffic, starts day 1 | You can do this immediately |
+
+> **Immediate action you can take at zero cost:** Share your new website link across every Instagram post, in your WhatsApp groups, on your personal profiles, and in every client conversation. This builds early traffic signals that help SEO.
+
+---
+
+## GMB & Backlinks — Why They Matter & What They Cost
+
+### Google My Business (GMB)
+
+GMB is the box that appears on the right side of Google search results and in Google Maps. For a local B2B company like AAA Events, **GMB is often more valuable than your website** for local discovery.
+
+When someone searches *"event company near me"* or *"stage setup Bengaluru"* on their phone, the first thing they see is the Map Pack — three businesses with star ratings, photos, and a call button. That is GMB.
+
+**Why it's not in Phase 1:**
+GMB setup is a separate discipline — verifying your business address with Google (they send a physical postcard or do a video call), uploading 20+ photos, getting your first 10+ reviews, and writing optimised business descriptions. It takes 2–4 weeks of focused work and is best done *after* the website is live so your GMB links to a credible, fast-loading site.
+
+**Phase 5 cost: ₹10,000** (one-time setup + optimisation)
+
+---
+
+### Backlinks
+
+A backlink is when another website links to yours. Google treats each backlink as a "vote of confidence." More votes from credible sources = higher ranking.
+
+**The honest reality of backlinks:**
+- You cannot fake quality backlinks. Google has been penalising fake link schemes since 2012.
+- Real backlinks come from: press features, event industry directories, supplier websites linking to you, blog posts about your work, and partnerships.
+- A new business typically gets 0–5 organic backlinks in Year 1. That's normal.
+
+**What we can do in Phase 5:**
+- Submit your business to 15–20 legitimate Indian event & business directories (each one is a free backlink)
+- Write a press-style case study of your best event, optimised to attract natural links
+- Identify partnership websites (venue partners, caterers, AV suppliers) who can link to you
+
+**Phase 5 cost: ₹10,000** (covers GMB + backlink foundation together)
+
+> **One free thing you can do right now:** Ask your top 5 best clients to leave a Google Review on your GMB page once it's live. Five genuine 5-star reviews in Month 1 will outperform most paid SEO activities.
+
+---
+
+## Exact Project Scope — What Is In & What Is Out
+
+This section exists to protect both parties. Everything below is a precise definition of what ₹28,000 covers. Anything not on this list is out of scope and requires a separate conversation and agreement.
+
+### ✅ IN SCOPE — Included in ₹28,000
+
+**Website**
+- [ ] Single-page custom-coded landing page (HTML / CSS / JS — no templates, no WordPress)
+- [ ] Mobile-first responsive design (works perfectly on all screen sizes)
+- [ ] Scroll-triggered animations and reveal effects
+- [ ] AAA logo animation on page load
+- [ ] Services / offerings section
+- [ ] Founders / team section
+- [ ] Google Maps embed (Bengaluru coverage area)
+- [ ] Gallery / portfolio section (using images provided by you)
+- [ ] Contact details section
+- [ ] Deployed to Vercel on your account
+
+**Lead Capture Form**
+- [ ] One embedded form on the website (fields as described above)
+- [ ] Form submission triggers instant WhatsApp message to all 3 owners
+- [ ] Basic spam protection (honeypot field)
+- [ ] Form confirmation message shown to the user on submit
+
+**SEO & Indexing**
+- [ ] Google Search Console account setup and site verification
+- [ ] XML sitemap generation and submission
+- [ ] robots.txt configuration
+- [ ] Title tags and meta descriptions for all page sections
+- [ ] Image alt tags
+- [ ] LocalBusiness schema markup (structured data)
+- [ ] Open Graph tags (so the link looks good when shared on WhatsApp/social)
+- [ ] Target keyword research (up to 8 keywords)
+- [ ] Core Web Vitals audit and pass before handover
+
+**Project Management**
+- [ ] One round of design revisions after first draft
+- [ ] One round of copy/content revisions
+- [ ] Handover call + walkthrough of all accounts
+- [ ] 30-day post-launch bug support (bugs only — not new features)
+
+---
+
+### ❌ OUT OF SCOPE — Not Included, Requires Separate Agreement
+
+**Not in this engagement under any circumstances:**
+
+| What | Why It's Separate |
+|:--|:--|
+| Google My Business setup | Different workflow, 2–4 weeks, Phase 5 |
+| Backlink building | Ongoing work, not a one-time task |
+| Paid ad campaigns (Google Ads / Meta Ads) | Requires your ad budget + management fee |
+| Blog or content writing | Recurring monthly work |
+| Second page or additional pages | Single-page scope only |
+| Booking / payment gateway integration | Separate module, Phase 3 |
+| Custom admin panel to edit the site yourself | Phase 4 |
+| WhatsApp Bot (automated reply flow) | Phase 2 |
+| AI lead research / database | Phase 2 |
+| Social media management or posting | Not a web development service |
+| Logo design or brand identity work | Not in scope unless agreed separately |
+| Video production or photography | Content is provided by you |
+| Email marketing setup | Not scoped |
+| Ongoing monthly maintenance retainer | Quoted separately if required |
+
+**Revision policy:**
+- Revisions during build: up to **2 rounds** of revisions on design, **1 round** on content/copy
+- Revisions after handover: **30-day bug support only** — bugs are things that are broken. New ideas, new sections, and changed requirements after sign-off are new work and charged separately.
+- A "revision" means refining what was already scoped — not adding new features or changing direction.
+
+---
+
 ## What Happens Next (Future Phases)
 
 All future work is charged as separate, clearly scoped engagements. Nothing will ever be charged automatically or without your explicit approval.
