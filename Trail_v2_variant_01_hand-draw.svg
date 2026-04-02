@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" fill="none">
+  <rect width="800" height="800" fill="#F2F2F2"/>
+  <defs>
+    <style>
+      .fill-shape {
+        fill: #241B36;
+        fill-opacity: 0;
+      }
+      .draw-stroke {
+        fill: none;
+        stroke: #241B36;
+        stroke-width: 2.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+      }
+    </style>
+  </defs>
+
+  <g id="group-1">
+    <path class="fill-shape" d="M 82.1,797.0 194.0,797.0 497.8,189.5 403.0,0.0 4.5,797.0 41.4,797.0 403.0,73.8 460.9,189.5 173.7,763.8 135.6,763.8 421.4,192.2 403.0,155.3 Z">
+      <animate attributeName="fill-opacity" from="0" to="1" dur="0.14s" begin="0.72s" fill="freeze"/>
+    </path>
+    <path class="draw-stroke" pathLength="100" d="M 82.1,797.0 194.0,797.0 497.8,189.5 403.0,0.0 4.5,797.0 41.4,797.0 403.0,73.8 460.9,189.5 173.7,763.8 135.6,763.8 421.4,192.2 403.0,155.3 Z">
+      <animate attributeName="stroke-dashoffset" from="100" to="0" dur="0.78s" begin="0.00s" fill="freeze"/>
+      <animate attributeName="opacity" from="1" to="0" dur="0.08s" begin="0.76s" fill="freeze"/>
+    </path>
+  </g>
+
+  <g id="group-2">
+    <path class="fill-shape" d="M 239.6,797.0 567.3,797.0 442.1,546.6 351.6,727.6 453.6,727.6 437.2,694.9 407.0,694.9 443.1,622.5 513.5,763.3 293.5,763.3 442.1,466.2 607.5,797.0 722.5,797.0 498.7,349.5 519.0,308.9 763.1,797.0 800.9,797.0 519.3,233.9 461.6,349.3 668.6,763.3 626.4,763.3 441.4,393.4 Z">
+      <animate attributeName="fill-opacity" from="0" to="1" dur="0.16s" begin="1.98s" fill="freeze"/>
+    </path>
+    <path class="draw-stroke" pathLength="100" d="M 239.6,797.0 567.3,797.0 442.1,546.6 351.6,727.6 453.6,727.6 437.2,694.9 407.0,694.9 443.1,622.5 513.5,763.3 293.5,763.3 442.1,466.2 607.5,797.0 722.5,797.0 498.7,349.5 519.0,308.9 763.1,797.0 800.9,797.0 519.3,233.9 461.6,349.3 668.6,763.3 626.4,763.3 441.4,393.4 Z">
+      <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.24s" begin="0.80s" fill="freeze"/>
+      <animate attributeName="opacity" from="1" to="0" dur="0.08s" begin="2.00s" fill="freeze"/>
+    </path>
+  </g>
+</svg>

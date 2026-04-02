@@ -178,7 +178,7 @@ add_table(
     [
         ["1", "Premium Immersive Website",       "Custom-coded, high-performance landing page"],
         ["2", "Basic SEO & Google Indexing",      "On-page SEO so you appear on Page 1 for your target keywords"],
-        ["3", "Lead Capture Form + WhatsApp Alert","Visitors fill a form; all 3 owners get an instant WhatsApp message with lead details"],
+        ["3", "Lead Capture Form + WhatsApp Alert","Visitors fill a form; both directors get an instant WhatsApp message with lead details"],
     ],
     col_widths=[0.7, 4.5, 7.8]
 )
@@ -232,7 +232,7 @@ add_table(
     ],
     col_widths=[5.5, 7.5]
 )
-add_body("On submission, all three owners instantly receive a WhatsApp message:", color=MUTED)
+add_body("On submission, both directors instantly receive a WhatsApp message:", color=MUTED)
 
 # WhatsApp message sample
 p = doc.add_paragraph()
@@ -283,7 +283,7 @@ seo_in = [
     "Google Search Console setup — site verified and submitted",
     "XML Sitemap generated and submitted",
     "On-Page SEO — title tags, meta descriptions, heading structure, image alt tags",
-    'Target keywords: "event production company Bengaluru", "LED wall rental Bengaluru", "concert stage setup company", and up to 8 total',
+    'Target keywords: "event production company Bengaluru", "LED wall rental Bengaluru", "event infrastructure setup Bengaluru", "concert stage setup company", and up to 8 total',
     "Schema Markup (LocalBusiness) — helps with Google Map Pack",
     "Core Web Vitals compliance — passing speed and usability tests",
     "robots.txt — correct crawl instructions",
@@ -312,7 +312,7 @@ in_scope = [
     ]),
     ("Lead Capture Form", [
         "One embedded form (fields as described above)",
-        "Instant WhatsApp alert to all 3 owners on submission",
+        "Instant WhatsApp alert to both directors on submission",
         "Basic spam protection (honeypot field)",
         "Confirmation message shown to user on submit",
     ]),
@@ -370,10 +370,10 @@ add_heading("8. Payment Terms", level=2)
 add_table(
     ["Milestone", "Amount", "When"],
     [
-        ["Advance",     "₹8,000",  "On agreement confirmation, before work begins"],
-        ["Mid-project", "₹10,000", "On first draft delivery — design live for your review"],
-        ["Final",       "₹10,000", "After every IN SCOPE item is delivered and you sign off"],
-        ["TOTAL",       "₹28,000", ""],
+        ["Advance Received", "₹5,000",  "Received on the agreement date; work commences on this date"],
+        ["Mid-project",      "₹13,000", "On first draft delivery — design live for your review"],
+        ["Final",            "₹10,000", "After every IN SCOPE item is delivered and you sign off"],
+        ["TOTAL",            "₹28,000", ""],
     ],
     col_widths=[4.0, 3.0, 6.0]
 )
@@ -388,7 +388,7 @@ add_table(
     [
         ["Scope",                  "Custom website + Basic SEO + Form with WhatsApp alerts"],
         ["Agreed Price",           "₹28,000"],
-        ["Payment Schedule",       "₹8,000 advance → ₹10,000 on first draft → ₹10,000 on sign-off"],
+        ["Payment Schedule",       "₹5,000 advance (received) → ₹13,000 on first draft → ₹10,000 on sign-off"],
         ["Monthly Running Cost",   "~₹0 (only domain renewal ~₹1,200/year)"],
         ["All Third-Party Accounts","In your name, billed to you — we never sit in between"],
         ["Page Load Guarantee",    "Under 0.8 seconds — demonstrated before handover"],
@@ -505,17 +505,62 @@ add_body(
 
 add_divider()
 
+# ── Signatures ────────────────────────────────────────────────────────────────
+add_heading("Signatures", level=2)
+add_body(
+    "This agreement is executed in two (2) original copies, one for the Client and one for Core Tensor. "
+    "By signing below, both parties confirm their understanding and acceptance of the scope, payment terms, "
+    "and conditions outlined in this document.",
+    color=MUTED
+)
+
+doc.add_paragraph()
+p2 = doc.add_paragraph()
+r_aaa = p2.add_run("For AAA Events & Production:")
+set_run_font(r_aaa, 10, bold=True, color=BLACK)
+doc.add_paragraph()
+doc.add_paragraph()
+p3 = doc.add_paragraph("_________________________________________\n")
+r_dir = p3.add_run("Authorized Signatory (Director 1)\n")
+set_run_font(r_dir, 10, bold=True, color=BLACK)
+r_date1 = p3.add_run("Date: _______________")
+set_run_font(r_date1, 10, color=BLACK)
+
+doc.add_paragraph()
+doc.add_paragraph()
+p3_2 = doc.add_paragraph("_________________________________________\n")
+r_dir2 = p3_2.add_run("Authorized Signatory (Director 2)\n")
+set_run_font(r_dir2, 10, bold=True, color=BLACK)
+r_date1_2 = p3_2.add_run("Date: _______________")
+set_run_font(r_date1_2, 10, color=BLACK)
+
+doc.add_paragraph()
+p4 = doc.add_paragraph()
+r_ct = p4.add_run("For Core Tensor:")
+set_run_font(r_ct, 10, bold=True, color=BLACK)
+doc.add_paragraph()
+doc.add_paragraph()
+p5 = doc.add_paragraph("_________________________________________\n")
+r_auth = p5.add_run("Authorized Signatory\n")
+set_run_font(r_auth, 10, bold=True, color=BLACK)
+r_date2 = p5.add_run("Date: _______________")
+set_run_font(r_date2, 10, color=BLACK)
+
+doc.add_paragraph()
+add_divider()
+
 # ── Footer ────────────────────────────────────────────────────────────────────
-p = doc.add_paragraph()
-p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-r = p.add_run(
+p_foot = doc.add_paragraph()
+p_foot.alignment = WD_ALIGN_PARAGRAPH.CENTER
+r_foot = p_foot.add_run(
     "Core Tensor builds custom, performance-first digital systems. "
     "We do not resell hosting, take platform kickbacks, or lock you into subscriptions. "
     "Everything we build is yours."
 )
-set_run_font(r, 8, italic=True, color=MUTED)
+set_run_font(r_foot, 8, italic=True, color=MUTED)
 
 # ── Save ──────────────────────────────────────────────────────────────────────
-out = "/home/user/AAA/01_Client_Facing/AAA_Events_Project_Agreement.docx"
+import os
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "AAA_Events_Project_Agreement.docx")
 doc.save(out)
 print(f"Saved: {out}")

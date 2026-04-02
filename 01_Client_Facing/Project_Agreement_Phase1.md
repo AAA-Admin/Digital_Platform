@@ -14,7 +14,7 @@ This covers three things bundled into a single engagement:
 |:--|:--|:--|
 | 1 | **Premium Immersive Website** | Custom-coded, high-performance landing page |
 | 2 | **Basic SEO & Google Indexing** | On-page SEO so you appear on Page 1 for your target keywords |
-| 3 | **Lead Capture Form + WhatsApp Alert** | Visitors fill a form on your site; all 3 owners get an instant WhatsApp message with the lead details |
+| 3 | **Lead Capture Form + WhatsApp Alert** | Visitors fill a form on your site; both directors get an instant WhatsApp message with the lead details |
 
 **Agreed Investment: ₹28,000 — all three deliverables above are included in this single price.**
 
@@ -67,7 +67,7 @@ Visitors on your website will fill in a short form with the following fields:
 | Approximate Budget Range | Dropdown |
 | Brief Requirement | Short text area |
 
-On submission, **all three owners will instantly receive a WhatsApp message** that looks like this:
+On submission, **both directors will instantly receive a WhatsApp message** that looks like this:
 
 ```
 🔔 NEW LEAD — AAA Events Website
@@ -128,7 +128,7 @@ For ₹28,000 this is what is included in your SEO:
 - **Target Keywords** — we will research and optimise for terms like:
   - *"event production company Bengaluru"*
   - *"LED wall rental Bengaluru"*
-  - *"scaffolding setup Bengaluru"*
+  - *"event infrastructure setup Bengaluru"*
   - *"concert stage setup company"*
 - **Schema Markup** — structured data that tells Google you are a local business (helps with the "Map Pack" results)
 - **Core Web Vitals compliance** — passing Google's speed and usability tests, which directly affects rankings
@@ -226,7 +226,7 @@ This section exists to protect both parties. Everything below is a precise defin
 
 **Lead Capture Form**
 - [ ] One embedded form on the website (fields as described above)
-- [ ] Form submission triggers instant WhatsApp message to all 3 owners
+- [ ] Form submission triggers instant WhatsApp message to both directors
 - [ ] Basic spam protection (honeypot field)
 - [ ] Form confirmation message shown to the user on submit
 
@@ -291,8 +291,8 @@ Nothing gets rebuilt from scratch. Every rupee invested now carries forward.
 
 | Milestone | Amount | When |
 |:--|:--|:--|
-| **Advance** | ₹8,000 | On agreement confirmation, before work begins |
-| **Mid-project** | ₹10,000 | On first draft delivery — design is live for your review |
+| **Advance Received** | ₹5,000 | Received on the agreement date; work commences on this date |
+| **Mid-project** | ₹13,000 | On first draft delivery — design is live for your review |
 | **Final** | ₹10,000 | After every item in the IN SCOPE checklist is ticked and you sign off |
 
 **Total: ₹28,000**
@@ -309,12 +309,47 @@ Nothing gets rebuilt from scratch. Every rupee invested now carries forward.
 |:--|:--|
 | **Scope** | Custom website + Basic SEO + Form with WhatsApp alerts |
 | **Agreed Price** | ₹28,000 |
-| **Payment Schedule** | ₹8,000 advance → ₹10,000 on first draft → ₹10,000 on sign-off |
+| **Payment Schedule** | ₹5,000 advance (received) → ₹13,000 on first draft → ₹10,000 on sign-off |
 | **Your Monthly Running Cost** | ~₹0 (only domain renewal ~₹1,200/year) |
 | **All Third-Party Accounts** | In your name, billed to you directly — we never sit in between |
 | **Page Load Guarantee** | Under 0.8 seconds — demonstrated before handover |
 | **No Templates** | 100% custom code, owned by you |
 | **Timeline** | 10 – 14 working days from content receipt |
+
+---
+
+## Signatures
+
+This agreement is executed in two (2) original copies, one for the Client and one for Core Tensor. By signing below, both parties confirm their understanding and acceptance of the scope, payment terms, and conditions outlined in this document.
+
+<br>
+
+**For AAA Events & Production:**
+
+<br><br><br>
+
+_________________________________________
+**Authorized Signatory (Director 1)**
+
+Date: _______________
+
+<br><br><br>
+
+_________________________________________
+**Authorized Signatory (Director 2)**
+
+Date: _______________
+
+<br><br>
+
+**For Core Tensor:**
+
+<br><br><br>
+
+_________________________________________
+**Authorized Signatory**
+
+Date: _______________
 
 ---
 

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "svg-preview",
+      "runtimeExecutable": "C:\\Python314\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "3456", "-d", "C:\\Users\\yuvar\\OneDrive\\Documents\\GitHub\\AAA\\06_Inspiration"],
+      "port": 3456
+    }
+  ]
+}
