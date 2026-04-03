@@ -10,6 +10,8 @@ Mark this under milestone: `M2 - Lead Funnel, SEO, and Speed`
 
 Add the public enquiry form path with the signed field set, validation, basic spam protection, and clear success/error behavior so visitors can submit event requirements without calling immediately.
 
+This issue owns the structured capture layer on the webpage. When all required fields are filled, the frontend/backend flow should produce a composed WhatsApp-ready message payload from those structured values so the next issue can deliver it.
+
 Signed fields:
 - Name
 - Phone Number
@@ -23,6 +25,8 @@ Signed fields:
 - [ ] Users can submit an enquiry from the site
 - [ ] Required fields are validated correctly
 - [ ] Basic anti-spam protection is in place
+- [ ] Form data is normalized into a structured payload using the signed field set
+- [ ] A composed WhatsApp-ready message is generated from the structured payload
 - [ ] Success and failure states are clear to the visitor
 
 ## Blocked by

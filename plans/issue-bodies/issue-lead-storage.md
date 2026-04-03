@@ -8,14 +8,14 @@ Mark this under milestone: `M2 - Lead Funnel, SEO, and Speed`
 
 ## What to build
 
-Implement the signed lead-alert behavior so valid form submissions immediately trigger WhatsApp delivery to both directors with the required lead details.
+Implement the signed lead-alert behavior so the composed message from the structured form payload is delivered to WhatsApp for both directors with the required lead details.
 
 The target outcome is the signed contract behavior, not a WhatsApp bot or automated reply flow.
 
 ## Acceptance criteria
 
 - [ ] Both directors receive WhatsApp alerts on valid form submission
-- [ ] Alert payload contains the required lead fields
+- [ ] Alert content is sourced from the structured payload composed in the form layer
 - [ ] Failure handling is observable and does not mislead the visitor
 
 ## Blocked by

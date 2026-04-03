@@ -6,7 +6,7 @@
 
 Durable decisions that apply across all phases:
 
-- **Delivery model**: Greenfield production rebuild, not incremental cleanup of the current demo files.
+- **Delivery model**: Production hardening from the existing demo reference where useful, rather than blindly rewriting everything from zero.
 - **Frontend**: Next.js single-page marketing site deployed on Vercel.
 - **Brand asset**: Use the animated SVG logo at `C:\Users\yuvar\OneDrive\Documents\GitHub\AAA\AAA_logo.svg` with transparent-background live-site integration.
 - **Positioning**: Present AAA as a complete event infrastructure support company, not only a scaffolding company.

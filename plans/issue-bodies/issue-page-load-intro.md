@@ -21,6 +21,11 @@ Direction:
 - use the NEP motion reference (`The Stamp Blue`) as a pacing and transformation reference only; do not copy their asset, sequence, or exact visual treatment
 - performance impact must be tightly budgeted so the site can still target fast loads
 
+Current logo-animation inspiration order:
+1. `https://dribbble.com/shots/20335565-Logo-Animation-for-Sandbox-Concept`
+2. `https://dribbble.com/shots/17972310-Lasso-Logo-Animation-Concept`
+3. `https://dribbble.com/shots/18516438-Status-Effects-logo-animation-pack`
+
 ## Acceptance criteria
 
 - [ ] Intro concept is defined with a clear visual direction
@@ -40,6 +45,12 @@ None - separate future track.
 | Claude | Review the narrative clarity, performance tradeoffs, and visual quality |
 
 Do not assign Codex or Claude as GitHub assignees or contributors.
+
+## Suggested Skills
+
+- Use `grill-me` before implementation if the visual story, sequencing, or motion tradeoffs are still ambiguous.
+- Use `design-an-interface` if multiple intro directions should be explored before one is chosen.
+- If the animation workflow becomes a repeated specialized pattern, create a dedicated skill rather than re-deciding the process each time.
 
 ## User stories addressed
 

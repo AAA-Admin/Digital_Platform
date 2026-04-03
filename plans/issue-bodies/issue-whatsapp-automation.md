@@ -8,7 +8,7 @@ Mark this under milestone: `M3 - Final Handover and Sign-Off`
 
 ## What to build
 
-Prepare the final handover material covering AAA-owned accounts, walkthrough items, sign-off checklist, and the 30-day bug-support boundary from the agreement.
+Prepare the final handover material covering AAA-owned accounts, walkthrough items, sign-off checklist, the 30-day bug-support boundary from the agreement, and a clear closeout summary of signed scope versus no-cost additions.
 
 ## Acceptance criteria
 
@@ -16,10 +16,12 @@ Prepare the final handover material covering AAA-owned accounts, walkthrough ite
 - [ ] Walkthrough checklist is ready
 - [ ] Final sign-off checklist is captured
 - [ ] 30-day bug-support boundary is documented
+- [ ] Closeout summary includes deviations and extra no-cost features delivered beyond the signed agreement
 
 ## Blocked by
 
 - Blocked by #10
+- Blocked by #14
 
 ## Agent Guidance
 

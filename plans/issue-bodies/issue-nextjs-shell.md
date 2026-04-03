@@ -32,6 +32,12 @@ Use the canonical animated SVG logo asset at `C:\Users\yuvar\OneDrive\Documents\
 
 Do not assign Codex or Claude as GitHub assignees or contributors.
 
+## Suggested Skills
+
+- Use `vercel:nextjs` for App Router and production architecture decisions.
+- Use `vercel:geist` where typography and brand polish choices are needed.
+- Use `grill-me` if reuse-vs-rebuild decisions around the demo become unclear.
+
 ## User stories addressed
 
 - User story 1

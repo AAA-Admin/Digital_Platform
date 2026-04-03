@@ -29,6 +29,12 @@ None - can start immediately.
 
 Do not assign Codex or Claude as GitHub assignees or contributors.
 
+## Suggested Skills
+
+- Use `github:github` for repository-oriented GitHub workflow context.
+- Use `vercel:vercel-cli` or `vercel:bootstrap` when setup work touches Vercel linkage or deployment plumbing.
+- Use `grill-me` if account ownership, environment ownership, or repo/deployment responsibilities are still unclear.
+
 ## User stories addressed
 
 - User story 8

@@ -50,7 +50,7 @@ This build must stay inside the contract. Future add-ons can be tracked separate
 
 ## Implementation Decisions
 
-- The project should be treated as a greenfield production build. The existing repo contains pitch material and a static concept demo, not a production app.
+- The project should be treated as a production hardening effort around an existing static demo reference. The current demo at `C:\Users\yuvar\OneDrive\Documents\GitHub\AAA\01_Client_Facing\demo\index.html` should be mined for reusable sections, motion ideas, content structure, and visual direction where that accelerates delivery without carrying over demo-only compromises.
 - The recommended frontend foundation is Next.js on Vercel because it supports a fast custom-coded single-page site on business-owned infrastructure.
 - The canonical brand logo asset is `C:\Users\yuvar\OneDrive\Documents\GitHub\AAA\AAA_logo.svg`, and the live site should use a transparent-background variant for header/hero placement.
 - The signed scope is limited to:
