@@ -1,2 +1,13 @@
 .vendor/*
 06_Inspiration/*
+.claude/*
+02_Internal_Dev/*
+03_Assets/*
+plans/*
+AAA.code-workspace
+INV-005.pdf
+visiting_card.jpeg
+Trail_v2_variant_01_hand-draw.svg
+01_Client_Facing/*
+!01_Client_Facing/demo/
+!01_Client_Facing/demo/index.html
