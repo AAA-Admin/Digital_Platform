@@ -14,7 +14,7 @@ export function WhySection() {
                 <div className="why-icon">🔩</div>
                 <div className="why-text">
                   <h4>Ringlock Certified Specialists</h4>
-                  <p>The only company in Bangalore specializing exclusively in the superior Ringlock system — faster to erect, safer under load.</p>
+                  <p>One of India&apos;s few companies specializing exclusively in the superior Ringlock system — faster to erect, safer under load.</p>
                 </div>
               </div>
               <div className="why-item reveal delay-2">
@@ -34,8 +34,8 @@ export function WhySection() {
               <div className="why-item reveal delay-4">
                 <div className="why-icon">📍</div>
                 <div className="why-text">
-                  <h4>Pan-Bangalore Coverage</h4>
-                  <p>Based in Mathikere, we cover every corner of Bangalore and Bengaluru Rural — from Whitefield to Yelahanka.</p>
+                  <h4>Pan-India Coverage</h4>
+                  <p>Based in Mathikere, Bangalore — we mobilise across India for large-format events, from metro cities to tier-2 markets.</p>
                 </div>
               </div>
             </div>

@@ -10,7 +10,7 @@ export function Footer() {
       </div>
       <p>
         Specialist in Ringlock Scaffolding Systems &nbsp;&middot;&nbsp; Mathikere, Bangalore 560054<br/>
-        <a href="mailto:aaaevents58@gmail.com">aaaevents58@gmail.com</a> &nbsp;&middot;&nbsp;
+        <a href="mailto:antony@aaa-events.in">antony@aaa-events.in</a> &nbsp;&middot;&nbsp;
         <a href="tel:+919108934435">+91 91089 34435</a>
       </p>
       <p style={{ marginTop: '16px', fontSize: '12px', color: 'var(--muted2)' }}>

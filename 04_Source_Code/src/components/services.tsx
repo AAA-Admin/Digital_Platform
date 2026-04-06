@@ -21,7 +21,7 @@ export function Services() {
           <div className="service-card reveal delay-3">
             <div className="service-icon">🎪</div>
             <h3>Event Production Support</h3>
-            <p>Comprehensive on-site event support including rigging, truss systems, lighting structures, and crowd control barriers for any venue in Bangalore.</p>
+            <p>Comprehensive on-site event support including rigging, truss systems, lighting structures, and crowd control barriers for venues anywhere in India.</p>
             <span className="service-tag">Full Support</span>
           </div>
         </div>

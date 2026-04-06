@@ -10,7 +10,7 @@ export function Founders() {
             <div className="founder-avatar">AT</div>
             <div className="founder-name">Antony Thomas Dsouza</div>
             <div className="founder-role">Director &amp; Lead Engineer</div>
-            <p className="founder-bio">The technical backbone of AAA. Antony brings 15+ years of hands-on Ringlock scaffolding expertise, having personally overseen 500+ stage builds across Bangalore. Every large-format project runs through his sign-off.</p>
+            <p className="founder-bio">The technical backbone of AAA. Antony brings 15+ years of hands-on Ringlock scaffolding expertise, having personally overseen 500+ stage builds across India. Every large-format project runs through his sign-off.</p>
             <div className="founder-contact">
               <a className="contact-pill" href="https://wa.me/919108934435" target="_blank" rel="noopener noreferrer">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
@@ -19,8 +19,8 @@ export function Founders() {
                 </svg>
                 +91 91089 34435
               </a>
-              <a className="contact-pill" href="mailto:aaaevents58@gmail.com">
-                ✉ aaaevents58@gmail.com
+              <a className="contact-pill" href="mailto:antony@aaa-events.in">
+                ✉ antony@aaa-events.in
               </a>
             </div>
           </div>
@@ -29,9 +29,12 @@ export function Founders() {
             <div className="founder-avatar" style={{ background: 'linear-gradient(135deg, var(--bg3), #001a1a)' }}>F2</div>
             <div className="founder-name">[Co-Founder Name]</div>
             <div className="founder-role">Co-Founder &amp; Operations</div>
-            <p className="founder-bio">Manages on-ground logistics, crew deployment, and vendor relationships across all active projects in Bangalore. Ensures every stage is built to spec and delivered on schedule.</p>
+            <p className="founder-bio">Manages on-ground logistics, crew deployment, and vendor relationships across all active projects in India. Ensures every stage is built to spec and delivered on schedule.</p>
             <div className="founder-contact">
               <span className="contact-pill">+91 99455 13198</span>
+              <a className="contact-pill" href="mailto:arif@aaa-events.in">
+                ✉ arif@aaa-events.in
+              </a>
             </div>
           </div>
         </div>

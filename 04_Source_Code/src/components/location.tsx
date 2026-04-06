@@ -3,8 +3,8 @@ export function Location() {
     <section className="location-section" id="location">
       <div className="section-max">
         <p className="section-label reveal">Find Us</p>
-        <h2 className="section-h reveal">Based in Bangalore.<br/>Built for Bangalore.</h2>
-        <p className="section-sub reveal">Centrally located in Mathikere — we reach any venue in the city within hours.</p>
+        <h2 className="section-h reveal">Based in Bangalore.<br/>Built for India.</h2>
+        <p className="section-sub reveal">Centrally located in Mathikere — we mobilise anywhere in India for your event.</p>
         <div className="location-grid">
           <div className="location-info">
             <div className="location-address reveal">
@@ -16,13 +16,13 @@ export function Location() {
               <p>
                 WhatsApp: <a href="https://wa.me/919108934435" style={{ color: 'var(--gold)' }}>+91 91089 34435</a><br/>
                 Alt: <a href="tel:+919945513198" style={{ color: 'var(--gold)' }}>+91 99455 13198</a><br/>
-                Email: <a href="mailto:aaaevents58@gmail.com" style={{ color: 'var(--gold)' }}>aaaevents58@gmail.com</a>
+                Email: <a href="mailto:antony@aaa-events.in" style={{ color: 'var(--gold)' }}>antony@aaa-events.in</a>
               </p>
             </div>
             <div className="reveal delay-2">
               <p style={{ fontSize: '12px', color: 'var(--muted)', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '.08em', fontWeight: 600 }}>Areas We Cover</p>
               <div className="coverage-tags">
-                {['Mathikere','Hebbal','Yeshwantpur','Whitefield','Koramangala','Palace Grounds','Yelahanka','Electronic City','All of Bangalore'].map(area => (
+                {['Bangalore','Mumbai','Delhi','Hyderabad','Chennai','Pune','Kolkata','Kochi','Pan-India'].map(area => (
                   <span className="coverage-tag" key={area}>{area}</span>
                 ))}
               </div>

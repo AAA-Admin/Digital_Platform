@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://aaa-events.in"),
   title: "AAA Events & Production",
   description:
-    "AAA Events & Production builds reliable event infrastructure for stages, live environments, and on-ground event execution across Bangalore.",
+    "AAA Events & Production builds reliable event infrastructure for stages, live environments, and on-ground event execution across India.",
 };
 
 export default function RootLayout({

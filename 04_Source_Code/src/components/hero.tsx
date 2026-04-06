@@ -4,7 +4,7 @@ export function Hero() {
       <div className="hero-bg"></div>
       <div className="hero-grid"></div>
       <div className="hero-content">
-        <div className="hero-badge">Bangalore&apos;s #1 Ringlock Scaffolding Specialists</div>
+        <div className="hero-badge">India&apos;s Trusted Ringlock Scaffolding Specialists</div>
         <h1>
           We Build the<br/>
           <span className="gold">Stages</span> That Define<br/>
