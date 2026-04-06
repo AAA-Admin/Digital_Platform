@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AAA Preloader — Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@800&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; background: #060402; }
+
+    #overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #060402;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #stage { position: relative; width: 0; height: 0; }
+
+    .ring, .ghost, .logo-wrap, .tiny-ghost {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    #wordmark {
+      position: absolute;
+      left: 0;
+      top: -46px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 5rem;
+      color: #ffffff;
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: flex-end;
+      opacity: 0;
+    }
+    #wordmark span { display: inline-block; }
+
+    #replay-btn {
+      position: fixed; bottom: 24px; right: 24px; z-index: 99999;
+      background: rgba(0,173,238,0.12);
+      border: 1px solid rgba(0,173,238,0.35);
+      color: #00ADEE;
+      font-family: sans-serif; font-size: 13px;
+      padding: 8px 18px; border-radius: 6px;
+      cursor: pointer; transition: background 0.2s;
+    }
+    #replay-btn:hover { background: rgba(0,173,238,0.22); }
+  </style>
+</head>
+<body>
+
+  <div id="overlay">
+    <div id="stage">
+
+      <!-- 5 Sonar rings — rounded triangle outline, 0.18s stagger, simultaneous expansion -->
+      <div class="ring" id="ring1" style="width:140px;height:140px;top:-70px;left:-70px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 411,17 Q 403,0 395,17 L 12,780 Q 4,797 23,797 L 777,797 Q 797,797 788,780 L 411,17 Z"
+                fill="none" stroke="rgba(0,173,238,0.55)" stroke-width="22" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="ring" id="ring2" style="width:140px;height:140px;top:-70px;left:-70px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 411,17 Q 403,0 395,17 L 12,780 Q 4,797 23,797 L 777,797 Q 797,797 788,780 L 411,17 Z"
+                fill="none" stroke="rgba(0,173,238,0.55)" stroke-width="22" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="ring" id="ring3" style="width:140px;height:140px;top:-70px;left:-70px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 411,17 Q 403,0 395,17 L 12,780 Q 4,797 23,797 L 777,797 Q 797,797 788,780 L 411,17 Z"
+                fill="none" stroke="rgba(0,173,238,0.55)" stroke-width="22" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="ring" id="ring4" style="width:140px;height:140px;top:-70px;left:-70px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 411,17 Q 403,0 395,17 L 12,780 Q 4,797 23,797 L 777,797 Q 797,797 788,780 L 411,17 Z"
+                fill="none" stroke="rgba(0,173,238,0.55)" stroke-width="22" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="ring" id="ring5" style="width:140px;height:140px;top:-70px;left:-70px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 411,17 Q 403,0 395,17 L 12,780 Q 4,797 23,797 L 777,797 Q 797,797 788,780 L 411,17 Z"
+                fill="none" stroke="rgba(0,173,238,0.55)" stroke-width="22" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- Tiny ghost triangles at each vertex — appear as last ring sweeps through -->
+      <!-- Apex: y = -67 × 1.5 = -100, BL: (-102,100), BR: (102,100) -->
+      <div class="tiny-ghost" id="tiny-apex" style="width:26px;height:26px;top:-113px;left:-13px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 411,17 Q 403,0 395,17 L 12,780 Q 4,797 23,797 L 777,797 Q 797,797 788,780 L 411,17 Z"
+                fill="none" stroke="rgba(0,173,238,0.55)" stroke-width="10" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="tiny-ghost" id="tiny-bl" style="width:26px;height:26px;top:87px;left:-115px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 411,17 Q 403,0 395,17 L 12,780 Q 4,797 23,797 L 777,797 Q 797,797 788,780 L 411,17 Z"
+                fill="none" stroke="rgba(0,173,238,0.55)" stroke-width="10" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="tiny-ghost" id="tiny-br" style="width:26px;height:26px;top:87px;left:89px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 411,17 Q 403,0 395,17 L 12,780 Q 4,797 23,797 L 777,797 Q 797,797 788,780 L 411,17 Z"
+                fill="none" stroke="rgba(0,173,238,0.55)" stroke-width="10" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- Ghost 1 — rounded logo, white stroke -->
+      <div class="ghost" id="ghost1" style="width:140px;height:140px;top:-70px;left:-70px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 102.10,797.00 L 174.00,797.00 Q 194.00,797.00 202.95,779.11 L 488.85,207.39 Q 497.80,189.50 488.85,171.61 L 411.95,17.89 Q 403.00,0.00 394.06,17.89 L 12.75,780.50 Q 4.50,797.00 22.95,797.00 Q 41.40,797.00 49.65,780.50 L 394.06,91.69 Q 403.00,73.80 411.95,91.69 L 451.95,171.61 Q 460.90,189.50 451.95,207.39 L 182.22,746.76 Q 173.70,763.80 154.65,763.80 Q 135.60,763.80 144.12,746.76 L 412.46,210.09 Q 421.40,192.20 412.48,174.30 L 411.92,173.20 Q 403.00,155.30 394.05,173.19 L 91.05,779.11 Q 82.10,797.00 102.10,797.00 Z"
+                fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="22" stroke-linejoin="round"/>
+          <path d="M 259.60,797.00 L 547.30,797.00 Q 567.30,797.00 558.36,779.11 L 451.04,564.49 Q 442.10,546.60 433.16,564.49 L 360.54,709.71 Q 351.60,727.60 371.60,727.60 L 435.31,727.60 Q 453.60,727.60 445.40,711.25 L 443.97,708.40 Q 437.20,694.90 422.10,694.90 Q 407.00,694.90 413.74,681.39 L 434.18,640.40 Q 443.10,622.50 452.04,640.39 L 504.56,745.41 Q 513.50,763.30 493.50,763.30 L 313.50,763.30 Q 293.50,763.30 302.45,745.41 L 433.15,484.09 Q 442.10,466.20 451.04,484.09 L 598.56,779.11 Q 607.50,797.00 627.50,797.00 L 702.50,797.00 Q 722.50,797.00 713.55,779.11 L 507.65,367.39 Q 498.70,349.50 507.64,331.61 L 510.06,326.79 Q 519.00,308.90 527.95,326.79 L 754.65,780.10 Q 763.10,797.00 782.00,797.00 Q 800.90,797.00 792.45,780.10 L 528.25,251.79 Q 519.30,233.90 510.36,251.79 L 470.54,331.41 Q 461.60,349.30 470.54,367.19 L 659.66,745.41 Q 668.60,763.30 648.60,763.30 L 646.40,763.30 Q 626.40,763.30 617.45,745.41 L 450.35,411.29 Q 441.40,393.40 432.46,411.29 L 248.54,779.11 Q 239.60,797.00 259.60,797.00 Z"
+                fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="22" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- Ghost 2 — rounded logo, white stroke -->
+      <div class="ghost" id="ghost2" style="width:140px;height:140px;top:-70px;left:-70px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 102.10,797.00 L 174.00,797.00 Q 194.00,797.00 202.95,779.11 L 488.85,207.39 Q 497.80,189.50 488.85,171.61 L 411.95,17.89 Q 403.00,0.00 394.06,17.89 L 12.75,780.50 Q 4.50,797.00 22.95,797.00 Q 41.40,797.00 49.65,780.50 L 394.06,91.69 Q 403.00,73.80 411.95,91.69 L 451.95,171.61 Q 460.90,189.50 451.95,207.39 L 182.22,746.76 Q 173.70,763.80 154.65,763.80 Q 135.60,763.80 144.12,746.76 L 412.46,210.09 Q 421.40,192.20 412.48,174.30 L 411.92,173.20 Q 403.00,155.30 394.05,173.19 L 91.05,779.11 Q 82.10,797.00 102.10,797.00 Z"
+                fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="22" stroke-linejoin="round"/>
+          <path d="M 259.60,797.00 L 547.30,797.00 Q 567.30,797.00 558.36,779.11 L 451.04,564.49 Q 442.10,546.60 433.16,564.49 L 360.54,709.71 Q 351.60,727.60 371.60,727.60 L 435.31,727.60 Q 453.60,727.60 445.40,711.25 L 443.97,708.40 Q 437.20,694.90 422.10,694.90 Q 407.00,694.90 413.74,681.39 L 434.18,640.40 Q 443.10,622.50 452.04,640.39 L 504.56,745.41 Q 513.50,763.30 493.50,763.30 L 313.50,763.30 Q 293.50,763.30 302.45,745.41 L 433.15,484.09 Q 442.10,466.20 451.04,484.09 L 598.56,779.11 Q 607.50,797.00 627.50,797.00 L 702.50,797.00 Q 722.50,797.00 713.55,779.11 L 507.65,367.39 Q 498.70,349.50 507.64,331.61 L 510.06,326.79 Q 519.00,308.90 527.95,326.79 L 754.65,780.10 Q 763.10,797.00 782.00,797.00 Q 800.90,797.00 792.45,780.10 L 528.25,251.79 Q 519.30,233.90 510.36,251.79 L 470.54,331.41 Q 461.60,349.30 470.54,367.19 L 659.66,745.41 Q 668.60,763.30 648.60,763.30 L 646.40,763.30 Q 626.40,763.30 617.45,745.41 L 450.35,411.29 Q 441.40,393.40 432.46,411.29 L 248.54,779.11 Q 239.60,797.00 259.60,797.00 Z"
+                fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="22" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- Main logo — rounded paths, brand blue -->
+      <div class="logo-wrap" id="main-logo" style="width:140px;height:140px;top:-70px;left:-70px;">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M 102.10,797.00 L 174.00,797.00 Q 194.00,797.00 202.95,779.11 L 488.85,207.39 Q 497.80,189.50 488.85,171.61 L 411.95,17.89 Q 403.00,0.00 394.06,17.89 L 12.75,780.50 Q 4.50,797.00 22.95,797.00 Q 41.40,797.00 49.65,780.50 L 394.06,91.69 Q 403.00,73.80 411.95,91.69 L 451.95,171.61 Q 460.90,189.50 451.95,207.39 L 182.22,746.76 Q 173.70,763.80 154.65,763.80 Q 135.60,763.80 144.12,746.76 L 412.46,210.09 Q 421.40,192.20 412.48,174.30 L 411.92,173.20 Q 403.00,155.30 394.05,173.19 L 91.05,779.11 Q 82.10,797.00 102.10,797.00 Z" fill="#00ADEE"/>
+          <path d="M 259.60,797.00 L 547.30,797.00 Q 567.30,797.00 558.36,779.11 L 451.04,564.49 Q 442.10,546.60 433.16,564.49 L 360.54,709.71 Q 351.60,727.60 371.60,727.60 L 435.31,727.60 Q 453.60,727.60 445.40,711.25 L 443.97,708.40 Q 437.20,694.90 422.10,694.90 Q 407.00,694.90 413.74,681.39 L 434.18,640.40 Q 443.10,622.50 452.04,640.39 L 504.56,745.41 Q 513.50,763.30 493.50,763.30 L 313.50,763.30 Q 293.50,763.30 302.45,745.41 L 433.15,484.09 Q 442.10,466.20 451.04,484.09 L 598.56,779.11 Q 607.50,797.00 627.50,797.00 L 702.50,797.00 Q 722.50,797.00 713.55,779.11 L 507.65,367.39 Q 498.70,349.50 507.64,331.61 L 510.06,326.79 Q 519.00,308.90 527.95,326.79 L 754.65,780.10 Q 763.10,797.00 782.00,797.00 Q 800.90,797.00 792.45,780.10 L 528.25,251.79 Q 519.30,233.90 510.36,251.79 L 470.54,331.41 Q 461.60,349.30 470.54,367.19 L 659.66,745.41 Q 668.60,763.30 648.60,763.30 L 646.40,763.30 Q 626.40,763.30 617.45,745.41 L 450.35,411.29 Q 441.40,393.40 432.46,411.29 L 248.54,779.11 Q 239.60,797.00 259.60,797.00 Z" fill="#00ADEE"/>
+        </svg>
+      </div>
+
+      <!-- Wordmark -->
+      <div id="wordmark"></div>
+
+    </div>
+  </div>
+
+  <button id="replay-btn" onclick="replay()">↺ Replay</button>
+
+  <script>
+    const WORDMARK = 'AAA Events';
+    const LOGO_SIZE = 140;
+
+    const wordmarkEl = document.getElementById('wordmark');
+    WORDMARK.split('').forEach(char => {
+      const span = document.createElement('span');
+      span.className = 'pl-letter';
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      wordmarkEl.appendChild(span);
+    });
+
+    let currentTl = null;
+
+    function runAnimation() {
+      const overlay  = document.getElementById('overlay');
+      const logo     = document.getElementById('main-logo');
+      const ghost1   = document.getElementById('ghost1');
+      const ghost2   = document.getElementById('ghost2');
+      const ring1    = document.getElementById('ring1');
+      const ring2    = document.getElementById('ring2');
+      const ring3    = document.getElementById('ring3');
+      const ring4    = document.getElementById('ring4');
+      const ring5    = document.getElementById('ring5');
+      const tinyApex = document.getElementById('tiny-apex');
+      const tinyBL   = document.getElementById('tiny-bl');
+      const tinyBR   = document.getElementById('tiny-br');
+      const wordmark = document.getElementById('wordmark');
+      const letters  = Array.from(wordmark.querySelectorAll('.pl-letter'));
+
+      // Measure wordmark width for lockup positioning
+      gsap.set(wordmark, { x: 0, opacity: 1, y: 0 });
+      const textW = wordmark.offsetWidth;
+      const gap = 24;
+      const totalW = LOGO_SIZE + gap + textW;
+      const logoFinalX = -(totalW / 2 - LOGO_SIZE / 2);
+      const textFinalX =  logoFinalX + LOGO_SIZE / 2 + gap;
+
+      // Reset
+      gsap.set(overlay,  { opacity: 1, display: 'flex' });
+      gsap.set(logo,     { scale: 4.2, opacity: 0, filter: 'brightness(0.05)', x: 0, y: 0 });
+      gsap.set(ghost1,   { scale: 0, opacity: 0, x: 0, y: 0 });
+      gsap.set(ghost2,   { scale: 0, opacity: 0, x: 0, y: 0 });
+      gsap.set([ring1, ring2, ring3, ring4, ring5], { scale: 0.22, opacity: 0 });
+      gsap.set([tinyApex, tinyBL, tinyBR], { scale: 0, opacity: 0 });
+      gsap.set(wordmark, { x: textFinalX, opacity: 0, y: 0 });
+      // rotateY card-flip start: each letter is edge-on (vertical sliver)
+      letters.forEach(l => gsap.set(l, { rotateY: 90, opacity: 0, transformOrigin: '50% 50%', transformPerspective: 350 }));
+
+      const tl = gsap.timeline();
+      currentTl = tl;
+
+      // Phase 1: Logo materialises (0 → 0.85s)
+      tl.to(logo, { scale: 1, opacity: 1, filter: 'brightness(1)', duration: 0.85, ease: 'power2.out' });
+
+      // Phase 2: Five overlapping rings — slow, thick, clearly visible
+      // Each ring expands 0.80s, stagger 0.22s. Ring 1: 0.85-1.65  Ring 5: 1.73-2.53
+      const rings = [ring1, ring2, ring3, ring4, ring5];
+      rings.forEach((ring, i) => {
+        tl.fromTo(ring,
+          { scale: 0.22, opacity: 1.0 },
+          { scale: 3.8, opacity: 0, duration: 0.80, ease: 'power2.out' },
+          0.85 + i * 0.22
+        );
+      });
+
+      // Tiny ghost triangles grow parallel with rings 4-5 fading (~2.10s)
+      const tinyT = 2.10;
+      [
+        { el: tinyApex, dt: 0.00 },
+        { el: tinyBL,   dt: 0.06 },
+        { el: tinyBR,   dt: 0.06 },
+      ].forEach(({ el, dt }) => {
+        tl.fromTo(el,
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 0.65, duration: 0.30, ease: 'power2.out' },
+          tinyT + dt
+        );
+        tl.to(el, { opacity: 0, scale: 0.4, duration: 0.22, ease: 'power2.in' }, tinyT + dt + 0.38);
+      });
+
+      // Phase 3: Ghost pop (2.65 → 3.1s)
+      tl.to(logo,   { scale: 1.16, duration: 0.10, ease: 'power3.out' }, 2.65);
+      tl.to(logo,   { scale: 1.00, duration: 0.24, ease: 'power2.inOut' }, 2.75);
+      tl.fromTo(ghost1,
+        { scale: 0, opacity: 0, x: -40, y: 32 },
+        { scale: 0.76, opacity: 1, x: -115, y: 88, duration: 0.36, ease: 'back.out(2.4)' }, 2.68);
+      tl.fromTo(ghost2,
+        { scale: 0, opacity: 0, x: 40, y: -32 },
+        { scale: 0.76, opacity: 1, x: 115, y: -88, duration: 0.36, ease: 'back.out(2.4)' }, 2.68);
+
+      // Phase 4a: Ghosts drift vertically (3.15 → 4.35s)
+      tl.to(ghost1, { x: -50, y: 230, scale: 0.52, opacity: 0.55, duration: 1.2, ease: 'power1.inOut' }, 3.15);
+      tl.to(ghost2, { x: 50, y: -230, scale: 0.52, opacity: 0.55, duration: 1.2, ease: 'power1.inOut' }, 3.15);
+
+      // Phase 4b: Ghosts converge back — absorbed (4.35 → 5.15s)
+      tl.to(ghost1, { x: 0, y: 0, scale: 0.15, opacity: 0, duration: 0.80, ease: 'power2.in' }, 4.35);
+      tl.to(ghost2, { x: 0, y: 0, scale: 0.15, opacity: 0, duration: 0.80, ease: 'power2.in' }, 4.35);
+
+      // Logo micro-pulse on absorption
+      tl.to(logo, { scale: 1.10, duration: 0.12, ease: 'power2.out' }, 5.05);
+      tl.to(logo, { scale: 1.00, duration: 0.20, ease: 'power2.inOut' }, 5.17);
+
+      // Phase 5: Compose (5.37 → 7.2s)
+      tl.to(logo,   { x: logoFinalX, duration: 0.65, ease: 'power2.inOut' }, 5.37);
+      tl.set(wordmark, { opacity: 1 }, 5.59);
+      // rotateY card-flip reveal: each letter swings from edge-on to facing forward
+      // Large stagger = trailing letters still vertical slivers while leaders are settled
+      tl.to(letters, {
+        rotateY: 0, opacity: 1,
+        duration: 0.52, stagger: 0.13, ease: 'power3.out',
+        transformOrigin: '50% 50%', transformPerspective: 350,
+      }, 5.61);
+
+      // Phase 6: Text fades, logo flies away
+      tl.to(wordmark, { opacity: 0, y: -10, duration: 0.25, ease: 'power2.in' }, 7.20);
+      tl.to(logo,     { opacity: 0, duration: 0.30, ease: 'power2.in' }, 7.50);
+
+      // Phase 7: Overlay out
+      tl.to(overlay, { opacity: 0, duration: 0.45, ease: 'power2.inOut' }, 8.15);
+    }
+
+    function replay() {
+      if (currentTl) { currentTl.kill(); currentTl = null; }
+      gsap.killTweensOf('*');
+      document.getElementById('overlay').style.display = 'flex';
+      document.getElementById('overlay').style.opacity = '1';
+      runAnimation();
+    }
+
+    window.addEventListener('load', runAnimation);
+  </script>
+</body>
+</html>
