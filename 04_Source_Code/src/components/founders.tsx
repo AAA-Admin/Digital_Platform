@@ -4,7 +4,7 @@ export function Founders() {
       <div className="section-max">
         <p className="section-label reveal">The Team</p>
         <h2 className="section-h reveal">The Founders Behind<br/>Every Stage</h2>
-        <p className="section-sub reveal">Three owners. One mission. We are personally on-site for every major project — because our name is on the stage.</p>
+        <p className="section-sub reveal">Two founders. One mission. We are personally on-site for every major project — because our name is on the stage.</p>
         <div className="founders-grid">
           <div className="founder-card reveal delay-1">
             <div className="founder-avatar">AT</div>
@@ -32,16 +32,6 @@ export function Founders() {
             <p className="founder-bio">Manages on-ground logistics, crew deployment, and vendor relationships across all active projects in Bangalore. Ensures every stage is built to spec and delivered on schedule.</p>
             <div className="founder-contact">
               <span className="contact-pill">+91 99455 13198</span>
-            </div>
-          </div>
-          {/* Founder 3 — placeholder for client to fill */}
-          <div className="founder-card reveal delay-3">
-            <div className="founder-avatar" style={{ background: 'linear-gradient(135deg, var(--bg3), #001a0a)' }}>F3</div>
-            <div className="founder-name">[Co-Founder Name]</div>
-            <div className="founder-role">Co-Founder &amp; Business Development</div>
-            <p className="founder-bio">Drives client relationships and new business across the corporate, entertainment, and government sectors. The face of AAA Events at every negotiation and new project kickoff.</p>
-            <div className="founder-contact">
-              <span className="contact-pill">Available on WhatsApp</span>
             </div>
           </div>
         </div>
