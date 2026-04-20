@@ -11,7 +11,7 @@ export function Footer() {
       <p>
         Specialist in Ringlock Scaffolding Systems &nbsp;&middot;&nbsp; Mathikere, Bangalore 560054<br/>
         <a href="mailto:antony@aaa-events.in">antony@aaa-events.in</a> &nbsp;&middot;&nbsp;
-        <a href="tel:+919108934435">+91 91089 34435</a>
+        <a href="tel:+919108311065">+91 91083 11065</a>
       </p>
       <p style={{ marginTop: '16px', fontSize: '12px', color: 'var(--muted2)' }}>
         &copy; 2025 AAA Events &amp; Production. All rights reserved.

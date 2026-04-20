@@ -1,0 +1,230 @@
+// components/HeroShowcase.tsx
+import Image from "next/image";
+
+type SideCard = {
+  title: string;
+  subtitle: string[];
+  image: string;
+};
+
+type Feature = {
+  title: string;
+};
+
+type Service = {
+  title: string;
+  subtitle?: string;
+};
+
+const leftCards: SideCard[] = [
+  {
+    title: "CONCERTS",
+    subtitle: ["LARGE SCALE.", "FLAWLESS", "EXPERIENCES."],
+    image: "/images/concerts.jpg",
+  },
+  {
+    title: "CORPORATE EVENTS",
+    subtitle: ["ENGAGE.", "INSPIRE.", "ACHIEVE."],
+    image: "/images/corporate-events.jpg",
+  },
+  {
+    title: "WEDDINGS",
+    subtitle: ["CRAFTING", "TIMELESS", "MEMORIES."],
+    image: "/images/weddings.jpg",
+  },
+  {
+    title: "EXHIBITIONS",
+    subtitle: ["SHOWCASING", "BRANDS.", "CREATING", "IMPACT."],
+    image: "/images/exhibitions.jpg",
+  },
+];
+
+const rightCards: SideCard[] = [
+  {
+    title: "STAGE PRODUCTION",
+    subtitle: ["ENGINEERED", "FOR STRENGTH.", "BUILT TO", "PERFORM."],
+    image: "/images/stage-production.jpg",
+  },
+  {
+    title: "GALA DINNERS",
+    subtitle: ["ELEGANCE.", "ATMOSPHERE.", "PERFECTION."],
+    image: "/images/gala-dinners.jpg",
+  },
+  {
+    title: "PRODUCT LAUNCHES",
+    subtitle: ["LAUNCH.", "ENGAGE.", "ELEVATE."],
+    image: "/images/product-launches.jpg",
+  },
+  {
+    title: "FESTIVALS & SPORTS EVENTS",
+    subtitle: ["ENERGY.", "SCALE.", "UNFORGETTABLE", "MOMENTS."],
+    image: "/images/festivals-sports.jpg",
+  },
+];
+
+const features: Feature[] = [
+  { title: "CREATIVE SOLUTIONS" },
+  { title: "EXPERT EXECUTION" },
+  { title: "CLIENT TRUST" },
+  { title: "SAFETY FIRST" },
+  { title: "PROVEN SUCCESS" },
+];
+
+const services: Service[] = [
+  { title: "RINGLOCK SCAFFOLDING", subtitle: "RENTAL" },
+  { title: "STAGE & TRUSSING", subtitle: "(UP TO 30M SPAN)" },
+  { title: "EVENT", subtitle: "PRODUCTION" },
+  { title: "SAFETY CERTIFICATION", subtitle: "& LOAD DESIGN" },
+];
+
+const bottomGallery = [
+  "/images/bottom-1.jpg",
+  "/images/bottom-2.jpg",
+  "/images/bottom-3.jpg",
+  "/images/bottom-4.jpg",
+  "/images/bottom-5.jpg",
+];
+
+function SideImageCard({ card, align = "left" }: { card: SideCard; align?: "left" | "right" }) {
+  return (
+    <div className="relative h-[220px] overflow-hidden border-b border-[#b8860b]">
+      <Image
+        src={card.image}
+        alt={card.title}
+        fill
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-black/45" />
+      <div className={`absolute inset-0 p-6 flex flex-col ${align === "right" ? "items-end text-right" : "items-start text-left"} justify-center`}>
+        <h3 className="text-[#d4a437] text-[28px] font-semibold tracking-[0.08em] leading-tight max-w-[260px]">
+          {card.title}
+        </h3>
+        <div className="mt-4 text-white text-sm md:text-base tracking-[0.18em] leading-7">
+          {card.subtitle.map((line) => (
+            <div key={line}>{line}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FeatureGrid() {
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center mt-10">
+      {features.map((item) => (
+        <div key={item.title} className="border-x border-[#9f7a1e] px-4">
+          <div className="text-[#d4a437] text-sm md:text-lg tracking-[0.12em] leading-6">
+            {item.title.split(" ").map((w, i) => (
+              <div key={i}>{w}</div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ServicesGrid() {
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mt-10">
+      {services.map((item) => (
+        <div key={item.title} className="border-x border-[#9f7a1e] px-3">
+          <div className="text-white text-sm md:text-base tracking-[0.08em] leading-6">
+            <div>{item.title}</div>
+            {item.subtitle && <div>{item.subtitle}</div>}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function BottomGallery() {
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-5 border-t border-[#b8860b]">
+      {bottomGallery.map((src, idx) => (
+        <div key={idx} className="relative h-[140px] md:h-[170px] border-r border-[#b8860b] last:border-r-0">
+          <Image src={src} alt={`Gallery ${idx + 1}`} fill className="object-cover" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default function HeroShowcase() {
+  return (
+    <main className="min-h-screen bg-black text-white">
+      <section className="max-w-[1600px] mx-auto border border-[#b8860b] bg-black">
+        <div className="grid grid-cols-1 xl:grid-cols-[1.05fr_1.4fr_1.05fr]">
+          <div className="border-r border-[#b8860b]">
+            {leftCards.map((card) => (
+              <SideImageCard key={card.title} card={card} align="left" />
+            ))}
+          </div>
+
+          <div className="relative bg-black px-6 md:px-12 py-12 md:py-16 flex flex-col justify-between">
+            <div className="absolute inset-y-0 left-0 w-10 md:w-16 bg-gradient-to-r from-[#b8860b] to-transparent opacity-25 clip-left" />
+            <div className="absolute inset-y-0 right-0 w-10 md:w-16 bg-gradient-to-l from-[#b8860b] to-transparent opacity-25 clip-right" />
+
+            <div className="relative z-10 text-center">
+              <div className="text-[84px] md:text-[140px] font-bold tracking-[-0.08em] leading-none">
+                <span className="text-red-600">A</span>
+                <span className="text-[#d4a437]">AA</span>
+              </div>
+
+              <div className="mt-2 text-white text-[22px] md:text-[34px] tracking-[0.22em]">
+                EVENTS & PRODUCTION
+              </div>
+
+              <div className="mt-6 border-y border-[#b8860b] py-4 text-[#f0d37b] text-sm md:text-[22px] tracking-[0.25em]">
+                EXPERIENCE • CREATIVITY • PERFECTION.
+              </div>
+
+              <div className="mt-10">
+                <div className="text-white text-[34px] md:text-[60px] font-light tracking-[0.06em] leading-tight">
+                  EXPERIENCE THAT BUILDS.
+                </div>
+                <div className="text-[#d4a437] text-[34px] md:text-[60px] font-semibold tracking-[0.06em] leading-tight">
+                  EXECUTION THAT DELIVERS.
+                </div>
+              </div>
+
+              <FeatureGrid />
+
+              <div className="mt-10 text-[#d4a437] text-[24px] md:text-[42px] tracking-[0.12em]">
+                ONE TEAM. ENDLESS POSSIBILITIES.
+              </div>
+
+              <ServicesGrid />
+
+              <div className="mt-10 text-white text-lg md:text-[28px] tracking-[0.16em] leading-relaxed">
+                STRUCTURAL EXCELLENCE &nbsp;|&nbsp; CERTIFIED SAFETY &nbsp;|&nbsp; ENGINEERED EXECUTION
+              </div>
+
+              <div className="mt-5 text-[#d4a437] text-xs md:text-lg tracking-[0.2em]">
+                TRUSTED BY CORPORATES, INSTITUTIONS & LARGE-SCALE EVENT ORGANIZERS ACROSS INDIA
+              </div>
+            </div>
+          </div>
+
+          <div className="border-l border-[#b8860b]">
+            {rightCards.map((card) => (
+              <SideImageCard key={card.title} card={card} align="right" />
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-[#c6921b] text-black text-center py-4 md:py-5 text-lg md:text-[34px] tracking-[0.16em] font-medium">
+          FROM CONCEPT TO CERTIFIED EXECUTION
+        </div>
+
+        <BottomGallery />
+
+        <div className="bg-black text-[#d4a437] text-center py-5 md:py-7 text-sm md:text-[24px] tracking-[0.24em]">
+          PLANNING &nbsp;|&nbsp; ENGINEERING &nbsp;|&nbsp; EXECUTION &nbsp;|&nbsp; MANAGEMENT &nbsp;|&nbsp; SUPPORT
+        </div>
+      </section>
+    </main>
+  );
+}

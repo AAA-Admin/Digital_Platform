@@ -1,0 +1,6 @@
+// app/page.tsx
+import HeroShowcase from "@/components/HeroShowcase";
+
+export default function Page() {
+  return <HeroShowcase />;
+}

@@ -67,21 +67,26 @@ export function EnquiryForm() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setErrors({});
     setSubmitState('submitting');
-    try {
-      const res = await fetch('/api/enquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      setSubmitState(res.ok ? 'success' : 'error');
-    } catch {
-      setSubmitState('error');
-    }
+
+    // Open WhatsApp with the structured message — this is the user-facing action
+    const waText = buildWaMessage(form);
+    const waHref = `https://wa.me/919108311065?text=${encodeURIComponent(waText)}`;
+    window.open(waHref, '_blank', 'noopener,noreferrer');
+
+    // Fire-and-forget background ping to /api/enquiry for lead tracking;
+    // don't block the user on it or fail the flow if the API is down.
+    fetch('/api/enquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    }).catch(() => { /* intentionally swallowed — WA flow already triggered */ });
+
+    setSubmitState('success');
   }
 
   if (submitState === 'success') {
     const waText = buildWaMessage(form);
-    const waHref = `https://wa.me/919108934435?text=${encodeURIComponent(waText)}`;
+    const waHref = `https://wa.me/919108311065?text=${encodeURIComponent(waText)}`;
     return (
       <div className="enquiry-success reveal delay-1">
         <div className="success-icon">✓</div>
@@ -92,7 +97,7 @@ export function EnquiryForm() {
           <a className="btn-wa" href={waHref} target="_blank" rel="noopener noreferrer">
             <WaIcon /> Continue on WhatsApp
           </a>
-          <a className="btn-call" href="tel:+919108934435">
+          <a className="btn-call" href="tel:+919108311065">
             <PhoneIcon /> Call Now
           </a>
         </div>
@@ -187,26 +192,23 @@ export function EnquiryForm() {
       />
 
       <button type="submit" className="btn-submit" disabled={submitState === 'submitting'}>
-        {submitState === 'submitting' ? 'Sending…' : 'Send Enquiry →'}
+        {submitState === 'submitting' ? 'Opening…' : (
+          <>
+            <WaIcon /> Chat on WhatsApp
+          </>
+        )}
       </button>
 
       {submitState === 'error' && (
         <p className="form-error-global">
           Something went wrong. Please call us:{' '}
-          <a href="tel:+919108934435">+91 910 893 4435</a>
+          <a href="tel:+919108311065">+91 91083 11065</a>
         </p>
       )}
 
       <div className="cta-fallback">
-        <span>Or reach out directly:</span>
-        <a
-          className="btn-wa"
-          href="https://wa.me/919108934435?text=Hi%20Antony%2C%20I%20need%20scaffolding%20for%20an%20event.%20Can%20we%20discuss%3F"
-          target="_blank" rel="noopener noreferrer"
-        >
-          <WaIcon /> Chat on WhatsApp
-        </a>
-        <a className="btn-call" href="tel:+919108934435">
+        <span>Prefer to talk?</span>
+        <a className="btn-call" href="tel:+919108311065">
           <PhoneIcon /> Call Now
         </a>
       </div>

@@ -14,6 +14,7 @@ const OUTER_TRIANGLE =
   'M 411,17 Q 403,0 395,17 L 12,780 Q 4,797 23,797 L 777,797 Q 797,797 788,780 L 411,17 Z';
 
 const BRAND = '#00ADEE';
+const ACCENT = '#dc2626';
 
 // ─── Main logo — brand blue fill ─────────────────────────────────────────────
 function AaaLogo() {
@@ -331,7 +332,7 @@ export function Preloader() {
               className="pl-letter"
               style={{
                 display: 'inline-block',
-                // Slight gap between the three A's in "AAA"
+                color: i === 0 ? ACCENT : undefined,
                 marginRight: i < 2 ? '0.06em' : undefined,
               }}
             >
