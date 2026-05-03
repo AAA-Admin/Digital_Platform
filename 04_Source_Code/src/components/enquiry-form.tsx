@@ -70,7 +70,7 @@ export function EnquiryForm() {
 
     // Open WhatsApp with the structured message — this is the user-facing action
     const waText = buildWaMessage(form);
-    const waHref = `https://wa.me/919108311065?text=${encodeURIComponent(waText)}`;
+    const waHref = `https://wa.me/919945513198?text=${encodeURIComponent(waText)}`;
     window.open(waHref, '_blank', 'noopener,noreferrer');
 
     // Fire-and-forget background ping to /api/enquiry for lead tracking;
@@ -86,7 +86,7 @@ export function EnquiryForm() {
 
   if (submitState === 'success') {
     const waText = buildWaMessage(form);
-    const waHref = `https://wa.me/919108311065?text=${encodeURIComponent(waText)}`;
+    const waHref = `https://wa.me/919945513198?text=${encodeURIComponent(waText)}`;
     return (
       <div className="enquiry-success reveal delay-1">
         <div className="success-icon">✓</div>
@@ -97,7 +97,7 @@ export function EnquiryForm() {
           <a className="btn-wa" href={waHref} target="_blank" rel="noopener noreferrer">
             <WaIcon /> Continue on WhatsApp
           </a>
-          <a className="btn-call" href="tel:+919108311065">
+          <a className="btn-call" href="tel:+919945513198">
             <PhoneIcon /> Call Now
           </a>
         </div>
@@ -202,13 +202,13 @@ export function EnquiryForm() {
       {submitState === 'error' && (
         <p className="form-error-global">
           Something went wrong. Please call us:{' '}
-          <a href="tel:+919108311065">+91 91083 11065</a>
+          <a href="tel:+919945513198">+91 99455 13198</a>
         </p>
       )}
 
       <div className="cta-fallback">
         <span>Prefer to talk?</span>
-        <a className="btn-call" href="tel:+919108311065">
+        <a className="btn-call" href="tel:+919945513198">
           <PhoneIcon /> Call Now
         </a>
       </div>

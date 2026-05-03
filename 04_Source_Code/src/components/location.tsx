@@ -14,7 +14,7 @@ export function Location() {
             <div className="location-address reveal delay-1">
               <h4>Contact</h4>
               <p>
-                WhatsApp: <a href="#contact" style={{ color: 'var(--gold)' }}>+91 91083 11065</a><br/>
+                WhatsApp: <a href="#contact" style={{ color: 'var(--gold)' }}>+91 99455 13198</a><br/>
                 Email: <a href="mailto:antony@aaa-events.in" style={{ color: 'var(--gold)' }}>antony@aaa-events.in</a>
               </p>
             </div>
