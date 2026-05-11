@@ -1,4 +1,4 @@
-html, body { margin: 0; min-height: 100%; overflow-x: hidden; max-width: 100%; }
+html, body { margin: 0; min-height: 100%; overflow-x: clip; max-width: 100%; }
 
 :root {
   --gold: #f0b429; --gold-dim: #c48f1a;
@@ -33,7 +33,7 @@ html, body { margin: 0; min-height: 100%; overflow-x: hidden; max-width: 100%; }
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; transition: background-color .3s, color .2s; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: clip; transition: background-color .3s, color .2s; }
 h1,h2,h3,h4,h5 { font-family: 'Sora', sans-serif; }
 
 /* NAV */
