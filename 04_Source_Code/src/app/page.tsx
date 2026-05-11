@@ -1,6 +1,8 @@
 import { HeroShowcase } from '@/components/hero-showcase';
+import { HeroShowcase2 } from '@/components/hero-showcase-2';
 import { Nav } from '@/components/nav';
 import { Hero } from '@/components/hero';
+import { Hero2 } from '@/components/hero-2';
 import { Marquee } from '@/components/marquee';
 import { Stats } from '@/components/stats';
 import { Services } from '@/components/services';
@@ -29,6 +31,8 @@ export default function Home() {
       <HeroShowcase />
       <Nav />
       <Hero />
+      <HeroShowcase2 />
+      <Hero2 />
       <Marquee />
       <Stats />
       <Services />
