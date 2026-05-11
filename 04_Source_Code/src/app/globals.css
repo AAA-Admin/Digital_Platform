@@ -66,8 +66,17 @@ nav.scrolled { background: var(--nav-bg-scrolled); }
 .nav-logo-text { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 16px; color: var(--text); }
 .nav-logo-text span { color: inherit; }
 .nav-links { display: flex; align-items: center; gap: 28px; }
-.nav-links a { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 500; transition: color .2s; }
+.nav-links a { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 500; transition: color .2s; position: relative; }
 .nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--gold); }
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
 .nav-right { display: flex; align-items: center; gap: 12px; }
 .nav-cta {
   background: var(--gold); color: #000; border: none; cursor: pointer;
@@ -601,19 +610,42 @@ html.theme-transitioning .location-address {
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  /* explicit padding overrides global `section { padding: 80px 32px }` */
-  padding: 64px 0 0 !important;
-  background: #000;
+  /* slightly increased side padding; top ~3x the side value */
+  padding: clamp(29px, 7.2vw, 86px) clamp(28px, 7vw, 84px) 64px !important;
+  background: transparent;
   box-sizing: border-box;
 }
 .hs-image-wrap {
   width: 100%;
   max-width: 100%;
-  margin: 0;
+  margin: 0 auto;
   display: block;
   line-height: 0;
   overflow: hidden;
+  border-radius: 18px;
   box-sizing: border-box;
+  /* Gold metallic border — alternating dark and light gold bands echo the
+     line work inside the artwork. Painted as a 2px gradient layer behind
+     the image (which has its own inner border-radius). */
+  padding: 2px;
+  background:
+    linear-gradient(
+      135deg,
+      #5a3d08 0%,
+      #c48f1a 12%,
+      #ffe9a8 22%,
+      #8a6210 35%,
+      #f0b429 48%,
+      #fff3c4 55%,
+      #b07f15 68%,
+      #ffd970 82%,
+      #8a6210 92%,
+      #4a3206 100%
+    );
+}
+.hs-image-wrap > .hs-image,
+.hs-image-wrap > span {
+  border-radius: 16px;
 }
 /* Next.js <Image> applies width/height HTML attributes (1536/1024) which can
    leak through and cause overflow in narrow viewports. Force the rendered
@@ -625,32 +657,6 @@ html.theme-transitioning .location-address {
   max-width: 100% !important;
   height: auto !important;
   display: block !important;
-}
-/* Long, elaborate blend below the image.
-   Direction: pure black at the very top (matching the image's dark icon-bar
-   edge, so the seam between image and blend vanishes) → gradually fades
-   to transparent over a long distance so whatever section follows simply
-   emerges, with no visible hard cut at either boundary. */
-.hs-blend {
-  width: 100%;
-  height: 320px;
-  display: block;
-  /* Fade from pure black (image's bottom strip) to the page's body bg (#080808)
-     so the bottom edge dissolves into whatever section follows — no seam,
-     no hard cut at center where the eye is most sensitive. */
-  background: linear-gradient(
-    to bottom,
-    #000000 0%,
-    #050505 35%,
-    #070707 60%,
-    #080808 85%,
-    #080808 100%
-  );
-  margin-top: -4px;     /* overlap the image by a few pixels — kills the top edge */
-  margin-bottom: -4px;  /* overlap the next section — kills the bottom edge */
-  position: relative;
-  z-index: 2;
-  pointer-events: none;
 }
 .sr-only {
   position: absolute;

@@ -16,10 +16,6 @@ export function HeroShowcase() {
           className="hs-image"
         />
       </div>
-      {/* Smooth blend strip — erases the hard edge between the image and the
-          page background by fading the image's bottom tone into site black. */}
-      <div className="hs-blend" aria-hidden="true" />
-
       {/* Real HTML for SEO — visually hidden but indexable + screen-reader accessible.
           Mirrors every word rendered inside the hero artwork so crawlers read the
           same content human visitors see, plus supporting keywords, locations and

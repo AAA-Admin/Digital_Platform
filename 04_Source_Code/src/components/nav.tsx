@@ -2,8 +2,11 @@
 import { useEffect, useState } from 'react';
 import { useTheme } from '@/hooks/use-theme';
 
+const NAV_SECTIONS = ['services', 'portfolio', 'founders', 'location'] as const;
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const { toggle } = useTheme();
 
   useEffect(() => {
@@ -11,6 +14,31 @@ export function Nav() {
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
+
+  useEffect(() => {
+    // Track which section is currently in view. Use rootMargin so the
+    // "active" hand-off happens near the top of the viewport rather than
+    // the middle, matching how a user reads a long page.
+    const sections = NAV_SECTIONS
+      .map(id => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActiveSection(visible[0].target.id);
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+    sections.forEach(s => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  const linkCls = (id: string) =>
+    activeSection === id ? 'active' : undefined;
 
   return (
     <nav className={scrolled ? 'scrolled' : undefined}>
@@ -22,10 +50,10 @@ export function Nav() {
         <span className="nav-logo-text"><span style={{ color: '#dc2626' }}>A</span>AA <span>Events</span></span>
       </a>
       <div className="nav-links">
-        <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#founders">Team</a>
-        <a href="#location">Location</a>
+        <a href="#services" className={linkCls('services')}>Services</a>
+        <a href="#portfolio" className={linkCls('portfolio')}>Portfolio</a>
+        <a href="#founders" className={linkCls('founders')}>Team</a>
+        <a href="#location" className={linkCls('location')}>Location</a>
       </div>
       <div className="nav-right">
         <button className="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" onClick={toggle}>
