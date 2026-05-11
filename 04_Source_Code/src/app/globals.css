@@ -633,18 +633,18 @@ html.theme-transitioning .location-address {
    emerges, with no visible hard cut at either boundary. */
 .hs-blend {
   width: 100%;
-  height: 260px;
+  height: 320px;
   display: block;
+  /* Fade from pure black (image's bottom strip) to the page's body bg (#080808)
+     so the bottom edge dissolves into whatever section follows — no seam,
+     no hard cut at center where the eye is most sensitive. */
   background: linear-gradient(
     to bottom,
-    #000          0%,   /* solid black — identical to image's bottom strip */
-    rgba(0,0,0,.50) 35%, /* reach ~50% transparent at 35% of the mask */
-    /* exponential decay from 35% → 100% — each step roughly halves alpha */
-    rgba(0,0,0,.30) 50%,
-    rgba(0,0,0,.16) 65%,
-    rgba(0,0,0,.07) 80%,
-    rgba(0,0,0,.02) 92%,
-    rgba(0,0,0,0)  100% /* fully transparent — blends into page flow */
+    #000000 0%,
+    #050505 35%,
+    #070707 60%,
+    #080808 85%,
+    #080808 100%
   );
   margin-top: -4px;     /* overlap the image by a few pixels — kills the top edge */
   margin-bottom: -4px;  /* overlap the next section — kills the bottom edge */

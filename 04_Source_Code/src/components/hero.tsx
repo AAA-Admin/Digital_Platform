@@ -8,10 +8,10 @@ export function Hero() {
         <h1>
           We Build the<br/>
           <span className="gold">Stages</span> That Define<br/>
-          <span className="stroke">Unforgettable Events</span>
+          Unforgettable Events
         </h1>
         <p className="hero-sub">
-          From intimate corporate setups to 10,000-person concert stages — AAA Events &amp; Production delivers precision-engineered Ringlock scaffolding systems that never fail.
+          From intimate corporate setups to 10,000-person concert stages — AAA Events &amp; Production delivers precision-engineered execution.
         </p>
         <div className="hero-actions">
           <a className="btn-primary btn-primary-wa" href="#contact">
