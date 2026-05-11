@@ -672,20 +672,24 @@ html.theme-transitioning .location-address {
    <img> (and any wrapper span Next may add) back to 100% with !important. */
 .hs-image,
 .hs-image-wrap > span,
-.hs-image-wrap img {
+.hs-image-wrap img,
+.hs-image-wrap video {
   width: 100% !important;
   max-width: 100% !important;
   height: auto !important;
   display: block !important;
+  object-fit: cover !important;
 }
 /* Show landscape on wide screens, portrait on phones. Hide the inactive
    variant outright so it doesn't take layout space or get tapped. */
 @media (max-width: 768px) {
   .hs-image-wrap img.hs-image-landscape,
+  .hs-image-wrap video.hs-image-landscape,
   .hs-image-wrap > span:has(> img.hs-image-landscape) { display: none !important; }
 }
 @media (min-width: 769px) {
   .hs-image-wrap img.hs-image-portrait,
+  .hs-image-wrap video.hs-image-portrait,
   .hs-image-wrap > span:has(> img.hs-image-portrait) { display: none !important; }
 }
 .sr-only {
@@ -698,6 +702,18 @@ html.theme-transitioning .location-address {
   clip: rect(0,0,0,0);
   white-space: nowrap;
   border: 0;
+}
+
+/* HeroShowcase 2 scroll-scrub wrapper — outer container expands to give
+   scroll distance for video scrubbing; the sticky child pins the video
+   in place while the wrapper is in view. */
+.hs-2-scrub-wrap {
+  position: relative;
+  width: 100%;
+}
+.hs-section-sticky {
+  position: sticky;
+  top: 0;
 }
 
 /* Hero 2 — sits after the second HeroShowcase. Uses the existing .hero
