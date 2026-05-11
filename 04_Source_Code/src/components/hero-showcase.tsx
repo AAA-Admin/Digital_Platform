@@ -3,17 +3,31 @@ import Image from 'next/image';
 export function HeroShowcase() {
   return (
     <section className="hs-section" aria-label="AAA Events & Production showcase">
-      {/* Visible artwork — Apple-style first-class hero image */}
+      {/* Visible artwork — responsive hero image.
+          Desktop/tablet gets the 16:9 landscape; phones get the 9:16 portrait.
+          Both are rendered; CSS hides the one that doesn't match the viewport
+          so each variant is preloaded and laid out correctly. */}
       <div className="hs-image-wrap">
         <Image
-          src="/images/hero/aaa-hero.png"
+          src="/images/hero/aaa-hero-16x9.png"
           alt="AAA Events & Production — concerts, corporate events, weddings, exhibitions, stage production, gala dinners, product launches, festivals & sports events"
-          width={1536}
-          height={1024}
+          width={1672}
+          height={941}
           priority
           fetchPriority="high"
-          sizes="100vw"
-          className="hs-image"
+          sizes="(max-width: 768px) 0px, 100vw"
+          className="hs-image hs-image-landscape"
+        />
+        <Image
+          src="/images/hero/aaa-hero-9x16.png"
+          alt=""
+          aria-hidden="true"
+          width={941}
+          height={1672}
+          priority
+          fetchPriority="high"
+          sizes="(max-width: 768px) 100vw, 0px"
+          className="hs-image hs-image-portrait"
         />
       </div>
       {/* Real HTML for SEO — visually hidden but indexable + screen-reader accessible.

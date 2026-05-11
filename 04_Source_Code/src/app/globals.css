@@ -610,10 +610,30 @@ html.theme-transitioning .location-address {
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  /* slightly increased side padding; top ~3x the side value */
-  padding: clamp(29px, 7.2vw, 86px) clamp(28px, 7vw, 84px) 64px !important;
   background: transparent;
   box-sizing: border-box;
+  /* Mobile-first: top padding clears the 64px fixed nav with breathing
+     room; sides give the portrait image space instead of edge-to-edge. */
+  padding: 88px 28px 40px !important;
+}
+/* Mobile: smaller corner radius so the portrait image's edge content
+   isn't eaten by the rounded corner. */
+@media (max-width: 768px) {
+  .hs-image-wrap {
+    border-radius: 12px;
+  }
+  .hs-image-wrap > .hs-image,
+  .hs-image-wrap > span {
+    border-radius: 10px;
+  }
+}
+/* Desktop: generous top padding so the gold top border has clear
+   breathing room under the nav; comfortable side padding for the
+   landscape image. */
+@media (min-width: 769px) {
+  .hs-section {
+    padding: 100px 84px 64px !important;
+  }
 }
 .hs-image-wrap {
   width: 100%;
@@ -657,6 +677,16 @@ html.theme-transitioning .location-address {
   max-width: 100% !important;
   height: auto !important;
   display: block !important;
+}
+/* Show landscape on wide screens, portrait on phones. Hide the inactive
+   variant outright so it doesn't take layout space or get tapped. */
+@media (max-width: 768px) {
+  .hs-image-wrap img.hs-image-landscape,
+  .hs-image-wrap > span:has(> img.hs-image-landscape) { display: none !important; }
+}
+@media (min-width: 769px) {
+  .hs-image-wrap img.hs-image-portrait,
+  .hs-image-wrap > span:has(> img.hs-image-portrait) { display: none !important; }
 }
 .sr-only {
   position: absolute;
