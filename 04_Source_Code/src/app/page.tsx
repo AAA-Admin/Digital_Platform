@@ -5,8 +5,7 @@ import { Hero } from '@/components/hero';
 import { Hero2 } from '@/components/hero-2';
 import { Marquee } from '@/components/marquee';
 import { Stats } from '@/components/stats';
-import { Services } from '@/components/services';
-import { WhySection } from '@/components/why-section';
+import { OverlapGallery } from '@/components/overlap-gallery';
 import { Founders } from '@/components/founders';
 import { Location } from '@/components/location';
 import { Cta } from '@/components/cta';
@@ -35,8 +34,7 @@ export default function Home() {
       <Hero2 />
       <Marquee />
       <Stats />
-      <Services />
-      <WhySection />
+      <OverlapGallery />
       <Founders />
       <Location />
       <Cta />

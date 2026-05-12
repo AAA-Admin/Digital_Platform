@@ -716,6 +716,112 @@ html.theme-transitioning .location-address {
   top: 0;
 }
 
+/* OverlapGallery — auto-rotating two-slide gallery. Rounded card,
+   no border, edge-to-edge media, arrow nav, dot pagination. */
+.og-section {
+  width: 100%;
+  padding: 32px clamp(16px, 4vw, 64px) 64px;
+  box-sizing: border-box;
+}
+.og-card {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 16 / 9;
+  /* Soft "half-white" outline — translucent so it reads as a muted
+     white line on the dark bg without being a hard pure-white edge. */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) .og-card { border-color: rgba(0, 0, 0, 0.25); }
+}
+[data-theme="light"] .og-card { border-color: rgba(0, 0, 0, 0.25); }
+@media (max-width: 768px) {
+  .og-section { padding: 16px 16px 40px; }
+  .og-card { border-radius: 14px; aspect-ratio: 9 / 16; }
+}
+.og-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .6s ease;
+  pointer-events: none;
+}
+.og-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.og-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 768px) {
+  .og-media-landscape { display: none; }
+}
+@media (min-width: 769px) {
+  .og-media-portrait { display: none; }
+}
+
+/* Arrow nav — circular dark buttons */
+.og-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 28px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  z-index: 2;
+}
+.og-nav:hover { background: rgba(0, 0, 0, 0.78); transform: translateY(-50%) scale(1.04); }
+.og-nav-prev { left: 16px; }
+.og-nav-next { right: 16px; padding-left: 2px; }
+
+/* Dot pagination — bottom-left, gold active pill */
+.og-dots {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+.og-dot {
+  width: 22px;
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 0;
+  transition: background .25s, width .25s;
+}
+.og-dot.is-active {
+  background: var(--gold);
+  width: 28px;
+}
+@media (max-width: 768px) {
+  .og-nav { width: 38px; height: 38px; font-size: 24px; }
+  .og-nav-prev { left: 10px; }
+  .og-nav-next { right: 10px; }
+  .og-dots { left: 14px; bottom: 14px; }
+}
+
 /* Hero 2 — sits after the second HeroShowcase. Uses the existing .hero
    layout so backgrounds, grid, and animations are reused. */
 .hero-2-headline {
