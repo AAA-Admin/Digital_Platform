@@ -2,115 +2,159 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * Overlap gallery — manual two-slide gallery.
+ * Generic two-slide gallery used for both the "Safety First Company" and
+ * "Our Unique Strengths" sections. Manual navigation only — arrow
+ * buttons and dot pagination, no auto-rotate.
  *
- * Slide 1: short video (muted, playsInline). Plays once each time the
- *           slide becomes active, then rewinds and pauses on frame 0
- *           — it does NOT loop.
- * Slide 2: static image.
+ * Each slide is either:
+ *  - a video (mp4 with optional landscape + portrait variants), or
+ *  - an image (responsive variants or a single source for both).
  *
- * Both slides have mobile (9:16) and desktop (16:9) variants. The
- * inactive viewport variant is hidden via CSS.
- *
- * Navigation is user-driven only — left/right chevrons and dot
- * pagination. No auto-rotate.
+ * Per-slide `bg` recolors the card while that slide is active so a
+ * square asset on a coloured background blends in cleanly across
+ * desktop (16:9) and mobile (9:16) without showing dark side-bands.
  */
 
-export function OverlapGallery() {
-  const [active, setActive] = useState(0); // 0 = video, 1 = image
-  const videoLandscapeRef = useRef<HTMLVideoElement>(null);
-  const videoPortraitRef = useRef<HTMLVideoElement>(null);
+type SlideMedia = {
+  type: 'video' | 'image';
+  srcLandscape: string;
+  srcPortrait: string;
+  posterLandscape?: string;
+  posterPortrait?: string;
+  alt: string;
+  /** object-fit applied to the media; defaults to 'cover'. */
+  fit?: 'cover' | 'contain';
+  /** background colour painted on the card while this slide is active. */
+  bg?: string;
+};
 
-  // When the video slide becomes active, rewind + play. When the video
-  // ends, rewind to frame 0 (no looping). When leaving the slide, pause
-  // and rewind so the next visit starts cleanly.
+type Props = {
+  ariaLabel?: string;
+  eyebrow?: string;
+  headline?: string;
+  slides: SlideMedia[];
+};
+
+export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slides }: Props) {
+  const [active, setActive] = useState(0);
+  const videoLandscapeRefs = useRef<Array<HTMLVideoElement | null>>([]);
+  const videoPortraitRefs = useRef<Array<HTMLVideoElement | null>>([]);
+
+  // When a video slide becomes active, rewind + play once; rewind on leave.
   useEffect(() => {
-    const landscape = videoLandscapeRef.current;
-    const portrait = videoPortraitRef.current;
+    slides.forEach((slide, i) => {
+      if (slide.type !== 'video') return;
+      const landscape = videoLandscapeRefs.current[i] ?? null;
+      const portrait = videoPortraitRefs.current[i] ?? null;
+      if (i === active) {
+        [landscape, portrait].forEach(v => {
+          if (!v) return;
+          try { v.currentTime = 0; } catch {}
+          v.play().catch(() => {});
+        });
+      } else {
+        [landscape, portrait].forEach(v => {
+          if (!v) return;
+          v.pause();
+          try { v.currentTime = 0; } catch {}
+        });
+      }
+    });
+  }, [active, slides]);
 
-    if (active === 0) {
-      [landscape, portrait].forEach(v => {
-        if (!v) return;
-        try { v.currentTime = 0; } catch {}
-        v.play().catch(() => {});
-      });
-    } else {
-      [landscape, portrait].forEach(v => {
+  // When a video ends, rewind to frame 0 and hold (no loop).
+  useEffect(() => {
+    const cleanups: Array<() => void> = [];
+    slides.forEach((slide, i) => {
+      if (slide.type !== 'video') return;
+      const landscape = videoLandscapeRefs.current[i];
+      const portrait = videoPortraitRefs.current[i];
+      const handler = (v: HTMLVideoElement | null) => () => {
         if (!v) return;
         v.pause();
         try { v.currentTime = 0; } catch {}
+      };
+      const lh = handler(landscape);
+      const ph = handler(portrait);
+      landscape?.addEventListener('ended', lh);
+      portrait?.addEventListener('ended', ph);
+      cleanups.push(() => {
+        landscape?.removeEventListener('ended', lh);
+        portrait?.removeEventListener('ended', ph);
       });
-    }
-
-    const handleEnded = (v: HTMLVideoElement | null) => () => {
-      if (!v) return;
-      v.pause();
-      try { v.currentTime = 0; } catch {}
-    };
-    const lh = handleEnded(landscape);
-    const ph = handleEnded(portrait);
-    landscape?.addEventListener('ended', lh);
-    portrait?.addEventListener('ended', ph);
-    return () => {
-      landscape?.removeEventListener('ended', lh);
-      portrait?.removeEventListener('ended', ph);
-    };
-  }, [active]);
+    });
+    return () => cleanups.forEach(fn => fn());
+  }, [slides]);
 
   const go = (next: number) => {
-    setActive(((next % 2) + 2) % 2);
+    const n = slides.length;
+    setActive(((next % n) + n) % n);
   };
 
-  return (
-    <section className="og-section" aria-label="AAA Events gallery">
-      <div className="og-heading">
-        <p className="section-label">Why AAA</p>
-        <h2 className="section-h">Safety First Company</h2>
-      </div>
-      <div className="og-card">
-        {/* Slide 0 — video */}
-        <div className={`og-slide ${active === 0 ? 'is-active' : ''}`} aria-hidden={active !== 0}>
-          <video
-            ref={videoLandscapeRef}
-            className="og-media og-media-landscape"
-            src="/videos/overlap-1-16x9.mp4"
-            width={1920}
-            height={1080}
-            muted
-            playsInline
-            preload="auto"
-          />
-          <video
-            ref={videoPortraitRef}
-            className="og-media og-media-portrait"
-            src="/videos/overlap-1-9x16.mp4"
-            width={1080}
-            height={1920}
-            muted
-            playsInline
-            preload="auto"
-            aria-hidden="true"
-          />
-        </div>
+  const cardBg = slides[active]?.bg;
 
-        {/* Slide 1 — image */}
-        <div className={`og-slide ${active === 1 ? 'is-active' : ''}`} aria-hidden={active !== 1}>
-          <img
-            className="og-media og-media-landscape"
-            src="/images/overlap/overlap-2-16x9.png"
-            alt="AAA Events showcase"
-            width={1920}
-            height={1080}
-          />
-          <img
-            className="og-media og-media-portrait"
-            src="/images/overlap/overlap-2-9x16.png"
-            alt=""
-            aria-hidden="true"
-            width={1080}
-            height={1920}
-          />
+  return (
+    <section className="og-section" aria-label={ariaLabel}>
+      {(eyebrow || headline) && (
+        <div className="og-heading">
+          {eyebrow && <p className="section-label">{eyebrow}</p>}
+          {headline && <h2 className="section-h">{headline}</h2>}
         </div>
+      )}
+      <div
+        className="og-card"
+        style={cardBg ? { background: cardBg } : undefined}
+      >
+        {slides.map((slide, i) => {
+          const isActive = active === i;
+          const fitClass = slide.fit === 'contain' ? 'og-fit-contain' : 'og-fit-cover';
+          return (
+            <div
+              key={i}
+              className={`og-slide ${isActive ? 'is-active' : ''} ${fitClass}`}
+              aria-hidden={!isActive}
+              style={slide.bg ? { background: slide.bg } : undefined}
+            >
+              {slide.type === 'video' ? (
+                <>
+                  <video
+                    ref={el => { videoLandscapeRefs.current[i] = el; }}
+                    className="og-media og-media-landscape"
+                    src={slide.srcLandscape}
+                    poster={slide.posterLandscape}
+                    muted
+                    playsInline
+                    preload="auto"
+                  />
+                  <video
+                    ref={el => { videoPortraitRefs.current[i] = el; }}
+                    className="og-media og-media-portrait"
+                    src={slide.srcPortrait}
+                    poster={slide.posterPortrait}
+                    muted
+                    playsInline
+                    preload="auto"
+                    aria-hidden="true"
+                  />
+                </>
+              ) : (
+                <>
+                  <img
+                    className="og-media og-media-landscape"
+                    src={slide.srcLandscape}
+                    alt={slide.alt}
+                  />
+                  <img
+                    className="og-media og-media-portrait"
+                    src={slide.srcPortrait}
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </>
+              )}
+            </div>
+          );
+        })}
 
         <button
           className="og-nav og-nav-prev"
@@ -128,7 +172,7 @@ export function OverlapGallery() {
         </button>
 
         <div className="og-dots" role="tablist" aria-label="Gallery slides">
-          {[0, 1].map(i => (
+          {slides.map((_, i) => (
             <button
               key={i}
               role="tab"

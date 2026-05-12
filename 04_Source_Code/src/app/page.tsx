@@ -34,7 +34,49 @@ export default function Home() {
       <Hero2 />
       <Marquee />
       <Stats />
-      <OverlapGallery />
+      <OverlapGallery
+        ariaLabel="AAA Events — Safety First Company"
+        eyebrow="Why AAA"
+        headline="Safety First Company"
+        slides={[
+          {
+            type: 'video',
+            srcLandscape: '/videos/overlap-1-16x9.mp4',
+            srcPortrait: '/videos/overlap-1-9x16.mp4',
+            alt: 'Safety-first ringlock scaffolding workflow',
+          },
+          {
+            type: 'image',
+            srcLandscape: '/images/overlap/overlap-2-16x9.png',
+            srcPortrait: '/images/overlap/overlap-2-9x16.png',
+            alt: 'AAA Events showcase',
+          },
+        ]}
+      />
+      <OverlapGallery
+        ariaLabel="AAA Events — Our Unique Strengths"
+        eyebrow="What Sets Us Apart"
+        headline="Our Unique Strengths"
+        slides={[
+          {
+            type: 'image',
+            srcLandscape: '/images/overlap/overlap-3-16x9.png',
+            srcPortrait: '/images/overlap/overlap-3-9x16.png',
+            alt: 'AAA Events — unique strengths overview',
+          },
+          {
+            type: 'image',
+            // Square asset — same source for landscape + portrait card. Centered
+            // via object-fit:contain on a white card so the surrounding space
+            // blends with the artwork's white background.
+            srcLandscape: '/images/overlap/strengths.png',
+            srcPortrait: '/images/overlap/strengths.png',
+            alt: 'AAA Events strengths summary',
+            fit: 'contain',
+            bg: '#ffffff',
+          },
+        ]}
+      />
       <Founders />
       <Location />
       <Cta />
