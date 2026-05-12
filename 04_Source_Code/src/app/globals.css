@@ -373,8 +373,94 @@ section { padding: 80px 32px; }
 .cert-check { color: #22c55e; font-size: 16px; font-weight: 700; }
 
 /* FOUNDERS */
-.founders-section { background: var(--bg); }
+.founders-section {
+  background: var(--bg);
+  /* match OverlapGallery's outer padding so both sections' inner
+     1200px boxes line up at the same screen edges. */
+  padding: 80px clamp(16px, 4vw, 64px) 80px;
+}
 .founders-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+/* Heading block — sits above the image grid, aligned to the grid's left
+   edge so the title lines up with the founder cards on desktop. */
+.founders-heading {
+  max-width: 1200px;
+  margin: 0 auto 48px;
+  text-align: center;
+  box-sizing: border-box;
+  /* Force the eyebrow and the headline to sit on their own lines,
+     centered — without this the inline-* children sit next to each
+     other on wide viewports. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* "THE TEAM" eyebrow — gold pill flanked by short gold lines */
+.founders-heading .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  letter-spacing: .22em;
+  margin-bottom: 18px;
+}
+.founders-heading .section-label::before,
+.founders-heading .section-label::after {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .6;
+}
+/* "Founders" — bigger, sharper, with a soft gold underline accent */
+.founders-heading .section-h {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  background: linear-gradient(180deg, var(--text) 0%, var(--text) 60%, rgba(240,180,41,.85) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 auto 14px;
+  display: inline-block;
+}
+.founders-heading::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+  border-radius: 3px;
+}
+/* New image-only founders grid — two cards side by side on desktop,
+   stacked on mobile. Width matches OverlapGallery's 1200px card so the
+   two sections' left/right edges align on screen. */
+.founders-images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.founder-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) .founder-image { border-color: rgba(0, 0, 0, 0.25); }
+}
+[data-theme="light"] .founder-image { border-color: rgba(0, 0, 0, 0.25); }
+@media (max-width: 768px) {
+  .founders-images-grid { grid-template-columns: 1fr; gap: 16px; }
+  .founder-image { border-radius: 12px; }
+}
 .founder-card {
   background: var(--bg2); border: 1px solid var(--border); border-radius: 20px;
   padding: 32px; text-align: center; transition: border-color .3s, transform .3s;
@@ -714,6 +800,57 @@ html.theme-transitioning .location-address {
 .hs-section-sticky {
   position: sticky;
   top: 0;
+}
+
+/* Shared treatment for the OverlapGallery heading — mirrors the
+   Founders heading (gold-flanked eyebrow + gradient headline + gold
+   underline). Sits above the gallery card. */
+.og-heading {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.og-heading .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  letter-spacing: .22em;
+  margin-bottom: 18px;
+}
+.og-heading .section-label::before,
+.og-heading .section-label::after {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .6;
+}
+.og-heading .section-h {
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  background: linear-gradient(180deg, var(--text) 0%, var(--text) 60%, rgba(240,180,41,.85) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 auto 14px;
+  display: inline-block;
+}
+.og-heading::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+  border-radius: 3px;
 }
 
 /* OverlapGallery — auto-rotating two-slide gallery. Rounded card,

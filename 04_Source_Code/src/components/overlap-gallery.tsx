@@ -63,6 +63,10 @@ export function OverlapGallery() {
 
   return (
     <section className="og-section" aria-label="AAA Events gallery">
+      <div className="og-heading">
+        <p className="section-label">Why AAA</p>
+        <h2 className="section-h">Safety First Company</h2>
+      </div>
       <div className="og-card">
         {/* Slide 0 — video */}
         <div className={`og-slide ${active === 0 ? 'is-active' : ''}`} aria-hidden={active !== 0}>
