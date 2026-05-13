@@ -1,0 +1,7 @@
+# Modern targets only — all support Array.at/flat/flatMap, Object.fromEntries,
+# Object.hasOwn, String.trimStart/trimEnd natively. This stops Next.js/SWC
+# from shipping the legacy polyfill chunk (~14 KB) flagged by Lighthouse.
+chrome >= 96
+firefox >= 90
+safari >= 14
+edge >= 96
