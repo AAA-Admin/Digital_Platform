@@ -16,6 +16,11 @@ import { useEffect, useRef, useState } from 'react';
  *   video.currentTime, so +90 px of scroll = +1 s of video.
  * - Once the wrapper's bottom reaches viewport bottom, the sticky
  *   releases and the page continues into Hero 2 text below.
+ *
+ * Lazy mount: the heavy mp4 sources are not attached until the wrapper
+ * is within ~1 viewport of being on screen. Until then the AVIF poster
+ * is the only network cost. The scroll-scrub listener is also gated on
+ * the mount flag so it doesn't no-op for nothing.
  */
 const SCRUB_PX_PER_SECOND = 90;
 // Extra scroll distance, in seconds, after the video reaches its end —
@@ -28,8 +33,34 @@ export function HeroShowcase2() {
   const landscapeRef = useRef<HTMLVideoElement>(null);
   const portraitRef = useRef<HTMLVideoElement>(null);
   const [scrubHeight, setScrubHeight] = useState<number>(0);
+  const [videosArmed, setVideosArmed] = useState(false);
+
+  // Arm videos when the wrapper is within ~1 viewport of being visible.
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setVideosArmed(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setVideosArmed(true);
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { rootMargin: '100% 0px', threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
+    if (!videosArmed) return;
     const activeVideo = (): HTMLVideoElement | null =>
       window.matchMedia('(max-width: 768px)').matches
         ? portraitRef.current
@@ -59,9 +90,10 @@ export function HeroShowcase2() {
       portrait?.removeEventListener('loadedmetadata', updateHeight);
       window.removeEventListener('resize', updateHeight);
     };
-  }, []);
+  }, [videosArmed]);
 
   useEffect(() => {
+    if (!videosArmed) return;
     const wrap = wrapRef.current;
     if (!wrap) return;
 
@@ -94,7 +126,7 @@ export function HeroShowcase2() {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
-  }, [scrubHeight]);
+  }, [scrubHeight, videosArmed]);
 
   return (
     <div
@@ -110,24 +142,24 @@ export function HeroShowcase2() {
           <video
             ref={landscapeRef}
             className="hs-image hs-image-landscape"
-            src="/videos/aaa-hero-2-16x9.mp4"
-            poster="/images/hero/aaa-hero-2-16x9.png"
+            src={videosArmed ? '/videos/aaa-hero-2-16x9.mp4' : undefined}
+            poster="/images/hero/aaa-hero-2-16x9.avif"
             width={1536}
             height={1024}
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
           />
           <video
             ref={portraitRef}
             className="hs-image hs-image-portrait"
-            src="/videos/aaa-hero-2-9x16.mp4"
-            poster="/images/hero/aaa-hero-2-9x16.png"
+            src={videosArmed ? '/videos/aaa-hero-2-9x16.mp4' : undefined}
+            poster="/images/hero/aaa-hero-2-9x16.avif"
             width={941}
             height={1672}
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             aria-hidden="true"
           />
         </div>

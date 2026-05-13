@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 /**
@@ -39,9 +40,41 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
   const [active, setActive] = useState(0);
   const videoLandscapeRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const videoPortraitRefs = useRef<Array<HTMLVideoElement | null>>([]);
+  const sectionRef = useRef<HTMLElement>(null);
+  // Lazy-mount heavy <video> elements: we don't attach a src until the
+  // section is within ~1 viewport of being on screen. Until then the
+  // poster shows and we save 20+ MB of network on initial load.
+  const [videosArmed, setVideosArmed] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    // If any slide is a video, watch for it to come into view.
+    const hasVideo = slides.some(s => s.type === 'video');
+    if (!hasVideo) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setVideosArmed(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setVideosArmed(true);
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { rootMargin: '100% 0px', threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [slides]);
 
   // When a video slide becomes active, rewind + play once; rewind on leave.
   useEffect(() => {
+    if (!videosArmed) return;
     slides.forEach((slide, i) => {
       if (slide.type !== 'video') return;
       const landscape = videoLandscapeRefs.current[i] ?? null;
@@ -60,10 +93,11 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
         });
       }
     });
-  }, [active, slides]);
+  }, [active, slides, videosArmed]);
 
   // When a video ends, rewind to frame 0 and hold (no loop).
   useEffect(() => {
+    if (!videosArmed) return;
     const cleanups: Array<() => void> = [];
     slides.forEach((slide, i) => {
       if (slide.type !== 'video') return;
@@ -84,7 +118,7 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
       });
     });
     return () => cleanups.forEach(fn => fn());
-  }, [slides]);
+  }, [slides, videosArmed]);
 
   const go = (next: number) => {
     const n = slides.length;
@@ -94,7 +128,7 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
   const cardBg = slides[active]?.bg;
 
   return (
-    <section className="og-section" aria-label={ariaLabel}>
+    <section ref={sectionRef} className="og-section" aria-label={ariaLabel}>
       {(eyebrow || headline) && (
         <div className="og-heading">
           {eyebrow && <p className="section-label">{eyebrow}</p>}
@@ -108,6 +142,8 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
         {slides.map((slide, i) => {
           const isActive = active === i;
           const fitClass = slide.fit === 'contain' ? 'og-fit-contain' : 'og-fit-cover';
+          // First image slide gets priority; everything else lazy-loads.
+          const isFirst = i === 0;
           return (
             <div
               key={i}
@@ -120,35 +156,43 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
                   <video
                     ref={el => { videoLandscapeRefs.current[i] = el; }}
                     className="og-media og-media-landscape"
-                    src={slide.srcLandscape}
+                    src={videosArmed ? slide.srcLandscape : undefined}
                     poster={slide.posterLandscape}
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                   />
                   <video
                     ref={el => { videoPortraitRefs.current[i] = el; }}
                     className="og-media og-media-portrait"
-                    src={slide.srcPortrait}
+                    src={videosArmed ? slide.srcPortrait : undefined}
                     poster={slide.posterPortrait}
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                     aria-hidden="true"
                   />
                 </>
               ) : (
                 <>
-                  <img
+                  <Image
                     className="og-media og-media-landscape"
                     src={slide.srcLandscape}
                     alt={slide.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                    priority={isFirst}
+                    loading={isFirst ? undefined : 'lazy'}
                   />
-                  <img
+                  <Image
                     className="og-media og-media-portrait"
                     src={slide.srcPortrait}
                     alt=""
                     aria-hidden="true"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                    priority={isFirst}
+                    loading={isFirst ? undefined : 'lazy'}
                   />
                 </>
               )}
