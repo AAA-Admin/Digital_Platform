@@ -31,8 +31,9 @@ export default function Home() {
         </svg>
       </a>
 
-      <HeroShowcase />
       <Nav />
+      <main>
+      <HeroShowcase />
       <Hero />
       <HeroShowcase2 />
       <Hero2 />
@@ -84,6 +85,7 @@ export default function Home() {
       <Founders />
       <Location />
       <Cta />
+      </main>
       <Footer />
       <RevealObserver />
     </>

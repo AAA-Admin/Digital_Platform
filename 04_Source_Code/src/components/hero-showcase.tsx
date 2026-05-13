@@ -15,7 +15,10 @@ export function HeroShowcase() {
           height={941}
           priority
           fetchPriority="high"
-          sizes="(max-width: 768px) 0px, 100vw"
+          /* Match the actual rendered width: viewport minus the .hs-section
+             side padding (clamp(28px, 7vw, 84px) per side ≈ 56–168 px total).
+             Browser picks an appropriately-sized variant. */
+          sizes="(max-width: 768px) 0px, calc(100vw - 168px)"
           className="hs-image hs-image-landscape"
         />
         <Image
@@ -26,7 +29,8 @@ export function HeroShowcase() {
           height={1672}
           priority
           fetchPriority="high"
-          sizes="(max-width: 768px) 100vw, 0px"
+          /* Mobile card has 28px side padding × 2 = 56px subtracted from vw. */
+          sizes="(max-width: 768px) calc(100vw - 56px), 0px"
           className="hs-image hs-image-portrait"
         />
       </div>

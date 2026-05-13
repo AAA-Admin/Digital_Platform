@@ -52,6 +52,9 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
     // If any slide is a video, watch for it to come into view.
     const hasVideo = slides.some(s => s.type === 'video');
     if (!hasVideo) return;
+    // Skip videos entirely on mobile — the mp4s are multi-MB and dominate
+    // mobile LCP/payload. Mobile users see the poster (or no video slide).
+    if (window.matchMedia('(max-width: 768px)').matches) return;
     if (typeof IntersectionObserver === 'undefined') {
       setVideosArmed(true);
       return;
