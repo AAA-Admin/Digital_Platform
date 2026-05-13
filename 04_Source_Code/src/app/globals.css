@@ -84,6 +84,34 @@ nav.scrolled { background: var(--nav-bg-scrolled); }
 }
 .nav-cta:hover { opacity: .85; }
 
+/* PRELOADER — theme-aware logo, larger size, longer entry + idle pulse. */
+.preloader-logo {
+  width: min(92vw, 720px);
+  height: auto;
+  /* Two-stage animation:
+     - preloaderEntry: 1.2s deliberate fade-in + scale-up
+     - preloaderPulse: gentle 3s breathing loop while waiting */
+  animation:
+    preloaderEntry 1.2s cubic-bezier(.2, .8, .2, 1) both,
+    preloaderPulse 3s ease-in-out 1.2s infinite;
+}
+@keyframes preloaderEntry {
+  from { opacity: 0; transform: scale(.78); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes preloaderPulse {
+  0%, 100% { transform: scale(1);    opacity: 1;   }
+  50%      { transform: scale(1.04); opacity: .92; }
+}
+.preloader-logo-light { display: none; }
+.preloader-logo-dark  { display: block; }
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) .preloader-logo-dark  { display: none; }
+  html:not([data-theme]) .preloader-logo-light { display: block; }
+}
+[data-theme="light"] .preloader-logo-dark  { display: none; }
+[data-theme="light"] .preloader-logo-light { display: block; }
+
 /* LOGO — theme-aware PNG with subtle modern hover zoom + entry animation.
    Both variants render; CSS hides the inactive one per theme. */
 .nav-logo {
