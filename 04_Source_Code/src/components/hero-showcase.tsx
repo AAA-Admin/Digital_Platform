@@ -15,6 +15,7 @@ export function HeroShowcase() {
           height={941}
           priority
           fetchPriority="high"
+          quality={65}
           /* Match the actual rendered width: viewport minus the .hs-section
              side padding (clamp(28px, 7vw, 84px) per side ≈ 56–168 px total).
              Browser picks an appropriately-sized variant. */
@@ -29,6 +30,7 @@ export function HeroShowcase() {
           height={1672}
           priority
           fetchPriority="high"
+          quality={60}
           /* Mobile card has 28px side padding × 2 = 56px subtracted from vw. */
           sizes="(max-width: 768px) calc(100vw - 56px), 0px"
           className="hs-image hs-image-portrait"
@@ -39,9 +41,14 @@ export function HeroShowcase() {
           same content human visitors see, plus supporting keywords, locations and
           structured service copy. */}
       <div className="hs-seo sr-only">
-        <h2>
-          AAA Events &amp; Production — Experience That Builds. Execution That Delivers.
-        </h2>
+        {/* Headings are intentionally NOT used here. The visible <h1> lives
+            in <Hero /> below; an <h2> here would appear before that <h1> in
+            DOM order and trip the "headings are not in sequentially-descending
+            order" a11y audit. Crawler readability is preserved via paragraph
+            text + <strong> emphasis. */}
+        <p>
+          <strong>AAA Events &amp; Production — Experience That Builds. Execution That Delivers.</strong>
+        </p>
 
         <p>
           AAA Events &amp; Production is India&apos;s specialist Ringlock scaffolding,
@@ -53,7 +60,7 @@ export function HeroShowcase() {
           launches, festivals and sports events.
         </p>
 
-        <h3>Our Services</h3>
+        <p><strong>Our Services</strong></p>
         <ul>
           <li>
             <strong>Concerts</strong> — large scale, flawless experiences. Live
@@ -100,7 +107,7 @@ export function HeroShowcase() {
           </li>
         </ul>
 
-        <h3>Capabilities</h3>
+        <p><strong>Capabilities</strong></p>
         <ul>
           <li>Ringlock Scaffolding Rental &amp; Sale (India-manufactured, certified)</li>
           <li>Stage &amp; Trussing — spans up to 30 m, roof loads to 5 t</li>
@@ -114,7 +121,7 @@ export function HeroShowcase() {
           <li>Custom Fabrication, Cladding &amp; Branded Decks</li>
         </ul>
 
-        <h3>Our Process</h3>
+        <p><strong>Our Process</strong></p>
         <p>
           Planning · Engineering · Execution · Management · Support —
           one team, one accountability chain, endless possibilities.
@@ -142,7 +149,7 @@ export function HeroShowcase() {
           </li>
         </ul>
 
-        <h3>Where We Work</h3>
+        <p><strong>Where We Work</strong></p>
         <p>
           Headquartered in Mathikere, Bangalore — mobilising Pan-India.
           Active delivery across Bangalore / Bengaluru, Mumbai, Delhi NCR,
@@ -151,7 +158,7 @@ export function HeroShowcase() {
           outstation events handled turnkey.
         </p>
 
-        <h3>Why AAA Events &amp; Production</h3>
+        <p><strong>Why AAA Events &amp; Production</strong></p>
         <ul>
           <li>15+ years of Ringlock scaffolding and event-production expertise</li>
           <li>500+ stage builds delivered across India without a single failure</li>
@@ -163,7 +170,7 @@ export function HeroShowcase() {
           <li>Transparent quoting — custom quote within two hours of enquiry</li>
         </ul>
 
-        <h3>Events with Safety</h3>
+        <p><strong>Events with Safety</strong></p>
         <p>
           <strong>Events with Safety</strong> is the AAA promise — every
           stage, every truss, every platform is engineered, load-tested
@@ -174,7 +181,7 @@ export function HeroShowcase() {
           because when your name is on the event, ours is on the steel.
         </p>
 
-        <h3>Keywords</h3>
+        <p><strong>Keywords</strong></p>
         <p>
           Events with safety, safe event scaffolding, certified event
           structures, Ringlock scaffolding Bangalore, event scaffolding

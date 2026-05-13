@@ -8,11 +8,11 @@ export function Location() {
         <div className="location-grid">
           <div className="location-info">
             <div className="location-address reveal">
-              <h4>Our Office &amp; Yard</h4>
+              <h3>Our Office &amp; Yard</h3>
               <p>Building No. #14, 4th Cross<br/>SBM Colony, Brindavan Nagar<br/>Mathikere, Bangalore — 560054<br/>Karnataka, India</p>
             </div>
             <div className="location-address reveal delay-1">
-              <h4>Contact</h4>
+              <h3>Contact</h3>
               <p>
                 WhatsApp: <a href="#contact" style={{ color: 'var(--gold)' }}>+91 99455 13198</a><br/>
                 Email: <a href="mailto:antony@aaa-events.in" style={{ color: 'var(--gold)' }}>antony@aaa-events.in</a>
