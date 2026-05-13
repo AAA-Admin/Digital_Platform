@@ -63,8 +63,6 @@ nav.scrolled { background: var(--nav-bg-scrolled); }
 }
 [data-theme="light"] .theme-toggle .icon-sun  { display: flex; }
 [data-theme="light"] .theme-toggle .icon-moon { display: none; }
-.nav-logo-text { font-family: var(--font-sora), 'Sora', sans-serif; font-weight: 800; font-size: 16px; color: var(--text); }
-.nav-logo-text span { color: inherit; }
 .nav-links { display: flex; align-items: center; gap: 28px; }
 .nav-links a { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 500; transition: color .2s; position: relative; }
 .nav-links a:hover { color: var(--text); }
@@ -86,21 +84,42 @@ nav.scrolled { background: var(--nav-bg-scrolled); }
 }
 .nav-cta:hover { opacity: .85; }
 
-/* SVG LOGO — brand */
-.logo-svg { height: 46px; width: auto; display: block; }
-/* Dark mode: right-side shadow — light/translucent so it reads on dark bg */
-.logo-svg {
-  filter: drop-shadow(2px 0px 1px rgba(255,255,255,0.18));
+/* LOGO — theme-aware PNG with subtle modern hover zoom + entry animation.
+   Both variants render; CSS hides the inactive one per theme. */
+.nav-logo {
+  /* Allow the inner image to scale slightly outside its layout box without
+     pushing nav neighbours around. */
+  overflow: visible;
+  transform-origin: left center;
 }
-/* Light mode: right-side shadow — slightly darker, same subtle nature */
+.nav-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1), filter .35s ease;
+  animation: navLogoEntry .6s cubic-bezier(.2, .8, .2, 1) both;
+  will-change: transform;
+}
+@keyframes navLogoEntry {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.nav-logo:hover .nav-logo-img,
+.nav-logo:focus-visible .nav-logo-img {
+  transform: scale(1.06);
+  filter: drop-shadow(0 2px 12px rgba(0, 173, 238, 0.25));
+}
+
+/* Theme visibility — dark theme uses the "logo-dark" file (designed for
+   dark backgrounds), light theme uses "logo-light". */
+.nav-logo-img-light { display: none; }
+.nav-logo-img-dark  { display: block; }
 @media (prefers-color-scheme: light) {
-  html:not([data-theme]) .logo-svg {
-    filter: drop-shadow(2px 0px 1px rgba(60,0,100,0.25));
-  }
+  html:not([data-theme]) .nav-logo-img-dark  { display: none; }
+  html:not([data-theme]) .nav-logo-img-light { display: block; }
 }
-[data-theme="light"] .logo-svg {
-  filter: drop-shadow(2px 0px 1px rgba(60,0,100,0.25));
-}
+[data-theme="light"] .nav-logo-img-dark  { display: none; }
+[data-theme="light"] .nav-logo-img-light { display: block; }
 
 /* HERO */
 .hero {

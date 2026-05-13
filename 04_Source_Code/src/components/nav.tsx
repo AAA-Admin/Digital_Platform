@@ -1,8 +1,11 @@
 'use client';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useTheme } from '@/hooks/use-theme';
 
-const NAV_SECTIONS = ['services', 'portfolio', 'founders', 'location'] as const;
+// IDs of the in-page anchors the scroll-spy + nav links target. Must
+// match the `id` props on the corresponding <section> elements.
+const NAV_SECTIONS = ['safety', 'strengths', 'founders', 'location'] as const;
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -42,16 +45,30 @@ export function Nav() {
 
   return (
     <nav className={scrolled ? 'scrolled' : undefined}>
-      <a className="nav-logo" href="#" id="site-nav-logo-wrap">
-        <svg className="logo-svg" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-          <path d="M 82.1,797.0 194.0,797.0 497.8,189.5 403.0,0.0 4.5,797.0 41.4,797.0 403.0,73.8 460.9,189.5 173.7,763.8 135.6,763.8 421.4,192.2 403.0,155.3 Z" fill="#00ADEE"/>
-          <path d="M 239.6,797.0 567.3,797.0 442.1,546.6 351.6,727.6 453.6,727.6 437.2,694.9 407.0,694.9 443.1,622.5 513.5,763.3 293.5,763.3 442.1,466.2 607.5,797.0 722.5,797.0 498.7,349.5 519.0,308.9 763.1,797.0 800.9,797.0 519.3,233.9 461.6,349.3 668.6,763.3 626.4,763.3 441.4,393.4 Z" fill="#00ADEE"/>
-        </svg>
-        <span className="nav-logo-text"><span style={{ color: '#dc2626' }}>A</span>AA <span>Events</span></span>
+      <a className="nav-logo" href="#" id="site-nav-logo-wrap" aria-label="AAA Events — home">
+        {/* Theme-aware logo. Both <Image>s render; CSS shows the one that
+            matches the active theme. Hover/focus applies a smooth zoom. */}
+        <Image
+          src="/images/logo/logo-dark.png"
+          alt="AAA Events"
+          width={600}
+          height={400}
+          priority
+          fetchPriority="high"
+          className="nav-logo-img nav-logo-img-dark"
+        />
+        <Image
+          src="/images/logo/logo-light.png"
+          alt=""
+          aria-hidden="true"
+          width={600}
+          height={400}
+          className="nav-logo-img nav-logo-img-light"
+        />
       </a>
       <div className="nav-links">
-        <a href="#services" className={linkCls('services')}>Services</a>
-        <a href="#portfolio" className={linkCls('portfolio')}>Portfolio</a>
+        <a href="#safety" className={linkCls('safety')}>Why AAA</a>
+        <a href="#strengths" className={linkCls('strengths')}>Strengths</a>
         <a href="#founders" className={linkCls('founders')}>Team</a>
         <a href="#location" className={linkCls('location')}>Location</a>
       </div>

@@ -40,6 +40,7 @@ export default function Home() {
       <Marquee />
       <Stats />
       <OverlapGallery
+        id="safety"
         ariaLabel="AAA Events — Safety First Company"
         eyebrow="Why AAA"
         headline="Safety First Company"
@@ -59,6 +60,7 @@ export default function Home() {
         ]}
       />
       <OverlapGallery
+        id="strengths"
         ariaLabel="AAA Events — Our Unique Strengths"
         eyebrow="What Sets Us Apart"
         headline="Our Unique Strengths"

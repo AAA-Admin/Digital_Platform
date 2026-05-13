@@ -31,12 +31,14 @@ type SlideMedia = {
 
 type Props = {
   ariaLabel?: string;
+  /** Anchor id on the rendered <section>, e.g. for scroll-spy nav links. */
+  id?: string;
   eyebrow?: string;
   headline?: string;
   slides: SlideMedia[];
 };
 
-export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slides }: Props) {
+export function OverlapGallery({ ariaLabel = 'Gallery', id, eyebrow, headline, slides }: Props) {
   const [active, setActive] = useState(0);
   const videoLandscapeRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const videoPortraitRefs = useRef<Array<HTMLVideoElement | null>>([]);
@@ -137,7 +139,7 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
   const cardBg = slides[active]?.bg;
 
   return (
-    <section ref={sectionRef} className="og-section" aria-label={ariaLabel}>
+    <section ref={sectionRef} id={id} className="og-section" aria-label={ariaLabel}>
       {(eyebrow || headline) && (
         <div className="og-heading">
           {eyebrow && <p className="section-label">{eyebrow}</p>}
