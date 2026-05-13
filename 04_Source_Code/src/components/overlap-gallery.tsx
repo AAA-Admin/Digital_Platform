@@ -52,9 +52,6 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
     // If any slide is a video, watch for it to come into view.
     const hasVideo = slides.some(s => s.type === 'video');
     if (!hasVideo) return;
-    // Skip videos entirely on mobile — the mp4s are multi-MB and dominate
-    // mobile LCP/payload. Mobile users see the poster (or no video slide).
-    if (window.matchMedia('(max-width: 768px)').matches) return;
     if (typeof IntersectionObserver === 'undefined') {
       setVideosArmed(true);
       return;
@@ -75,27 +72,36 @@ export function OverlapGallery({ ariaLabel = 'Gallery', eyebrow, headline, slide
     return () => io.disconnect();
   }, [slides]);
 
-  // When a video slide becomes active, rewind + play once; rewind on leave.
+  // Play the currently-active video slide. Runs when the active index
+  // changes AND when `videosArmed` flips on (first viewport entry) — the
+  // latter handles the case where the page lands with slide 0 already
+  // being a video, so the video starts playing as soon as src is attached
+  // rather than waiting for a manual nav click.
   useEffect(() => {
     if (!videosArmed) return;
-    slides.forEach((slide, i) => {
-      if (slide.type !== 'video') return;
-      const landscape = videoLandscapeRefs.current[i] ?? null;
-      const portrait = videoPortraitRefs.current[i] ?? null;
-      if (i === active) {
-        [landscape, portrait].forEach(v => {
-          if (!v) return;
-          try { v.currentTime = 0; } catch {}
-          v.play().catch(() => {});
-        });
-      } else {
-        [landscape, portrait].forEach(v => {
-          if (!v) return;
-          v.pause();
-          try { v.currentTime = 0; } catch {}
-        });
-      }
+    // Defer one frame so React commits the new src attribute before we
+    // ask the element to play (otherwise play() races metadata load).
+    const id = requestAnimationFrame(() => {
+      slides.forEach((slide, i) => {
+        if (slide.type !== 'video') return;
+        const landscape = videoLandscapeRefs.current[i] ?? null;
+        const portrait = videoPortraitRefs.current[i] ?? null;
+        if (i === active) {
+          [landscape, portrait].forEach(v => {
+            if (!v) return;
+            try { v.currentTime = 0; } catch {}
+            v.play().catch(() => {});
+          });
+        } else {
+          [landscape, portrait].forEach(v => {
+            if (!v) return;
+            v.pause();
+            try { v.currentTime = 0; } catch {}
+          });
+        }
+      });
     });
+    return () => cancelAnimationFrame(id);
   }, [active, slides, videosArmed]);
 
   // When a video ends, rewind to frame 0 and hold (no loop).

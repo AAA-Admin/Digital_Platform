@@ -1,186 +1,111 @@
 'use client';
-import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * Hero showcase 2 — scroll-scrubbed video on desktop, static image on mobile.
+ * Hero showcase 2 — autoplays a short video once when the section enters
+ * the viewport, then holds on the final frame. No scroll-scrub, no loop,
+ * no sticky pin. Mobile and desktop both play the video.
  *
- * Mobile (≤768px): renders only the AVIF poster as a Next.js <Image>. No
- * video element is ever attached to the DOM, so the 8+ MB mp4 never enters
- * the mobile network payload. We trade the desktop-only scroll-scrub
- * polish for a dramatically better mobile LCP / total payload.
- *
- * Desktop (≥769px): the existing scroll-scrub experience — sticky pin,
- * scrollY drives video.currentTime at 90 px/s, 3 s dwell at the end.
- * Heavy mp4 is still IntersectionObserver-gated.
+ * The mp4 src is gated behind an IntersectionObserver so the file is only
+ * fetched when the user is close to seeing the section.
  */
-const SCRUB_PX_PER_SECOND = 90;
-const DWELL_SECONDS = 3;
-// Assumed video duration before metadata loads. Picking a value close to
-// the real 3 s avoids a layout shift when scrubHeight resolves.
-const ASSUMED_DURATION = 3;
-
 export function HeroShowcase2() {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  // null until the client decides; prevents an SSR/CSR mismatch where the
-  // server would otherwise commit to one branch.
-  const [variant, setVariant] = useState<'mobile' | 'desktop' | null>(null);
-  const [scrubHeight, setScrubHeight] = useState<number>(
-    (ASSUMED_DURATION + DWELL_SECONDS) * SCRUB_PX_PER_SECOND + 800
-  );
-  const [videoArmed, setVideoArmed] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const landscapeRef = useRef<HTMLVideoElement>(null);
+  const portraitRef = useRef<HTMLVideoElement>(null);
+  const [armed, setArmed] = useState(false);
+  const [played, setPlayed] = useState(false);
 
-  // Decide variant on mount based on viewport. Re-check on resize so
-  // rotating the device picks the right one.
+  // Attach the mp4 src when the section is within ~1 viewport of being
+  // visible. Start playback on first true intersection.
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)');
-    const apply = () => setVariant(mq.matches ? 'mobile' : 'desktop');
-    apply();
-    mq.addEventListener('change', apply);
-    return () => mq.removeEventListener('change', apply);
-  }, []);
-
-  // Update default scrub height when viewport height changes (desktop only).
-  useEffect(() => {
-    if (variant !== 'desktop') return;
-    const onResize = () => {
-      const v = videoRef.current;
-      const dur = v?.duration && isFinite(v.duration) && v.duration > 0
-        ? v.duration : ASSUMED_DURATION;
-      setScrubHeight((dur + DWELL_SECONDS) * SCRUB_PX_PER_SECOND + window.innerHeight);
-    };
-    onResize();
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, [variant]);
-
-  // Arm the video once the wrapper is within ~1 viewport of being visible.
-  useEffect(() => {
-    if (variant !== 'desktop') return;
-    const el = wrapRef.current;
+    const el = sectionRef.current;
     if (!el) return;
     if (typeof IntersectionObserver === 'undefined') {
-      setVideoArmed(true);
+      setArmed(true);
       return;
     }
     const io = new IntersectionObserver(
       entries => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setVideoArmed(true);
-            io.disconnect();
-            break;
-          }
+          if (!entry.isIntersecting) continue;
+          // First arm the videos (sets src), then on the next tick play.
+          setArmed(true);
         }
       },
       { rootMargin: '100% 0px', threshold: 0 }
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [variant]);
+  }, []);
 
-  // Refine scrub height after metadata is known.
+  // Once armed and the section is actually visible, play once.
   useEffect(() => {
-    if (variant !== 'desktop' || !videoArmed) return;
-    const v = videoRef.current;
-    if (!v) return;
-    const onMeta = () => {
-      if (v.duration && isFinite(v.duration) && v.duration > 0) {
-        setScrubHeight((v.duration + DWELL_SECONDS) * SCRUB_PX_PER_SECOND + window.innerHeight);
-      }
-    };
-    v.addEventListener('loadedmetadata', onMeta);
-    if (v.readyState >= 1) onMeta();
-    return () => v.removeEventListener('loadedmetadata', onMeta);
-  }, [variant, videoArmed]);
+    if (!armed || played) return;
+    const el = sectionRef.current;
+    if (!el) return;
 
-  // Scroll-scrub.
+    const tryPlay = () => {
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const v = isMobile ? portraitRef.current : landscapeRef.current;
+      if (!v) return;
+      v.play().catch(() => {});
+      setPlayed(true);
+    };
+
+    // Fire on next paint so the src has propagated.
+    const id = requestAnimationFrame(tryPlay);
+    return () => cancelAnimationFrame(id);
+  }, [armed, played]);
+
+  // When the video ends, hold on the final frame (browsers do this by
+  // default since loop is off, but we explicitly pause for safety).
   useEffect(() => {
-    if (variant !== 'desktop' || !videoArmed) return;
-    const wrap = wrapRef.current;
-    if (!wrap) return;
-    let rafQueued = false;
-    const onScroll = () => {
-      if (rafQueued) return;
-      rafQueued = true;
-      requestAnimationFrame(() => {
-        rafQueued = false;
-        const v = videoRef.current;
-        if (!v || !isFinite(v.duration) || v.duration === 0) return;
-        const rect = wrap.getBoundingClientRect();
-        const scrolled = Math.max(0, -rect.top);
-        const scrubRange = v.duration * SCRUB_PX_PER_SECOND;
-        const videoScrolled = Math.min(scrolled, scrubRange);
-        if (!v.paused) v.pause();
-        v.currentTime = videoScrolled / SCRUB_PX_PER_SECOND;
-      });
+    const onEnded = (v: HTMLVideoElement | null) => () => {
+      if (!v) return;
+      v.pause();
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [variant, videoArmed, scrubHeight]);
-
-  // SSR / pre-hydration: render the mobile-safe Image branch so the heavy
-  // wrapper / sticky / video DOM isn't created server-side. Hydration may
-  // promote to the desktop branch.
-  if (variant !== 'desktop') {
-    return (
-      <section
-        className="hs-section"
-        aria-label="AAA Events & Production — second showcase"
-      >
-        <div className="hs-image-wrap">
-          <Image
-            src="/images/hero/aaa-hero-2-9x16.avif"
-            alt="AAA Events & Production showcase"
-            width={941}
-            height={1672}
-            sizes="(max-width: 768px) calc(100vw - 56px), 0px"
-            className="hs-image hs-image-portrait"
-            priority={false}
-            loading="lazy"
-          />
-          <Image
-            src="/images/hero/aaa-hero-2-16x9.avif"
-            alt=""
-            aria-hidden="true"
-            width={1536}
-            height={1024}
-            sizes="(max-width: 768px) 0px, calc(100vw - 168px)"
-            className="hs-image hs-image-landscape"
-            priority={false}
-            loading="lazy"
-          />
-        </div>
-      </section>
-    );
-  }
+    const lh = onEnded(landscapeRef.current);
+    const ph = onEnded(portraitRef.current);
+    landscapeRef.current?.addEventListener('ended', lh);
+    portraitRef.current?.addEventListener('ended', ph);
+    return () => {
+      landscapeRef.current?.removeEventListener('ended', lh);
+      portraitRef.current?.removeEventListener('ended', ph);
+    };
+  }, []);
 
   return (
-    <div
-      ref={wrapRef}
-      className="hs-2-scrub-wrap"
-      style={{ height: `${scrubHeight}px` }}
+    <section
+      ref={sectionRef}
+      className="hs-section"
+      aria-label="AAA Events & Production — second showcase"
     >
-      <section
-        className="hs-section hs-section-sticky"
-        aria-label="AAA Events & Production — second showcase"
-      >
-        <div className="hs-image-wrap">
-          <video
-            ref={videoRef}
-            className="hs-image hs-image-landscape"
-            src={videoArmed ? '/videos/aaa-hero-2-16x9.mp4' : undefined}
-            poster="/images/hero/aaa-hero-2-16x9.avif"
-            width={1536}
-            height={1024}
-            muted
-            playsInline
-            preload="metadata"
-          />
-        </div>
-      </section>
-    </div>
+      <div className="hs-image-wrap">
+        <video
+          ref={landscapeRef}
+          className="hs-image hs-image-landscape"
+          src={armed ? '/videos/aaa-hero-2-16x9.mp4' : undefined}
+          poster="/images/hero/aaa-hero-2-16x9.avif"
+          width={1536}
+          height={1024}
+          muted
+          playsInline
+          preload="metadata"
+        />
+        <video
+          ref={portraitRef}
+          className="hs-image hs-image-portrait"
+          src={armed ? '/videos/aaa-hero-2-9x16.mp4' : undefined}
+          poster="/images/hero/aaa-hero-2-9x16.avif"
+          width={941}
+          height={1672}
+          muted
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
+      </div>
+    </section>
   );
 }
