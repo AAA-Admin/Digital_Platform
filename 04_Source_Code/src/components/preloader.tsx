@@ -16,7 +16,7 @@ export function Preloader() {
     const overlay = overlayRef.current;
     if (!overlay) return;
 
-    const MIN_VISIBLE_MS = 2400;  // never hide sooner than this
+    const MIN_VISIBLE_MS = 1600;  // never hide sooner than this
     const HARD_CAP_MS = 4500;     // never wait longer than this
     const mountedAt = Date.now();
 
