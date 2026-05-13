@@ -1,16 +1,20 @@
+import dynamic from 'next/dynamic';
 import { HeroShowcase } from '@/components/hero-showcase';
-import { HeroShowcase2 } from '@/components/hero-showcase-2';
 import { Nav } from '@/components/nav';
 import { Hero } from '@/components/hero';
 import { Hero2 } from '@/components/hero-2';
 import { Marquee } from '@/components/marquee';
 import { Stats } from '@/components/stats';
-import { OverlapGallery } from '@/components/overlap-gallery';
-import { Founders } from '@/components/founders';
-import { Location } from '@/components/location';
-import { Cta } from '@/components/cta';
-import { Footer } from '@/components/footer';
 import { RevealObserver } from '@/components/reveal-observer';
+
+// Dynamic-import non-LCP, below-the-fold sections so their JS doesn't ship in
+// the initial bundle. SSR is kept on so HTML still renders for SEO and CLS.
+const HeroShowcase2 = dynamic(() => import('@/components/hero-showcase-2').then(m => m.HeroShowcase2), { ssr: true });
+const OverlapGallery = dynamic(() => import('@/components/overlap-gallery').then(m => m.OverlapGallery), { ssr: true });
+const Founders = dynamic(() => import('@/components/founders').then(m => m.Founders), { ssr: true });
+const Location = dynamic(() => import('@/components/location').then(m => m.Location), { ssr: true });
+const Cta = dynamic(() => import('@/components/cta').then(m => m.Cta), { ssr: true });
+const Footer = dynamic(() => import('@/components/footer').then(m => m.Footer), { ssr: true });
 
 export default function Home() {
   return (

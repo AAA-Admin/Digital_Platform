@@ -35,9 +35,9 @@ export function HeroShowcase() {
           same content human visitors see, plus supporting keywords, locations and
           structured service copy. */}
       <div className="hs-seo sr-only">
-        <h1>
+        <h2>
           AAA Events &amp; Production — Experience That Builds. Execution That Delivers.
-        </h1>
+        </h2>
 
         <p>
           AAA Events &amp; Production is India&apos;s specialist Ringlock scaffolding,
@@ -49,7 +49,7 @@ export function HeroShowcase() {
           launches, festivals and sports events.
         </p>
 
-        <h2>Our Services</h2>
+        <h3>Our Services</h3>
         <ul>
           <li>
             <strong>Concerts</strong> — large scale, flawless experiences. Live
@@ -96,7 +96,7 @@ export function HeroShowcase() {
           </li>
         </ul>
 
-        <h2>Capabilities</h2>
+        <h3>Capabilities</h3>
         <ul>
           <li>Ringlock Scaffolding Rental &amp; Sale (India-manufactured, certified)</li>
           <li>Stage &amp; Trussing — spans up to 30 m, roof loads to 5 t</li>
@@ -110,7 +110,7 @@ export function HeroShowcase() {
           <li>Custom Fabrication, Cladding &amp; Branded Decks</li>
         </ul>
 
-        <h2>Our Process</h2>
+        <h3>Our Process</h3>
         <p>
           Planning · Engineering · Execution · Management · Support —
           one team, one accountability chain, endless possibilities.
@@ -138,7 +138,7 @@ export function HeroShowcase() {
           </li>
         </ul>
 
-        <h2>Where We Work</h2>
+        <h3>Where We Work</h3>
         <p>
           Headquartered in Mathikere, Bangalore — mobilising Pan-India.
           Active delivery across Bangalore / Bengaluru, Mumbai, Delhi NCR,
@@ -147,7 +147,7 @@ export function HeroShowcase() {
           outstation events handled turnkey.
         </p>
 
-        <h2>Why AAA Events &amp; Production</h2>
+        <h3>Why AAA Events &amp; Production</h3>
         <ul>
           <li>15+ years of Ringlock scaffolding and event-production expertise</li>
           <li>500+ stage builds delivered across India without a single failure</li>
@@ -159,7 +159,7 @@ export function HeroShowcase() {
           <li>Transparent quoting — custom quote within two hours of enquiry</li>
         </ul>
 
-        <h2>Events with Safety</h2>
+        <h3>Events with Safety</h3>
         <p>
           <strong>Events with Safety</strong> is the AAA promise — every
           stage, every truss, every platform is engineered, load-tested
@@ -170,7 +170,7 @@ export function HeroShowcase() {
           because when your name is on the event, ours is on the steel.
         </p>
 
-        <h2>Keywords</h2>
+        <h3>Keywords</h3>
         <p>
           Events with safety, safe event scaffolding, certified event
           structures, Ringlock scaffolding Bangalore, event scaffolding
